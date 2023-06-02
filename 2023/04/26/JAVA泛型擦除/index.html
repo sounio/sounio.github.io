@@ -87,7 +87,7 @@
 <meta property="og:description" content="###JAVA泛型擦除原理 Java 的泛型是伪泛型，因为在编译期间所有的泛型信息都会被擦除掉，泛型擦除具体来说就是在编译成字节码时首先进行类型检查，接着进行类型擦除（即所有类型参数都用他们的限定类型替换，包括类、变量和方法，如果类型变量没有限定，可以替换为Object，如果类型变量有限定则原始类型就用第一个边界的类型来替换，譬如 class Prd&lt;T extends Comparable">
 <meta property="og:locale">
 <meta property="article:published_time" content="2023-04-26T07:47:47.000Z">
-<meta property="article:modified_time" content="2023-05-05T02:48:22.037Z">
+<meta property="article:modified_time" content="2023-06-01T02:27:02.975Z">
 <meta property="article:author" content="sounio">
 <meta name="twitter:card" content="summary">
 
@@ -334,7 +334,7 @@
 
       
         <p>###JAVA泛型擦除原理</p>
-<p><strong>Java 的泛型是伪泛型，因为在编译期间所有的泛型信息都会被擦除掉，</strong>泛型擦除具体来说就是在编译成字节码时<strong>首先进行类型检查，接着进行类型擦除</strong>（即所有类型参数都用他们的限定类型替换，包括类、变量和方法，如果类型变量没有限定，可以替换为Object，如果类型变量有限定则原始类型就用第一个边界的类型来替换，譬如 class Prd&lt;T extends Comparable &amp; Serializable&gt; {} 的原始类型就是 Comparable），<strong>接着如果类型擦除和多态性发生冲突时就在子类中生成<u>桥方法</u>解决，接着如果调用泛型方法的返回类型被擦除则在调用该方法时插入强制类型转换。</strong></p>
+<p>Java 的泛型是伪泛型，因为在编译期间所有的泛型信息都会被擦除掉，泛型擦除具体来说就是在编译成字节码时首先进行类型检查，接着进行类型擦除（即<code>所有类型参数都用他们的限定类型替换，包括类、变量和方法</code>，如果类型变量<code>没有限定</code>，可以替换为<code>Object</code>，如果类型变量有限定则原始类型就用第一个边界的类型来替换，譬如 class Prd&lt;T extends Comparable &amp; Serializable&gt; {} 的原始类型就是 Comparable），接着如果类型擦除和多态性发生冲突时就在子类中生成<u>桥方法</u>解决，接着如果调用泛型方法的返回类型被擦除则在调用该方法时插入强制类型转换。</p>
 <p>先检查再擦除的类型检查是<strong>针对引用</strong>的，用引用调用泛型方法就会对这个引用调用的方法进行类型检测而无关它真正引用的对象。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;String&gt; arrayList2 = <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">arrayList2.add(<span class="string">&quot;123&quot;</span>); <span class="comment">//编译通过 </span></span><br><span class="line">arrayList2.add(<span class="number">123</span>);<span class="comment">//编译错误</span></span><br><span class="line"><span class="type">String</span> <span class="variable">object2</span> <span class="operator">=</span> arrayList2.get(<span class="number">0</span>); <span class="comment">//返回类型是 String </span></span><br><span class="line"></span><br><span class="line"><span class="type">ArrayList</span> <span class="variable">arrayList3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;String&gt;();</span><br><span class="line">arrayList3.add(<span class="string">&quot;123&quot;</span>); <span class="comment">//编译通过 </span></span><br><span class="line">arrayList3.add(<span class="number">123</span>); <span class="comment">//编译通过 </span></span><br><span class="line"><span class="type">Object</span> <span class="variable">object3</span> <span class="operator">=</span> arrayList3.get(<span class="number">0</span>); <span class="comment">//返回类型是 Object</span></span><br></pre></td></tr></table></figure>
 
@@ -355,6 +355,15 @@
 
 <p>这个桥方法实际上就是对超类中sayHello(Obejct)的<strong>重写</strong>。这样做的原因是，当程序员在子类中写下以下这段代码的时候，本意是对超类中的<strong>同名方法进行重写</strong>，但因为超类发生了类型擦除，所以实际上<strong>并没有重写成功</strong>，因此加入了桥方法的机制来避免类型擦除与多态发生冲突。</p>
 <p>java代码中，判断两个方法是否是同一个方法是根据方法的签名来决定的，方法的签名是不包含方法的返回值的，也就是“方法签名&#x3D;方法名+参数”。如果我们代码里面这样写确实是冲突的Java无法找到是哪一个方法，Java虚拟机中的方法签名规则是不同的，其“方法签名&#x3D;方法名+参数+返回值”，所以他是能正确区分两个方法的，所以字节码中是允许存在上面这种情况的。</p>
+<h4 id="关于泛型擦除与多态性的冲突"><a href="#关于泛型擦除与多态性的冲突" class="headerlink" title="关于泛型擦除与多态性的冲突"></a>关于泛型擦除与多态性的冲突</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GenericClass</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doSomething</span><span class="params">(T obj)</span> &#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    GenericClass&lt;String&gt; genericObj = <span class="keyword">new</span> <span class="title class_">GenericClass</span>&lt;&gt;();	<span class="comment">// 冲突 ，编译时报错</span></span><br><span class="line">    <span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="string">&quot;Hello&quot;</span>;</span><br><span class="line">    genericObj.doSomething(obj); <span class="comment">// 编译错误</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在声明 <code>GenericClass&lt;String&gt; genericObj = new GenericClass&lt;&gt;();</code> 时，泛型类型参数 <code>T</code> 被指定为 <code>String</code>，因此 <code>genericObj</code> 的实例只能接受 <code>String</code> 类型的参数。然而，在 <code>genericObj.doSomething(obj);</code> 这行代码中，<code>obj</code> 的类型是 <code>Object</code>，不是 <code>String</code>，因此会导致编译错误。</p>
+<h4 id="多态的优点"><a href="#多态的优点" class="headerlink" title="多态的优点"></a>多态的优点</h4><p>多态性有以下几个优点：</p>
+<ol>
+<li>可扩展性：多态性允许在不修改现有代码的情况下添加<code>新的子类</code>。这样可以更方便地扩展系统功能。</li>
+<li>灵活性：通过多态性，可以在运行时<code>动态地确定对象的实际类型</code>，并调用相应类型的方法。这样可以根据实际需要灵活地处理对象。</li>
+<li>可替换性：多态性允许将一个子类对象赋值给父类引用变量，这样可以在不改变代码的情况下，通过替换不同的子类对象来改变程序的行为。</li>
+<li>可维护性：多态性可以使代码更加模块化和可维护，因为每个子类都可以独立地实现自己的行为，不会对其他代码产生影响。</li>
+</ol>
 
       
     </div>
@@ -443,8 +452,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -495,6 +513,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E6%B3%9B%E5%9E%8B%E6%93%A6%E9%99%A4%E4%B8%8E%E5%A4%9A%E6%80%81%E6%80%A7%E7%9A%84%E5%86%B2%E7%AA%81"><span class="nav-number">1.</span> <span class="nav-text">关于泛型擦除与多态性的冲突</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E6%80%81%E7%9A%84%E4%BC%98%E7%82%B9"><span class="nav-number">2.</span> <span class="nav-text">多态的优点</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

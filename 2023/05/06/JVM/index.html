@@ -99,7 +99,7 @@
 <meta property="og:image" content="https://camo.githubusercontent.com/3501cb34812d6129ac468b95bf34579a76dcf5cb0fac5c22810bef4e96320c40/68747470733a2f2f67697465652e636f6d2f647265616d63617465722f626c6f672d696d672f7261772f6d61737465722f755069632f2545342542442542462545372539342541382545352538462541352545362539462538342d6634437739782e706e67">
 <meta property="og:image" content="https://camo.githubusercontent.com/d584f6dda010a7bae95b34af5d39b00b4baf6b86dadfd21bc59cd80638f3263c/68747470733a2f2f67697465652e636f6d2f647265616d63617465722f626c6f672d696d672f7261772f6d61737465722f755069632f2545372539422542342545362538452541352545362538432538372545392539322538382d386d3348487a2e706e67">
 <meta property="article:published_time" content="2023-05-06T11:16:24.000Z">
-<meta property="article:modified_time" content="2023-05-07T14:24:05.941Z">
+<meta property="article:modified_time" content="2023-06-01T02:10:34.754Z">
 <meta property="article:author" content="sounio">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/24506a0020724d209362cde9feea9103.png">
@@ -366,6 +366,7 @@
 <ul>
 <li>每当我们使用<code>字面量</code>（String s&#x3D;“1”;）创建字符串常量时，JVM会首先检查字符串常量池，如果该字符串已经存在常量池中，那么就将<code>此字符串对象的地址赋值给引用s</code>（引用s在Java栈。如果字符串不存在常量池中，就会实例化该字符串并且将其放到常量池中，并将此<code>字符串对象的地址赋值</code>给引用s（引用s在Java栈中）。</li>
 <li>每当我们使用关键字new（String s&#x3D;new String(”1”);）创建字符串常量时，JVM会首先检查字符串常量池，<code>如果该字符串已经存在常量池中，那么不再在字符串常量池创建该字符串对象，而直接堆中创建该对象的副本</code>，然后将堆中对象的地址赋值给引用s，如果字符串不存在常量池中，就会实例化该字符串并且将其放到常量池中，然后在堆中创建该对象的副本，然后将<code>堆中对象的地址赋值</code>给引用s。</li>
+<li>如果需要将<code>new</code>创建的字符串对象放入字符串常量池中，可以使用<code>intern()</code>方法，它会检查字符串在常量池中是否存在，如果存在则返回常量池中的引用，如果不存在则将字符串添加到常量池中并返回引用。</li>
 </ul>
 <h2 id="类加载过程"><a href="#类加载过程" class="headerlink" title="类加载过程"></a>类加载过程</h2><p><img src="https://img-blog.csdnimg.cn/24506a0020724d209362cde9feea9103.png" alt="在这里插入图片描述"></p>
 <p><strong>加载-验证-准备-解析-初始化</strong></p>
