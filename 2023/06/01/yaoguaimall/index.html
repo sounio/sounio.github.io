@@ -87,8 +87,9 @@
 <meta property="og:description" content="YaoGuaiMall一、虚拟环境虚拟机使用VirtualBox。 不用去下载linux镜像，使用vagrant（一个软件）快速创建虚拟机。他会去官方仓库下载安装。 安装好开机后使用vagrant ssh进行连接。 网络地址转换虚拟机可以使用端口转发：将virtualbox内各组件的端口和windows的端口进行映射，比如将virtualbox中MySQL的3306端口和Windows的3333端">
 <meta property="og:locale">
 <meta property="og:image" content="c:\Users\15958\AppData\Roaming\Typora\typora-user-images\image-20230604225147720.png">
+<meta property="og:image" content="c:/Users/15958/Desktop/%E8%B0%B7%E7%B2%92%E5%95%86%E5%9F%8E/%E8%B0%B7%E7%B2%92%E5%95%86%E5%9F%8E%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0/%E5%88%86%E5%B8%83%E5%BC%8F%E9%AB%98%E7%BA%A7%E7%AF%87/image/image-20201026092738311.png">
 <meta property="article:published_time" content="2023-06-01T04:55:04.000Z">
-<meta property="article:modified_time" content="2023-06-04T15:35:26.885Z">
+<meta property="article:modified_time" content="2023-06-05T15:36:18.658Z">
 <meta property="article:author" content="sounio">
 <meta property="article:tag" content="mall">
 <meta name="twitter:card" content="summary">
@@ -406,7 +407,76 @@
 <p>这里的renren-fast就是进行负载均衡的地址，需要先行注册到注册中心。</p>
 <p>解决办法：</p>
 <p>1.配置请求头允许跨域。</p>
+<p>2.使用nginx转化为同一个域。</p>
+<h3 id="3-文件上传"><a href="#3-文件上传" class="headerlink" title="3.文件上传"></a>3.文件上传</h3><p>使用oss服务器</p>
+<blockquote>
+<p>上传策略</p>
+</blockquote>
+<ol>
+<li><p>文件传到服务器，再由服务器传到oss服务器</p>
+<p>缺点是多经过了一层本地服务器，没有必要。浪费带宽。</p>
+</li>
+<li><p>文件由前端直接上传到服务器</p>
+<p>缺点是前端没有安全性可言，会暴露账号与密码。</p>
+</li>
+<li><p>使用令牌签名机制</p>
+</li>
+</ol>
+<h3 id="4-异常处理与数据校验"><a href="#4-异常处理与数据校验" class="headerlink" title="4.异常处理与数据校验"></a>4.异常处理与数据校验</h3><h4 id="1-JSR303"><a href="#1-JSR303" class="headerlink" title="1.JSR303"></a>1.JSR303</h4><p>一种规范</p>
+<p>@Valid注解用于开启数据校验。</p>
+<blockquote>
+<p>分组校验</p>
+</blockquote>
+<p>对于校验指定不同的groups，因为不同情况下对于数据的校验可能不同。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Null(message=”新增不能指定id“,groups=&#123;AddGroup.class&#125;)</span></span><br><span class="line"><span class="meta">@Validated(&#123;AddGroups.class&#125;)</span></span><br></pre></td></tr></table></figure>
 
+<p>这里的@Null就是一个注解，message是注解出现异常的提示信息，groups是分组选择，里面传入的是分组信息，其实是一个空的接口，用于进行标识。</p>
+<p>下面的@Validated用于标记当前请求是哪个分组的</p>
+<p><code>使用分组之后，没有进行划分分组的校验将会失效</code></p>
+<h4 id="2-异常"><a href="#2-异常" class="headerlink" title="2.异常"></a>2.异常</h4><p>@ExceptionHandler(value&#x3D;Exception.class)</p>
+<p>该注解作用是感知对应value的异常</p>
+<blockquote>
+<p>异常状态码</p>
+</blockquote>
+<p>也就是错误码和错误信息定义规范。根据具体业务确定。</p>
+<h3 id="5-Feign和Dubbo区别"><a href="#5-Feign和Dubbo区别" class="headerlink" title="5.Feign和Dubbo区别"></a>5.Feign和Dubbo区别</h3><p>Feign是基于HTTP协议的轻量级的RESTful风格的框架，主要用于微服务架构中的服务间通信。Dubbo是一个基于RPC协议的高性能的分布式服务框架，主要用于构建传统的企业级分布式系统。</p>
+<p>Feign适用于<code>轻量级</code>的微服务架构，更加简单和灵活；而Dubbo适用于<code>传统的</code>企业级分布式系统，具备<code>更丰富的功能和更高的性能</code>。</p>
+<h2 id="四、Elasticsearch"><a href="#四、Elasticsearch" class="headerlink" title="四、Elasticsearch"></a>四、Elasticsearch</h2><p>一个分布式的开源搜索和分析引擎。</p>
+<h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><h5 id="1-index-索引"><a href="#1-index-索引" class="headerlink" title="1 index(索引)"></a>1 index(索引)</h5><p>动词，相当于 MySQL 中的 insert；</p>
+<p>名词，相当于MySQL 中的 DataBase</p>
+<h5 id="2-Type-类型"><a href="#2-Type-类型" class="headerlink" title="2 Type(类型)"></a>2 Type(类型)</h5><p>在 Index（索引）中，可以定义一个或多个类型</p>
+<p>类似于 MySQL 中的 Table，每一种类型的数据放在一起</p>
+<h5 id="3-Document-文档"><a href="#3-Document-文档" class="headerlink" title="3 Document(文档)"></a>3 Document(文档)</h5><p>保存在某个索引（index）下，某种类型（Type）的一个数据（Document）,文档是 JSON 格式的，Document 就像是 MySQL 中某个 Table 里面的内容</p>
+<h5 id="4-倒排索引机制"><a href="#4-倒排索引机制" class="headerlink" title="4 倒排索引机制"></a>4 倒排索引机制</h5><p><img src="C:/Users/15958/Desktop/谷粒商城/谷粒商城项目笔记/分布式高级篇/image/image-20201026092738311.png" alt="image-20201026092738311"></p>
+<h2 id="五、Nginx"><a href="#五、Nginx" class="headerlink" title="五、Nginx"></a>五、Nginx</h2><blockquote>
+<p>正向代理与反向代理</p>
+</blockquote>
+<p>正向代理：例如科学上网，隐藏客户端信息。</p>
+<p>反向代理：屏蔽内网服务器信息，负载均衡访问。</p>
+<p>这里使用nginx搭载<code>域名访问环境</code>以及进行反向代理(取代网关的作用)。</p>
+<blockquote>
+<p>域名映射过程</p>
+</blockquote>
+<p>输入一个网址时，例如baidu.com，并不知道这个域名的ip地址，第一步是去本机host文件寻找映射，看看有没有对应的IP地址映射。如果没有，就去网络上的dns服务器寻找,进行解析.</p>
+<p>使用nginx进行反向代理的时候,通过配置可以实现网关路由的功能,不过需要修改配置文件,如果是分布式的情况下,可能各个微服务都有自己的ip地址,每次都要修改nginx的配置文件,所以这里还是直接转发给网关进行路由.</p>
+<p><code>这里的过程就是页面发给nginx,然后nginx转发给网关,网关再进行路由.</code>(可是nginx在代理给网关的时候,会丢失请求的host信息)</p>
+<h2 id="六、压力测试与优化"><a href="#六、压力测试与优化" class="headerlink" title="六、压力测试与优化"></a>六、压力测试与优化</h2><p><code>postman</code>用来测试服务。</p>
+<p><code>jmeter</code>用来做性能测试。</p>
+<p><code>jconsole</code>堆内存的监控、CPU占用率等等。<code>jvisualvm</code>一样，可以下载插件，查看GC。</p>
+<blockquote>
+<p>优化主要是在jvm的堆区</p>
+</blockquote>
+<h3 id="1-数据库优化"><a href="#1-数据库优化" class="headerlink" title="1.数据库优化"></a>1.数据库优化</h3><h4 id="添加索引"><a href="#添加索引" class="headerlink" title="添加索引"></a>添加索引</h4><p>通过索引,可以快速定位到指定值所在的行或列(会占用额外的空间以及需要考虑增删改查的维护成本)</p>
+<blockquote>
+<p>关系性数据库与非关系性数据库</p>
+</blockquote>
+<p>关系型数据库是基于关系模型的数据库，数据<code>以表格的形式进行组织和存储</code>。关系模型由表（表格）组成，每个表由一组列和行组成，其中列代表属性（字段），行代表记录（数据）。关系型数据库使用结构化查询语言（SQL）进行数据管理和查询。</p>
+<p>非关系型数据库是指不基于关系模型的数据库，它们使用<code>不同的数据模型和存储结构</code>。非关系型数据库适用于需要处理大量数据、需要高扩展性和高性能的场景。</p>
+<p>关系型数据库适合需要保证数据一致性和复杂查询的应用，而非关系型数据库适用于大规模数据和高并发访问的场景，并且对数据的结构要求较为灵活。</p>
+<h3 id="2-nginx动静分离"><a href="#2-nginx动静分离" class="headerlink" title="2.nginx动静分离"></a>2.nginx动静分离</h3><p>将项目需要的所有静态资源都由nginx直接返回.</p>
+<p>将静态资源交给nginx可以将服务器的压力进行分担,节省带宽和减轻后端的负载,(nginx在处理静态资源的时候采用了sendfile机制,可以提高文件传输的效率)</p>
+<h3 id="3-数据库查询逻辑变更"><a href="#3-数据库查询逻辑变更" class="headerlink" title="3.数据库查询逻辑变更"></a>3.数据库查询逻辑变更</h3><p>将查询数据库的次数减少,减少数据库读写频率</p>
+<h3 id="4-缓存与分布式锁"><a href="#4-缓存与分布式锁" class="headerlink" title="4.缓存与分布式锁"></a>4.缓存与分布式锁</h3>
       
     </div>
     
@@ -567,7 +637,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#YaoGuaiMall"><span class="nav-number">1.</span> <span class="nav-text">YaoGuaiMall</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83"><span class="nav-number">1.1.</span> <span class="nav-text">一、虚拟环境</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">网络地址转换</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker"><span class="nav-number">1.1.1.</span> <span class="nav-text">Docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3"><span class="nav-number">1.1.2.</span> <span class="nav-text">端口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81SpringCloudAlibaba"><span class="nav-number">1.2.</span> <span class="nav-text">二、SpringCloudAlibaba</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Nacos-%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.Nacos-注册中心</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-openfeign-%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.openfeign-远程调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-nacos%E4%BD%9C%E4%B8%BA%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83"><span class="nav-number">1.2.3.</span> <span class="nav-text">3.nacos作为配置中心</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-SpringCloudGateway"><span class="nav-number">1.2.4.</span> <span class="nav-text">4.SpringCloudGateway</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E4%B8%9A%E5%8A%A1"><span class="nav-number">1.3.</span> <span class="nav-text">三、业务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">1.3.1.</span> <span class="nav-text">1.Lambda表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%B7%A8%E5%9F%9F"><span class="nav-number">1.3.2.</span> <span class="nav-text">2.跨域</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#YaoGuaiMall"><span class="nav-number">1.</span> <span class="nav-text">YaoGuaiMall</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83"><span class="nav-number">1.1.</span> <span class="nav-text">一、虚拟环境</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">网络地址转换</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker"><span class="nav-number">1.1.1.</span> <span class="nav-text">Docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3"><span class="nav-number">1.1.2.</span> <span class="nav-text">端口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81SpringCloudAlibaba"><span class="nav-number">1.2.</span> <span class="nav-text">二、SpringCloudAlibaba</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Nacos-%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.Nacos-注册中心</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-openfeign-%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.openfeign-远程调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-nacos%E4%BD%9C%E4%B8%BA%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83"><span class="nav-number">1.2.3.</span> <span class="nav-text">3.nacos作为配置中心</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-SpringCloudGateway"><span class="nav-number">1.2.4.</span> <span class="nav-text">4.SpringCloudGateway</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E4%B8%9A%E5%8A%A1"><span class="nav-number">1.3.</span> <span class="nav-text">三、业务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">1.3.1.</span> <span class="nav-text">1.Lambda表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%B7%A8%E5%9F%9F"><span class="nav-number">1.3.2.</span> <span class="nav-text">2.跨域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.文件上传</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C"><span class="nav-number">1.3.4.</span> <span class="nav-text">4.异常处理与数据校验</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-JSR303"><span class="nav-number">1.3.4.1.</span> <span class="nav-text">1.JSR303</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%BC%82%E5%B8%B8"><span class="nav-number">1.3.4.2.</span> <span class="nav-text">2.异常</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Feign%E5%92%8CDubbo%E5%8C%BA%E5%88%AB"><span class="nav-number">1.3.5.</span> <span class="nav-text">5.Feign和Dubbo区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81Elasticsearch"><span class="nav-number">1.4.</span> <span class="nav-text">四、Elasticsearch</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.4.0.1.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-index-%E7%B4%A2%E5%BC%95"><span class="nav-number">1.4.0.1.1.</span> <span class="nav-text">1 index(索引)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-Type-%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.4.0.1.2.</span> <span class="nav-text">2 Type(类型)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-Document-%E6%96%87%E6%A1%A3"><span class="nav-number">1.4.0.1.3.</span> <span class="nav-text">3 Document(文档)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-%E5%80%92%E6%8E%92%E7%B4%A2%E5%BC%95%E6%9C%BA%E5%88%B6"><span class="nav-number">1.4.0.1.4.</span> <span class="nav-text">4 倒排索引机制</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81Nginx"><span class="nav-number">1.5.</span> <span class="nav-text">五、Nginx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95%E4%B8%8E%E4%BC%98%E5%8C%96"><span class="nav-number">1.6.</span> <span class="nav-text">六、压力测试与优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%98%E5%8C%96"><span class="nav-number">1.6.1.</span> <span class="nav-text">1.数据库优化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E7%B4%A2%E5%BC%95"><span class="nav-number">1.6.1.1.</span> <span class="nav-text">添加索引</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-nginx%E5%8A%A8%E9%9D%99%E5%88%86%E7%A6%BB"><span class="nav-number">1.6.2.</span> <span class="nav-text">2.nginx动静分离</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9F%A5%E8%AF%A2%E9%80%BB%E8%BE%91%E5%8F%98%E6%9B%B4"><span class="nav-number">1.6.3.</span> <span class="nav-text">3.数据库查询逻辑变更</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E7%BC%93%E5%AD%98%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81"><span class="nav-number">1.6.4.</span> <span class="nav-text">4.缓存与分布式锁</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
