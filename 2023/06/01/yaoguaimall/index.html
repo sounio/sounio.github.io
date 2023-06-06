@@ -88,8 +88,9 @@
 <meta property="og:locale">
 <meta property="og:image" content="c:\Users\15958\AppData\Roaming\Typora\typora-user-images\image-20230604225147720.png">
 <meta property="og:image" content="c:/Users/15958/Desktop/%E8%B0%B7%E7%B2%92%E5%95%86%E5%9F%8E/%E8%B0%B7%E7%B2%92%E5%95%86%E5%9F%8E%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0/%E5%88%86%E5%B8%83%E5%BC%8F%E9%AB%98%E7%BA%A7%E7%AF%87/image/image-20201026092738311.png">
+<meta property="og:image" content="c:\Users\15958\AppData\Roaming\Typora\typora-user-images\image-20230606100048328.png">
 <meta property="article:published_time" content="2023-06-01T04:55:04.000Z">
-<meta property="article:modified_time" content="2023-06-05T15:36:18.658Z">
+<meta property="article:modified_time" content="2023-06-06T02:00:58.922Z">
 <meta property="article:author" content="sounio">
 <meta property="article:tag" content="mall">
 <meta name="twitter:card" content="summary">
@@ -476,7 +477,14 @@
 <h3 id="2-nginx动静分离"><a href="#2-nginx动静分离" class="headerlink" title="2.nginx动静分离"></a>2.nginx动静分离</h3><p>将项目需要的所有静态资源都由nginx直接返回.</p>
 <p>将静态资源交给nginx可以将服务器的压力进行分担,节省带宽和减轻后端的负载,(nginx在处理静态资源的时候采用了sendfile机制,可以提高文件传输的效率)</p>
 <h3 id="3-数据库查询逻辑变更"><a href="#3-数据库查询逻辑变更" class="headerlink" title="3.数据库查询逻辑变更"></a>3.数据库查询逻辑变更</h3><p>将查询数据库的次数减少,减少数据库读写频率</p>
-<h3 id="4-缓存与分布式锁"><a href="#4-缓存与分布式锁" class="headerlink" title="4.缓存与分布式锁"></a>4.缓存与分布式锁</h3>
+<h3 id="4-缓存与分布式锁"><a href="#4-缓存与分布式锁" class="headerlink" title="4.缓存与分布式锁"></a>4.缓存与分布式锁</h3><p>为了性能提升,引入缓存,数据库主要承担数据落盘工作(持久化).</p>
+<blockquote>
+<p>哪些数据适合放入缓存</p>
+<p>即时性、数据一致性要求不高的；访问量大且更新频率不高的(读多、写少).</p>
+</blockquote>
+<img src="C:\Users\15958\AppData\Roaming\Typora\typora-user-images\image-20230606100048328.png" alt="image-20230606100048328" style="zoom:67%;" />
+
+
       
     </div>
     
@@ -722,10 +730,9 @@
   
 
 
+  
 
 
-  
-  
 
 
 
@@ -767,12 +774,7 @@
 
   
   
-    <script type="text/javascript" src="/lib/three/three.min.js"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
