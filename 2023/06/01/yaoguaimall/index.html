@@ -89,8 +89,11 @@
 <meta property="og:image" content="c:\Users\15958\AppData\Roaming\Typora\typora-user-images\image-20230604225147720.png">
 <meta property="og:image" content="c:/Users/15958/Desktop/%E8%B0%B7%E7%B2%92%E5%95%86%E5%9F%8E/%E8%B0%B7%E7%B2%92%E5%95%86%E5%9F%8E%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0/%E5%88%86%E5%B8%83%E5%BC%8F%E9%AB%98%E7%BA%A7%E7%AF%87/image/image-20201026092738311.png">
 <meta property="og:image" content="c:\Users\15958\AppData\Roaming\Typora\typora-user-images\image-20230606100048328.png">
+<meta property="og:image" content="c:\Users\15958\AppData\Roaming\Typora\typora-user-images\image-20230606185559970.png">
+<meta property="og:image" content="c:\Users\15958\AppData\Roaming\Typora\typora-user-images\image-20230606191049557.png">
+<meta property="og:image" content="c:\Users\15958\AppData\Roaming\Typora\typora-user-images\image-20230606191640868.png">
 <meta property="article:published_time" content="2023-06-01T04:55:04.000Z">
-<meta property="article:modified_time" content="2023-06-06T02:18:13.431Z">
+<meta property="article:modified_time" content="2023-06-06T11:42:09.433Z">
 <meta property="article:author" content="sounio">
 <meta property="article:tag" content="mall">
 <meta name="twitter:card" content="summary">
@@ -347,7 +350,7 @@
 <p>![1685597379518](D:\WeChatFile\WeChat Files\wxid_cii3gqlpyfgm22\FileStorage\Temp\1685597379518.png)</p>
 <p>得到虚拟机的IP地址，将其填入vagrant的私有网络地址（vagrant配置文件），这样虚拟机就有了一个ip地址（可以自定义）。</p>
 <h3 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h3><p>Docker是一种开源的容器化平台，用于构建、打包、部署和运行应用程序。</p>
-<p>比如需要安装一个软件，就先安装docker，然后让docker去下载镜像，然后启动这个软件。镜像地址在dockerhub</p>
+<p>比如需要安装一个软件，就先安装docker，然后让docker去下载镜像，然后启动这个软件。镜像 地址在dockerhub</p>
 <p>一般安装需要管理员权限：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su root 	// 登录管理员账号	默认密码vagrant</span><br></pre></td></tr></table></figure>
 
@@ -477,18 +480,86 @@
 <h3 id="2-nginx动静分离"><a href="#2-nginx动静分离" class="headerlink" title="2.nginx动静分离"></a>2.nginx动静分离</h3><p>将项目需要的所有静态资源都由nginx直接返回.</p>
 <p>将静态资源交给nginx可以将服务器的压力进行分担,节省带宽和减轻后端的负载,(nginx在处理静态资源的时候采用了sendfile机制,可以提高文件传输的效率)</p>
 <h3 id="3-数据库查询逻辑变更"><a href="#3-数据库查询逻辑变更" class="headerlink" title="3.数据库查询逻辑变更"></a>3.数据库查询逻辑变更</h3><p>将查询数据库的次数减少,减少数据库读写频率</p>
-<h3 id="4-缓存与分布式锁"><a href="#4-缓存与分布式锁" class="headerlink" title="4.缓存与分布式锁"></a>4.缓存与分布式锁</h3><p>为了性能提升,引入缓存,数据库主要承担数据落盘工作(持久化).</p>
+<h3 id="4-缓存与分布式锁（redis）"><a href="#4-缓存与分布式锁（redis）" class="headerlink" title="4.缓存与分布式锁（redis）"></a>4.缓存与分布式锁（redis）</h3><p>为了性能提升,引入缓存,数据库主要承担数据落盘工作(持久化).</p>
 <blockquote>
 <p>哪些数据适合放入缓存</p>
 <p>即时性、数据一致性要求不高的；访问量大且更新频率不高的(读多、写少).</p>
 </blockquote>
 <img src="C:\Users\15958\AppData\Roaming\Typora\typora-user-images\image-20230606100048328.png" alt="image-20230606100048328" style="zoom:67%;" />
 
-<h4 id="缓存方式有哪些"><a href="#缓存方式有哪些" class="headerlink" title="缓存方式有哪些?"></a>缓存方式有哪些?</h4><p>1.本地缓存(比如Map);</p>
-<p>​	存在的问题:</p>
+<h4 id="缓存方式有哪些"><a href="#缓存方式有哪些" class="headerlink" title="缓存方式有哪些?"></a>缓存方式有哪些?</h4><h4 id="1-本地缓存-比如Map"><a href="#1-本地缓存-比如Map" class="headerlink" title="1.本地缓存(比如Map);"></a>1.本地缓存(比如Map);</h4><p>​	存在的问题:</p>
 <p>​	在分布式的情况下,每个服务器都有着自己的内存或者说map,在负载均衡的时候,不一定会路由到有这个缓存数据的服务器(缓存不共享);</p>
 <p>​	在数据库修改的时候,第一个负载均衡的服务器会修改缓存,可是其他服务器并不会在缓存修改这个数据.(不一致问题)</p>
-<p>2.redis</p>
+<h4 id="2-Redis"><a href="#2-Redis" class="headerlink" title="2.Redis"></a>2.Redis</h4><p>springboot2.0以后默认使用Lettuce作为操作redis的客户端，它使用netty进行网络通信。（也可以将Lettuce换为jedis，jedis吞吐量较低）</p>
+<p>Lettuece和jedis都是操作redis的底层客户端，Spring将其再次封装成<code>redisTemplate</code>。</p>
+<p>Netty是一个基于Java的异步事件驱动的网络应用程序框架(用于通信)</p>
+<h5 id="缓存失效问题"><a href="#缓存失效问题" class="headerlink" title="缓存失效问题"></a>缓存失效问题</h5><p>高并发下缓存失效问题</p>
+<h6 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h6><p>重点是浪费了数据库的资源去查一个知道肯定不存在的元素</p>
+<p><img src="C:\Users\15958\AppData\Roaming\Typora\typora-user-images\image-20230606185559970.png" alt="image-20230606185559970"></p>
+<blockquote>
+<p>解决方法</p>
+</blockquote>
+<ol>
+<li><p>布隆过滤器（Bloom Filter）：布隆过滤器是一种数据结构，用于<code>快速判断一个元素是否存在于一个集合中</code>。可以在查询缓存之前使用布隆过滤器进行快速判断，如果元素不存在于布隆过滤器中，则可以直接返回，<code>避免访问数据库</code>。布隆过滤器是通过一些位映射实现的.</p>
+<p>布隆过滤器有时候会出现<code>误判</code>的情况,也就是将一个不存在的元素认为存在.设置白名单可以一定程度上解决这个问题,也就是先维护一个白名单,<code>只让不存在于白名单的元素通过布隆过滤器</code>.</p>
+</li>
+<li><p>**<code>缓存空对象</code>**：当查询数据库时，如果发现某个数据在数据库中不存在，可以将这个结果作为一个空对象缓存起来。下次再查询相同的数据时，可以直接<code>从缓存中返回空对象</code>，避免访问数据库。</p>
+</li>
+<li><p>延迟加载：当发现某个数据在缓存中不存在时，可以将该数据的查询操作放入一个<code>延迟加载队列</code>中，然后<code>再异步进行查询并更新缓存</code>。这样可以避免大量的并发请求同时访问数据库，减轻数据库的压力</p>
+</li>
+<li><p>限流和黑名单：通过限制请求频率、设置访问频次限制、使用验证码等手段来防止恶意攻击和非法请求，将合法的请求放行，而对于异常或非法请求进行拦截或限制。</p>
+</li>
+<li><p>数据预热：在系统启动时或低峰期，可以通过<code>批量加载热点数据到缓存中</code>，提前预热缓存，避免在高峰期因缓存失效而导致大量请求穿透到数据库。</p>
+</li>
+<li><p>使用互斥锁（Mutex Lock）：当缓存未命中时，可以使用<code>互斥锁</code>来<code>保证只有一个线程去访问数据库</code>，其他线程等待结果，避免多个线程同时访问数据库造成缓存穿透。</p>
+</li>
+</ol>
+<h6 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h6><p>重点是缓存某一时刻集体失效</p>
+<p><img src="C:\Users\15958\AppData\Roaming\Typora\typora-user-images\image-20230606191049557.png" alt="image-20230606191049557"></p>
+<blockquote>
+<p>解决方法</p>
+</blockquote>
+<ol>
+<li>设置合理的**<code>缓存过期时间</code>**：避免所有缓存同时失效，可以给缓存设置<code>随机</code>的过期时间，分散缓存失效时间点，减少缓存同时过期的概率。</li>
+<li>限流和熔断机制：通过<code>限制并发访问量</code>、设置请求的最大处理数量等方式，控制请求流量，避免缓存雪崩导致的大量请求涌入。</li>
+<li>数据库<code>容灾</code>和高可用：保证数据库的高可用性，使用数据库主从复制、读写分离等技术，避免数据库单点故障导致的雪崩效应。</li>
+<li>分布式锁：在缓存失效时，使用分布式锁机制，<code>只允许一个请求重新加载缓存</code>，避免缓存失效时大量请求同时访问数据库。</li>
+</ol>
+<blockquote>
+<p>过期策略</p>
+</blockquote>
+<ol>
+<li>时间过期策略（TTL）：为<code>每个缓存项</code>设置一个<code>固定的过期时间</code>，缓存项在达到过期时间后自动失效。</li>
+<li><code>惰性</code>过期策略（Lazy Expiration）：只在<code>访问缓存项时检查其是否过期</code>，如果过期则进行失效操作。这种策略避免了定期扫描所有缓存项的开销，但会在访问过期缓存项时引入一定的延迟。</li>
+<li><code>定期</code>过期策略（Fixed Interval Expiration）：定期<code>扫描所有缓存项</code>，判断其是否过期，并进行失效操作。可以通过设置固定的时间间隔来执行扫描操作。</li>
+<li><code>最近最少使用</code>过期策略（Least Recently Used Expiration）：根据缓存项的<code>访问频率</code>来判断其是否过期。当缓存空间不足时，会优先淘汰最近最少被使用的缓存项。</li>
+<li><code>容量限制</code>策略（Capacity Limitation）：当缓存<code>达到一定容量限制</code>时，会根据一定的规则淘汰部分缓存项。常见的规则包括最近最少使用、最早过期等。</li>
+</ol>
+<h6 id="缓存击穿"><a href="#缓存击穿" class="headerlink" title="缓存击穿"></a>缓存击穿</h6><p>重点是高访问的数据过期</p>
+<p><img src="C:\Users\15958\AppData\Roaming\Typora\typora-user-images\image-20230606191640868.png" alt="image-20230606191640868"></p>
+<blockquote>
+<p>解决方法</p>
+</blockquote>
+<ol>
+<li>**<code>加锁策略</code>**：在缓存失效的时候，通过加锁的方式，<code>只允许一个线程去访问数据库</code>，其他线程等待。当第一个线程从数据库中获取到数据后，更新缓存，并释放锁，其他线程再从缓存中获取数据。</li>
+<li>设置热点数据永不过期：<code>针对一些热点数据</code>，可以设置其缓存永不过期，或者设置一个较长的过期时间。这样即使缓存失效，仍然可以继续使用旧数据，避免了缓存失效期间的数据库压力。</li>
+</ol>
+<h5 id="缓存倾斜问题"><a href="#缓存倾斜问题" class="headerlink" title="缓存倾斜问题"></a>缓存倾斜问题</h5><p>指在某些特定条件下，缓存中的部分数据受到极高的访问频率，而其他数据则很少或几乎不被访问的情况。</p>
+<p>会造成空间浪费和命中率下降的问题.</p>
+<blockquote>
+<p>解决方法</p>
+</blockquote>
+<ol>
+<li><code>分级</code>缓存：将缓存分成多个层级，不同层级的缓存用于存储不同访问频率的数据。可以将<code>热门数据放在高速缓存层</code>，将<code>冷门数据放在低速缓存层</code>，以充分利用缓存空间。</li>
+<li><code>热点数据隔离</code>：将热门数据单独存储在一个缓存集群中，避免与其他数据混合存储，确保热门数据有足够的缓存空间，提高缓存命中率。</li>
+<li>数据<code>预热</code>：在系统启动或低峰期，预先将一些热门数据加载到缓存中，避免系统高峰期出现缓存倾斜问题。</li>
+<li>动态调整缓存策略：根据实时的数据访问情况，动态调整缓存策略，优化缓存的利用率和命中率。</li>
+</ol>
+<h5 id="缓存加锁策略"><a href="#缓存加锁策略" class="headerlink" title="缓存加锁策略"></a>缓存加锁策略</h5><h6 id="1-synchronized-this-本地锁"><a href="#1-synchronized-this-本地锁" class="headerlink" title="1.synchronized(this)	(本地锁)"></a>1.synchronized(this)	(本地锁)</h6><p>因为springboot中所有组件都是单例的,所以都是同一把锁,是能锁住的.</p>
+<blockquote>
+<p>注意:进程得到锁以后,应该再去缓存中确定一次,如果没有才需要继续查询(<code>双检锁</code>),防止前一个进程已经读过数据库了,下一个进程还要去读.</p>
+</blockquote>
+<h6 id="2-分布式下如何加锁"><a href="#2-分布式下如何加锁" class="headerlink" title="2.分布式下如何加锁"></a>2.分布式下如何加锁</h6><p>对于每一个微服务都有一个容器,比如product服务可能有很多个容器,那么便会有有很多个实例,这时<code>this只代表了当前容器的实例</code>,也就是每一个this都是不同的锁.(本地锁只能锁住当前进程,所以需要分布式锁)</p>
 
       
     </div>
@@ -650,7 +721,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#YaoGuaiMall"><span class="nav-number">1.</span> <span class="nav-text">YaoGuaiMall</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83"><span class="nav-number">1.1.</span> <span class="nav-text">一、虚拟环境</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">网络地址转换</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker"><span class="nav-number">1.1.1.</span> <span class="nav-text">Docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3"><span class="nav-number">1.1.2.</span> <span class="nav-text">端口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81SpringCloudAlibaba"><span class="nav-number">1.2.</span> <span class="nav-text">二、SpringCloudAlibaba</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Nacos-%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.Nacos-注册中心</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-openfeign-%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.openfeign-远程调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-nacos%E4%BD%9C%E4%B8%BA%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83"><span class="nav-number">1.2.3.</span> <span class="nav-text">3.nacos作为配置中心</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-SpringCloudGateway"><span class="nav-number">1.2.4.</span> <span class="nav-text">4.SpringCloudGateway</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E4%B8%9A%E5%8A%A1"><span class="nav-number">1.3.</span> <span class="nav-text">三、业务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">1.3.1.</span> <span class="nav-text">1.Lambda表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%B7%A8%E5%9F%9F"><span class="nav-number">1.3.2.</span> <span class="nav-text">2.跨域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.文件上传</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C"><span class="nav-number">1.3.4.</span> <span class="nav-text">4.异常处理与数据校验</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-JSR303"><span class="nav-number">1.3.4.1.</span> <span class="nav-text">1.JSR303</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%BC%82%E5%B8%B8"><span class="nav-number">1.3.4.2.</span> <span class="nav-text">2.异常</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Feign%E5%92%8CDubbo%E5%8C%BA%E5%88%AB"><span class="nav-number">1.3.5.</span> <span class="nav-text">5.Feign和Dubbo区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81Elasticsearch"><span class="nav-number">1.4.</span> <span class="nav-text">四、Elasticsearch</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.4.0.1.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-index-%E7%B4%A2%E5%BC%95"><span class="nav-number">1.4.0.1.1.</span> <span class="nav-text">1 index(索引)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-Type-%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.4.0.1.2.</span> <span class="nav-text">2 Type(类型)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-Document-%E6%96%87%E6%A1%A3"><span class="nav-number">1.4.0.1.3.</span> <span class="nav-text">3 Document(文档)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-%E5%80%92%E6%8E%92%E7%B4%A2%E5%BC%95%E6%9C%BA%E5%88%B6"><span class="nav-number">1.4.0.1.4.</span> <span class="nav-text">4 倒排索引机制</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81Nginx"><span class="nav-number">1.5.</span> <span class="nav-text">五、Nginx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95%E4%B8%8E%E4%BC%98%E5%8C%96"><span class="nav-number">1.6.</span> <span class="nav-text">六、压力测试与优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%98%E5%8C%96"><span class="nav-number">1.6.1.</span> <span class="nav-text">1.数据库优化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E7%B4%A2%E5%BC%95"><span class="nav-number">1.6.1.1.</span> <span class="nav-text">添加索引</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-nginx%E5%8A%A8%E9%9D%99%E5%88%86%E7%A6%BB"><span class="nav-number">1.6.2.</span> <span class="nav-text">2.nginx动静分离</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9F%A5%E8%AF%A2%E9%80%BB%E8%BE%91%E5%8F%98%E6%9B%B4"><span class="nav-number">1.6.3.</span> <span class="nav-text">3.数据库查询逻辑变更</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E7%BC%93%E5%AD%98%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81"><span class="nav-number">1.6.4.</span> <span class="nav-text">4.缓存与分布式锁</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E6%96%B9%E5%BC%8F%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="nav-number">1.6.4.1.</span> <span class="nav-text">缓存方式有哪些?</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#YaoGuaiMall"><span class="nav-number">1.</span> <span class="nav-text">YaoGuaiMall</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83"><span class="nav-number">1.1.</span> <span class="nav-text">一、虚拟环境</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">网络地址转换</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker"><span class="nav-number">1.1.1.</span> <span class="nav-text">Docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3"><span class="nav-number">1.1.2.</span> <span class="nav-text">端口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81SpringCloudAlibaba"><span class="nav-number">1.2.</span> <span class="nav-text">二、SpringCloudAlibaba</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Nacos-%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.Nacos-注册中心</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-openfeign-%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.openfeign-远程调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-nacos%E4%BD%9C%E4%B8%BA%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83"><span class="nav-number">1.2.3.</span> <span class="nav-text">3.nacos作为配置中心</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-SpringCloudGateway"><span class="nav-number">1.2.4.</span> <span class="nav-text">4.SpringCloudGateway</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E4%B8%9A%E5%8A%A1"><span class="nav-number">1.3.</span> <span class="nav-text">三、业务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">1.3.1.</span> <span class="nav-text">1.Lambda表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%B7%A8%E5%9F%9F"><span class="nav-number">1.3.2.</span> <span class="nav-text">2.跨域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.文件上传</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C"><span class="nav-number">1.3.4.</span> <span class="nav-text">4.异常处理与数据校验</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-JSR303"><span class="nav-number">1.3.4.1.</span> <span class="nav-text">1.JSR303</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%BC%82%E5%B8%B8"><span class="nav-number">1.3.4.2.</span> <span class="nav-text">2.异常</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Feign%E5%92%8CDubbo%E5%8C%BA%E5%88%AB"><span class="nav-number">1.3.5.</span> <span class="nav-text">5.Feign和Dubbo区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81Elasticsearch"><span class="nav-number">1.4.</span> <span class="nav-text">四、Elasticsearch</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.4.0.1.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-index-%E7%B4%A2%E5%BC%95"><span class="nav-number">1.4.0.1.1.</span> <span class="nav-text">1 index(索引)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-Type-%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.4.0.1.2.</span> <span class="nav-text">2 Type(类型)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-Document-%E6%96%87%E6%A1%A3"><span class="nav-number">1.4.0.1.3.</span> <span class="nav-text">3 Document(文档)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-%E5%80%92%E6%8E%92%E7%B4%A2%E5%BC%95%E6%9C%BA%E5%88%B6"><span class="nav-number">1.4.0.1.4.</span> <span class="nav-text">4 倒排索引机制</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81Nginx"><span class="nav-number">1.5.</span> <span class="nav-text">五、Nginx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95%E4%B8%8E%E4%BC%98%E5%8C%96"><span class="nav-number">1.6.</span> <span class="nav-text">六、压力测试与优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%98%E5%8C%96"><span class="nav-number">1.6.1.</span> <span class="nav-text">1.数据库优化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E7%B4%A2%E5%BC%95"><span class="nav-number">1.6.1.1.</span> <span class="nav-text">添加索引</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-nginx%E5%8A%A8%E9%9D%99%E5%88%86%E7%A6%BB"><span class="nav-number">1.6.2.</span> <span class="nav-text">2.nginx动静分离</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9F%A5%E8%AF%A2%E9%80%BB%E8%BE%91%E5%8F%98%E6%9B%B4"><span class="nav-number">1.6.3.</span> <span class="nav-text">3.数据库查询逻辑变更</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E7%BC%93%E5%AD%98%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%EF%BC%88redis%EF%BC%89"><span class="nav-number">1.6.4.</span> <span class="nav-text">4.缓存与分布式锁（redis）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E6%96%B9%E5%BC%8F%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="nav-number">1.6.4.1.</span> <span class="nav-text">缓存方式有哪些?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98-%E6%AF%94%E5%A6%82Map"><span class="nav-number">1.6.4.2.</span> <span class="nav-text">1.本地缓存(比如Map);</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Redis"><span class="nav-number">1.6.4.3.</span> <span class="nav-text">2.Redis</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E5%A4%B1%E6%95%88%E9%97%AE%E9%A2%98"><span class="nav-number">1.6.4.3.1.</span> <span class="nav-text">缓存失效问题</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F"><span class="nav-number">1.6.4.3.1.1.</span> <span class="nav-text">缓存穿透</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9"><span class="nav-number">1.6.4.3.1.2.</span> <span class="nav-text">缓存雪崩</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF"><span class="nav-number">1.6.4.3.1.3.</span> <span class="nav-text">缓存击穿</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E5%80%BE%E6%96%9C%E9%97%AE%E9%A2%98"><span class="nav-number">1.6.4.3.2.</span> <span class="nav-text">缓存倾斜问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E5%8A%A0%E9%94%81%E7%AD%96%E7%95%A5"><span class="nav-number">1.6.4.3.3.</span> <span class="nav-text">缓存加锁策略</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-synchronized-this-%E6%9C%AC%E5%9C%B0%E9%94%81"><span class="nav-number">1.6.4.3.3.1.</span> <span class="nav-text">1.synchronized(this)	(本地锁)</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%8B%E5%A6%82%E4%BD%95%E5%8A%A0%E9%94%81"><span class="nav-number">1.6.4.3.3.2.</span> <span class="nav-text">2.分布式下如何加锁</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
