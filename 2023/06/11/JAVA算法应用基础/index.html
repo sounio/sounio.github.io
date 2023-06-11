@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Java ， leetcode," />
 
 
 
@@ -79,16 +79,17 @@
 
 
 
-<meta name="description" content="jarjar包就是 Java Archive File。其实就是一个项目的打包,或者说是一些能够直接拿来用的业务模块。 jar 与 zip 唯一的区别就是在 jar 文件的内容中，包含了一个 META-INF&#x2F;MANIFEST.MF 文件，该文件是在生成 jar 文件的时候自动创建的，作为jar里面的”详情单”，包含了该Jar包的版本、创建人和类搜索路径Class-Path等信息，当然如">
+<meta name="description" content="Linkedlist链表结构 LinkedList 实现了 Queue 接口，可作为队列使用。 LinkedList 实现了 List 接口，可进行列表的相关操作。 LinkedList 实现了 Deque 接口，可作为队列使用。 LinkedList 实现了 Cloneable 接口，可实现克隆。 123456789101112131415161718   LinkedList&lt;Strin">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一些基础知识">
-<meta property="og:url" content="https://sounio.github.io/2023/05/08/%E4%B8%80%E4%BA%9B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/index.html">
+<meta property="og:title" content="JAVA算法应用基础">
+<meta property="og:url" content="https://sounio.github.io/2023/06/11/JAVA%E7%AE%97%E6%B3%95%E5%BA%94%E7%94%A8%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="Sounio">
-<meta property="og:description" content="jarjar包就是 Java Archive File。其实就是一个项目的打包,或者说是一些能够直接拿来用的业务模块。 jar 与 zip 唯一的区别就是在 jar 文件的内容中，包含了一个 META-INF&#x2F;MANIFEST.MF 文件，该文件是在生成 jar 文件的时候自动创建的，作为jar里面的”详情单”，包含了该Jar包的版本、创建人和类搜索路径Class-Path等信息，当然如">
+<meta property="og:description" content="Linkedlist链表结构 LinkedList 实现了 Queue 接口，可作为队列使用。 LinkedList 实现了 List 接口，可进行列表的相关操作。 LinkedList 实现了 Deque 接口，可作为队列使用。 LinkedList 实现了 Cloneable 接口，可实现克隆。 123456789101112131415161718   LinkedList&lt;Strin">
 <meta property="og:locale">
-<meta property="article:published_time" content="2023-05-08T05:02:53.000Z">
-<meta property="article:modified_time" content="2023-06-08T06:19:11.240Z">
+<meta property="article:published_time" content="2023-06-11T14:07:28.000Z">
+<meta property="article:modified_time" content="2023-06-11T14:20:47.828Z">
 <meta property="article:author" content="sounio">
+<meta property="article:tag" content="Java ， leetcode">
 <meta name="twitter:card" content="summary">
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://sounio.github.io/2023/05/08/一些基础知识/"/>
+  <link rel="canonical" href="https://sounio.github.io/2023/06/11/JAVA算法应用基础/"/>
 
 
 
 
 
-  <title>一些基础知识 | Sounio</title>
+  <title>JAVA算法应用基础 | Sounio</title>
   
 
 
@@ -266,7 +267,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sounio.github.io/2023/05/08/%E4%B8%80%E4%BA%9B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+    <link itemprop="mainEntityOfPage" href="https://sounio.github.io/2023/06/11/JAVA%E7%AE%97%E6%B3%95%E5%BA%94%E7%94%A8%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -283,7 +284,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">一些基础知识</h1>
+          <h1 class="post-title" itemprop="name headline">JAVA算法应用基础</h1>
         
 
         <div class="post-meta">
@@ -295,8 +296,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-05-08T13:02:53+08:00">
-                2023-05-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-06-11T22:07:28+08:00">
+                2023-06-11
               </time>
             
 
@@ -333,20 +334,54 @@
       
 
       
-        <h2 id="jar"><a href="#jar" class="headerlink" title="jar"></a>jar</h2><p>jar包就是 Java Archive File。其实就是一个项目的打包,或者说是一些能够直接拿来用的业务模块。</p>
-<p>jar 与 zip 唯一的区别就是在 jar 文件的内容中，包含了一个 META-INF&#x2F;MANIFEST.MF 文件，该文件是在生成 jar 文件的时候自动创建的，作为jar里面的”详情单”，包含了该Jar包的版本、创建人和类搜索路径Class-Path等信息，当然如果是可执行Jar包，会包含<code>Main-Class</code>属性，表明<code>Main方法入口</code>，尤其是较为重要的Class-Path和Main-Class。</p>
-<p>有的jar包是可以直接通过 <code>java -jar</code> 指令来执行的。</p>
-<p>当我们开发了一个程序以后，程序中有很多的类，如果需要提供给别人使用,发给对方一大堆源文件是非常不好的，因此通常需要把这些类以及相关的资源文件打包成一个 jar 包,把这个 jar 包提供给别人使用,同时提供给使用者清晰的文档。这样他人在拿到我们提供的jar之后，就能方便地进行调用。而且安全。能够对JAR文件进行数字签名，只让能够识别数字签名的用户使用里面的东西。</p>
-<p>由于jvm实际解析的是.class字节码文件而非.java文件，且jar中最好不要包含代码源文件，将.class文件打个jar包，在src根目录下执行如下指令</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jar -cvf welcome.jar com/imooc/jardemo1/Welcome.<span class="keyword">class</span> <span class="title class_">com</span>/imooc/jardemo1/impl/Teacher.class</span><br></pre></td></tr></table></figure>
+        <h2 id="Linkedlist"><a href="#Linkedlist" class="headerlink" title="Linkedlist"></a>Linkedlist</h2><p>链表结构</p>
+<p>LinkedList 实现了 Queue 接口，可作为队列使用。</p>
+<p>LinkedList 实现了 List 接口，可进行列表的相关操作。</p>
+<p>LinkedList 实现了 Deque 接口，可作为队列使用。</p>
+<p>LinkedList 实现了 Cloneable 接口，可实现克隆。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">   LinkedList&lt;String&gt; sites = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;String&gt;();</span><br><span class="line">   sites.add(<span class="string">&quot;队尾添加元素,返回true&quot;</span>);</span><br><span class="line">   sites.addFirst(<span class="string">&quot;队头添加元素&quot;</span>);</span><br><span class="line">   sites.addLast(<span class="string">&quot;队尾添加元素,无返回&quot;</span>);</span><br><span class="line">   sites.removeFirst(<span class="string">&quot;移除头部元素&quot;</span>);</span><br><span class="line">   sites.removeLast(<span class="string">&quot;移除尾部元素&quot;</span>);</span><br><span class="line">   sites.size()</span><br><span class="line">   sites.get(i)</span><br><span class="line">   sites.getLast()</span><br><span class="line">   <span class="keyword">for</span>(String i : sites)&#123;</span><br><span class="line">       System.out,println(i);</span><br><span class="line">   &#125;</span><br><span class="line"><span class="keyword">public</span> T[] toArray(T[] a)	返回一个由链表元素转换类型而成的数组。</span><br><span class="line">   <span class="keyword">public</span> Object[] toArray()	返回一个由链表元素组成的数组。</span><br><span class="line">   <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">add</span><span class="params">(E e)</span>	链表末尾添加元素，返回是否成功，成功为 <span class="literal">true</span>，失败为 <span class="literal">false</span>。</span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> index, E element)</span>	向指定位置插入元素。</span><br><span class="line">   <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">addAll</span><span class="params">(Collection c)</span>	将一个集合的所有元素添加到链表后面，返回是否成功，成功为 <span class="literal">true</span>，失败为 <span class="literal">false</span>。</span><br><span class="line">   <span class="keyword">public</span> E <span class="title function_">remove</span><span class="params">(<span class="type">int</span> index)</span>	删除指定位置的元素。</span><br></pre></td></tr></table></figure>
 
-<p>c表示要创建一个新的jar包，v表示创建的过程中在控制台输出创建过程的一些信息，f表示给生成的jar包命名</p>
-<p>打jar的时候，会生成一个META-INF的目录，里面有&#96;&#96;这个清单列表。要使得jar包能直接运行，需要在清单加上<code>Main-Class</code>，后接main函数所在类的全路径名（注意冒号之后一定要跟英文的空格，整个文件最后有一行空行）。</p>
-<p>在包含调用关系时，需要在<code>MANIFEST.MF</code>中配置<code>Class-Path</code>（如果是多个jar，则用英文空格隔开）。CLASSPATH是<code>指定程序中所使用的类文件所在的位置</code>。</p>
-<h2 id="关于String"><a href="#关于String" class="headerlink" title="关于String"></a>关于String</h2><p>1.如何实现string的equals()方法</p>
-<h2 id="hsahcode"><a href="#hsahcode" class="headerlink" title="hsahcode"></a>hsahcode</h2><p>每个 Java 对象都有一个默认的 hashCode() 实现，该实现<code>一般基于对象的内存地址</code>计算哈希码。通常情况下，每个对象的哈希码是不同的，因为每个对象在内存中都有其自己的地址。但是，如果两个对象的内存地址相同，它们的哈希码也相同。</p>
-<p>HashCode是根据对象的<code>内容</code>生成的一个整数值(重写了hashcode方法)，用于快速地判断对象在哈希表等数据结构中的位置。值得注意的是，根据对象的内容生成哈希码时，应该保证<code>相等的对象具有相同的哈希码</code>，但<code>不要求不相等的对象具有不同的哈希码</code>。这是因为哈希码是一个有限的整数范围，而对象的内容可能是无限的，因此<code>不同对象的内容可能会产生相同的哈希码</code>（这就是哈希冲突）。</p>
-<p>哈希冲突是不能避免的,只能进行优化,比如散列函数优化\开放地址\链表法\再哈希.</p>
+
+
+
+
+<h2 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h2><p>ArrayList 是一个数组队列，提供了相关的添加、删除、修改、遍历等功能。</p>
+<table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/java/java-arraylist-add.html">add()</a></td>
+<td align="left">将元素插入到指定位置的 arraylist 中</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/java/java-arraylist-addall.html">addAll()</a></td>
+<td align="left">添加集合中的所有元素到 arraylist 中</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/java/java-arraylist-clear.html">clear()</a></td>
+<td align="left">删除 arraylist 中的所有元素</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/java/java-arraylist-clone.html">clone()</a></td>
+<td align="left">复制一份 arraylist</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/java/java-arraylist-contains.html">contains()</a></td>
+<td align="left">判断元素是否在 arraylist</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/java/java-arraylist-get.html">get()</a></td>
+<td align="left">通过索引值获取 arraylist 中的元素</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://www.runoob.com/java/java-arraylist-indexof.html">indexOf()</a></td>
+<td align="left">返回 arraylist 中元素的索引值</td>
+</tr>
+</tbody></table>
 
       
     </div>
@@ -362,6 +397,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Java-%EF%BC%8C-leetcode/" rel="tag"># Java ， leetcode</a>
+          
+        </div>
+      
 
       
       
@@ -371,8 +412,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2023/05/07/Spring/" rel="next" title="Spring">
-                <i class="fa fa-chevron-left"></i> Spring
+              <a href="/2023/06/01/yaoguaimall/" rel="next" title="YaoguaiMall">
+                <i class="fa fa-chevron-left"></i> YaoguaiMall
               </a>
             
           </div>
@@ -380,10 +421,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2023/05/31/Redis/" rel="prev" title="Redis">
-                Redis <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -506,7 +543,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#jar"><span class="nav-number">1.</span> <span class="nav-text">jar</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8EString"><span class="nav-number">2.</span> <span class="nav-text">关于String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hsahcode"><span class="nav-number">3.</span> <span class="nav-text">hsahcode</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linkedlist"><span class="nav-number">1.</span> <span class="nav-text">Linkedlist</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ArrayList"><span class="nav-number">2.</span> <span class="nav-text">ArrayList</span></a></li></ol></div>
             
 
           </div>

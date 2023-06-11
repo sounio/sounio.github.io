@@ -92,8 +92,17 @@
 <meta property="og:image" content="c:\Users\15958\AppData\Roaming\Typora\typora-user-images\image-20230606185559970.png">
 <meta property="og:image" content="c:\Users\15958\AppData\Roaming\Typora\typora-user-images\image-20230606191049557.png">
 <meta property="og:image" content="c:\Users\15958\AppData\Roaming\Typora\typora-user-images\image-20230606191640868.png">
+<meta property="og:image" content="c:\Users\15958\AppData\Roaming\Typora\typora-user-images\image-20230606232815673.png">
+<meta property="og:image" content="c:\Users\15958\AppData\Roaming\Typora\typora-user-images\image-20230606232852164.png">
+<meta property="og:image" content="c:\Users\15958\AppData\Roaming\Typora\typora-user-images\image-20230608121015287.png">
+<meta property="og:image" content="c:\Users\15958\AppData\Roaming\Typora\typora-user-images\image-20230608223512787.png">
+<meta property="og:image" content="c:\Users\15958\AppData\Roaming\Typora\typora-user-images\image-20230608224222239.png">
+<meta property="og:image" content="c:\Users\15958\AppData\Roaming\Typora\typora-user-images\image-20230608225156331.png">
+<meta property="og:image" content="file:///C:/Users/15958/Desktop/%E8%B0%B7%E7%B2%92%E5%95%86%E5%9F%8E/%E8%B0%B7%E7%B2%92%E5%95%86%E5%9F%8E%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0/%E5%88%86%E5%B8%83%E5%BC%8F%E9%AB%98%E7%BA%A7%E7%AF%87/image/oAuth2_01.gif?lastModify=1685951031">
+<meta property="og:image" content="c:\Users\15958\AppData\Roaming\Typora\typora-user-images\image-20230609144207914.png">
+<meta property="og:image" content="c:\Users\15958\AppData\Roaming\Typora\typora-user-images\image-20230609154714932.png">
 <meta property="article:published_time" content="2023-06-01T04:55:04.000Z">
-<meta property="article:modified_time" content="2023-06-06T15:05:27.819Z">
+<meta property="article:modified_time" content="2023-06-10T14:35:47.236Z">
 <meta property="article:author" content="sounio">
 <meta property="article:tag" content="mall">
 <meta name="twitter:card" content="summary">
@@ -605,6 +614,179 @@
 <p>3.闭锁:等待所有锁释放才继续;通常是一个<code>计数器</code>，初始化一个数值，每当一个线程完成操作时，计数器减一，直到计数器为零时，所有等待的线程被释放</p>
 <p>4.信号量:控制同时访问某个资源的线程数量</p>
 <p>闭锁用于等待操作的完成，而信号量用于控制资源的访问数量</p>
+<blockquote>
+<p>一致性问题</p>
+</blockquote>
+<p>双写模式：改变后一起更改</p>
+<p><img src="C:\Users\15958\AppData\Roaming\Typora\typora-user-images\image-20230606232815673.png" alt="image-20230606232815673"></p>
+<p>失效模式：直接删除</p>
+<p><img src="C:\Users\15958\AppData\Roaming\Typora\typora-user-images\image-20230606232852164.png" alt="image-20230606232852164"></p>
+<h5 id="缓存数据一致性解决方案"><a href="#缓存数据一致性解决方案" class="headerlink" title="缓存数据一致性解决方案"></a>缓存数据一致性解决方案</h5><p>无论是双写模式还是失效模式，都会遇到缓存不一致的问题，即多个实例同时更新会出事，怎么办？</p>
+<ul>
+<li>1、如果是用户纯度数据（订单数据、用户数据），这<code>并发几率很小</code>，几乎不用考虑这个问题，缓存数据加上过期时间，每隔一段时间触发读的主动更新即可</li>
+<li>2、如果是菜单，商品介绍等基础数据，也可以去使用 canal 订阅，binlog 的方式</li>
+<li>3、缓存数据 + 过期时间也足够解决大部分业务对缓存的要求</li>
+<li>4、通过<code>加锁</code>保证并发读写，写写的时候按照顺序排好队，读读无所谓，所以适合读写锁，（业务不关心脏数据，允许临时脏数据可忽略）</li>
+</ul>
+<p>总结:</p>
+<ul>
+<li>我们能放入缓存的数据本来就不应该是实时性、一致性要求超高的。所以缓存数据的时候加上过期时间，保证每天拿到当前的最新值即可</li>
+<li>我们不应该过度设计，增加系统的复杂性</li>
+<li>遇到实时性、一致性要求高的数据，就应该查数据库，即使慢点</li>
+<li>或者使用<code>canal</code></li>
+</ul>
+<h4 id="4-SpringCache"><a href="#4-SpringCache" class="headerlink" title="4.SpringCache"></a>4.SpringCache</h4><p>spring集成框架，定义缓存组件的规则</p>
+<p>使用CacheManager管理缓存，CacheManager可以有各种实现，比如redis，map等等。</p>
+<p>springcache会对每个缓存的对象继续分区，但是这个分区只是springcache的标识，也就是在redis中是没有这个标识的，通过分区可以部分数据进行集中修改。</p>
+<h5 id="问题以及解决"><a href="#问题以及解决" class="headerlink" title="问题以及解决"></a>问题以及解决</h5><h6 id="读模式"><a href="#读模式" class="headerlink" title="读模式"></a>读模式</h6><p>缓存穿透:查询一个null数据，解决 缓存空数据：ache-null-values&#x3D;true</p>
+<p>缓存击穿:大量并发进来同时查询一个正好过期的数据，解决:加锁 ？ <code>默认是无加锁</code>,可以配置加锁（本地锁）</p>
+<p>缓存雪崩:大量的key同时过期，解决：加上随机时间，Spring-cache-redis-time-to-live</p>
+<h6 id="写模式：（缓存与数据库库不一致）"><a href="#写模式：（缓存与数据库库不一致）" class="headerlink" title="写模式：（缓存与数据库库不一致）"></a>写模式：（缓存与数据库库不一致）</h6><p>1、读写加锁</p>
+<p>2、引入canal，感知到MySQL的更新去更新数据库</p>
+<p>3、读多写多，直接去数据库查询就行</p>
+<h6 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h6><p>常规数据（读多写少，即时性，一致性要求不高的数据）完全可以使用SpringCache 写模式（ 只要缓存数据有过期时间就足够了）</p>
+<h2 id="七、线程、异步编排"><a href="#七、线程、异步编排" class="headerlink" title="七、线程、异步编排"></a>七、线程、异步编排</h2><h3 id="初始化线程的4种方式（线程池）"><a href="#初始化线程的4种方式（线程池）" class="headerlink" title="初始化线程的4种方式（线程池）"></a>初始化线程的4种方式（线程池）</h3><ul>
+<li><p>继承Tread</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Thread01</span> <span class="keyword">extends</span> <span class="title class_">Thread</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;当前线程：&quot;</span> + Thread.currentThread().getId());</span><br><span class="line">        <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">10</span> / <span class="number">2</span>;</span><br><span class="line">        System.out.println(<span class="string">&quot;运行结果：&quot;</span> + i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实现Runable接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Runable01</span> <span class="keyword">implements</span> <span class="title class_">Runnable</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;当前线程：&quot;</span> + Thread.currentThread().getId());</span><br><span class="line">        <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">10</span> / <span class="number">2</span>;</span><br><span class="line">        System.out.println(<span class="string">&quot;运行结果：&quot;</span> + i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实现Callable接口 + FutureTask （可以拿到返回结果，可以处理异常）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Callable01</span> <span class="keyword">implements</span> <span class="title class_">Callable</span>&lt;Integer&gt; &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Integer <span class="title function_">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;	<span class="comment">// 可以有返回值</span></span><br><span class="line">        System.out.println(<span class="string">&quot;当前线程：&quot;</span> + Thread.currentThread().getId());</span><br><span class="line">        <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">10</span> / <span class="number">2</span>;</span><br><span class="line">        System.out.println(<span class="string">&quot;运行结果：&quot;</span> + i);</span><br><span class="line">        <span class="keyword">return</span> i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><blockquote>
+<p>线程池(建议保证每个系统只有有限个线程池，一两个)</p>
+</blockquote>
+<ul>
+<li><p>创建</p>
+<p>1.Executors</p>
+<p>2.new ThreadPoolExecutor</p>
+</li>
+<li><p>执行</p>
+</li>
+<li><p>七大参数</p>
+<p><img src="C:\Users\15958\AppData\Roaming\Typora\typora-user-images\image-20230608121015287.png" alt="image-20230608121015287"></p>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>启动线程</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//前两种</span></span><br><span class="line"><span class="type">Tread01</span> <span class="variable">tread</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Tread01</span>();</span><br><span class="line">trean.start();	<span class="comment">// 启动线程</span></span><br><span class="line"><span class="comment">//Callable接口</span></span><br><span class="line">FutureTask&lt;Integer&gt; futureTask = <span class="keyword">new</span> <span class="title class_">FutureTask</span>&lt;&gt;(<span class="keyword">new</span> <span class="title class_">Callable01</span>());</span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Thread</span>(futureTask).start();</span><br><span class="line"><span class="type">Integer</span> <span class="variable">integer</span> <span class="operator">=</span> futureTask.get();<span class="comment">//阻塞等待整个线程执行完成，获取返回结果</span></span><br></pre></td></tr></table></figure>
+
+<p>在业务中，需要对线程数进行管理，不然容易资源耗尽，以后对于所有的多线程异步任务都给线程池处理（性能稳定）</p>
+<h3 id="线程池运行流程"><a href="#线程池运行流程" class="headerlink" title="线程池运行流程"></a>线程池运行流程</h3><p>1、线程池创建，准备好 <code>core</code> 数量 的核心线程，准备接受任务</p>
+<p>2、新的任务进来，用 <code>core</code> 准备好的空闲线程执行</p>
+<ul>
+<li><code>core</code> **<code>满了</code>**，就将再进来的任务放入阻塞队列中，空闲的 core 就会自己去阻塞队列获取任务执行</li>
+<li><code>阻塞队列也满了</code>，就直接开<code>新线程</code>去执行，最大只能开到 <code>max</code> 指定的数量</li>
+<li><code>max</code> 都执行好了，<code>Max-core</code> 数量空闲的线程会在 <code>keepAliveTime</code> 指定的时间后自动销毁，终保持到 <code>core</code> 大小</li>
+<li>如果线程数开到了 <code>max</code> 数量，还有新的任务进来，就会使用 reject 指定的<code>拒绝策略</code>进行处理</li>
+</ul>
+<p>3、所有的线程创建都是由指定的 <code>factory</code> 创建的</p>
+<h3 id="线程池种类"><a href="#线程池种类" class="headerlink" title="线程池种类"></a>线程池种类</h3><p>在Java中，常用的线程池类型有以下几种：</p>
+<ol>
+<li>FixedThreadPool（固定线程池）：<ul>
+<li>核心线程数固定，<code>不会回收</code>线程。</li>
+<li>当任务提交到线程池时，若有空闲线程则立即执行，若无空闲线程则任务会等待直到有可用线程。</li>
+<li>当线程池中的线程都在执行任务且达到最大线程数时，新的任务会进入等待队列。</li>
+</ul>
+</li>
+<li>CachedThreadPool（缓存线程池）：<ul>
+<li>线程池不固定大小，可以根据需要<code>动态创建和回收线程</code>。</li>
+<li>当任务提交到线程池时，若有空闲线程则立即执行，若无空闲线程则创建新线程执行任务。</li>
+<li>当线程池中的线程<code>空闲时间</code>超过一定阈值（默认60秒），则会被回收销毁。</li>
+</ul>
+</li>
+<li>ScheduledThreadPool（定时线程池）：<ul>
+<li>线程池可用于执行定时任务和周期性任务。</li>
+<li>核心线程数固定，<code>不会回收线程</code>。</li>
+<li>若任务提交时间早于当前时间，则立即执行任务；若任务提交时间晚于当前时间，则等待至指定时间后执行。</li>
+<li>定时线程池一般不进行线程回收，除非显式地关闭线程池。</li>
+</ul>
+</li>
+<li>SingleThreadPool（单线程池）：<ul>
+<li>只有一个核心线程的线程池。</li>
+<li>保证所有任务按照指定顺序执行，先进先出。</li>
+<li>当<code>线程因异常结束时，会重新创建一个新线程来替代</code>。</li>
+</ul>
+</li>
+<li>WorkStealingPool（<code>工作窃取</code>线程池）：该线程池是Java 8新增的一种线程池类型，基于工作窃取算法，每个线程都有自己的任务队列，当线程完成自己的任务后，可以从其他线程的队列中<code>偷取任务</code>执行。适用于任务间存在较大差异，且具有任务窃取特性的场景。</li>
+</ol>
+<h3 id="异步编排"><a href="#异步编排" class="headerlink" title="异步编排"></a>异步编排</h3><p>其实就是对于各个任务进行异步的调用来节约时间，同时要注意任务间的逻辑调用。</p>
+<h4 id="CompletableFuture"><a href="#CompletableFuture" class="headerlink" title="CompletableFuture"></a>CompletableFuture</h4><p>JAVA8引入的一个类，用于支持异步编程和处理异步任务的结果。<code>CompletableFuture</code>是<code>Future</code>的一个扩展，它提供了更强大的功能和灵活性。</p>
+<h5 id="1-创建异步对象"><a href="#1-创建异步对象" class="headerlink" title="1.创建异步对象"></a>1.创建异步对象</h5><p>CompletableFuture 提供了四个静态方法来创建一个异步操作</p>
+<p><img src="C:\Users\15958\AppData\Roaming\Typora\typora-user-images\image-20230608223512787.png" alt="image-20230608223512787"></p>
+<p>1、<strong>runXxx 都是没有返回结果的，supplyXxxx都是可以获取返回结果的</strong></p>
+<p>2、可以传入自定义的线程池，否则就是用默认的线程池</p>
+<p>代码示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ExecutionException, InterruptedException &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;main....start.....&quot;</span>);</span><br><span class="line">    CompletableFuture&lt;Void&gt; completableFuture = CompletableFuture.runAsync(() -&gt; &#123;	<span class="comment">// 新建一个异步对象，无返回</span></span><br><span class="line">        System.out.println(<span class="string">&quot;当前线程：&quot;</span> + Thread.currentThread().getId());</span><br><span class="line">        <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">10</span> / <span class="number">2</span>;</span><br><span class="line">        System.out.println(<span class="string">&quot;运行结果：&quot;</span> + i);</span><br><span class="line">    &#125;, executor);</span><br><span class="line"></span><br><span class="line">    CompletableFuture&lt;Integer&gt; future = CompletableFuture.supplyAsync(() -&gt; &#123;	<span class="comment">// 新建一个异步对象，有返回</span></span><br><span class="line">        System.out.println(<span class="string">&quot;当前线程：&quot;</span> + Thread.currentThread().getId());</span><br><span class="line">        <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">10</span> / <span class="number">2</span>;</span><br><span class="line">        System.out.println(<span class="string">&quot;运行结果：&quot;</span> + i);</span><br><span class="line">        <span class="keyword">return</span> i;</span><br><span class="line">    &#125;, executor);</span><br><span class="line">    <span class="type">Integer</span> <span class="variable">integer</span> <span class="operator">=</span> future.get();	<span class="comment">// 获取返回的结果</span></span><br><span class="line"></span><br><span class="line">    System.out.println(<span class="string">&quot;main....stop.....&quot;</span> + integer);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-计算完成时的回调函数"><a href="#2-计算完成时的回调函数" class="headerlink" title="2.计算完成时的回调函数"></a>2.计算完成时的回调函数</h5><p><img src="C:\Users\15958\AppData\Roaming\Typora\typora-user-images\image-20230608224222239.png" alt="image-20230608224222239"></p>
+<p>whenComplete 可以处理<code>正常和异常</code>的<code>计算结果</code>(只能感知，不能修改)，exceptionally 处理<code>异常</code>情况</p>
+<p>whenComplete 和 whenCompleteAsync 的区别</p>
+<p>​		whenComplete ：是执行<code>当前任务的线程继续执行</code> whencomplete 的任务</p>
+<p>​		whenCompleteAsync： 是执行把 whenCompleteAsync 这个任务继续<code>提交给线程池来进行执行</code></p>
+<blockquote>
+<p>方法<code>不以 Async 结尾</code>，意味着 Action 使用<code>相同</code>的线程执行，而 Async 可能会使用其他线程执行（如果是使用相同的线程池，也可能会被同一个线程选中执行）</p>
+</blockquote>
+<h5 id="3-handle方法"><a href="#3-handle方法" class="headerlink" title="3.handle方法"></a>3.handle方法</h5><p>和complete方法一样，可对结果做最后的处理，可<code>改变返回值</code></p>
+<h5 id="4-线程串行化方法（任务逻辑组合）"><a href="#4-线程串行化方法（任务逻辑组合）" class="headerlink" title="4.线程串行化方法（任务逻辑组合）"></a>4.线程串行化方法（任务逻辑组合）</h5><p><img src="C:\Users\15958\AppData\Roaming\Typora\typora-user-images\image-20230608225156331.png" alt="image-20230608225156331"></p>
+<p>thenApply方法：当一个线程<code>依赖</code>另一个线程时，获取上一个任务返回的结果，并返回当前任物的返回值</p>
+<p>thenAccept方法：消费处理结果，接受任务处理结果，并消费处理，无返回结果</p>
+<p>thenRun方法：只要上面任务执行完成，就开始执行 thenRun ,只是处理完任务后，执行thenRun的后续操作</p>
+<p>thenCombine: <code>组合两个</code> future，获取两个 future的返回结果，并返回当前任务的返回值</p>
+<p>thenAccpetBoth: 组合两个 future，获取两个 future 任务的返回结果，然后处理任务，没有返回值</p>
+<p>runAfterBoth:组合两个 future，不需要获取 future 的结果，只需要两个 future处理完成任务后，处理该任务，</p>
+<p>applyToEither;<code>两个任务有一个</code>执行完成，获取它的返回值，处理任务并有新的返回值</p>
+<p>acceptEither: 两个任务有一个执行完成，获取它的返回值，处理任务，没有新的返回值</p>
+<p>runAfterEither:两个任务有一个执行完成，不需要获取 future 的结果，处理任务，也没有返回值</p>
+<p>allOf：等待<code>所有任务</code>完成</p>
+<p>anyOf:<code>只要有一个任务完成</code></p>
+<h2 id="八、认证（登录服务）"><a href="#八、认证（登录服务）" class="headerlink" title="八、认证（登录服务）"></a>八、认证（登录服务）</h2><h3 id="1-验证码防刷校验"><a href="#1-验证码防刷校验" class="headerlink" title="1.验证码防刷校验"></a>1.验证码防刷校验</h3><p>验证码（uuid生成）存在redis中。</p>
+<p>防刷校验的目的是防止60s内同一个手机号再次发送验证码。</p>
+<h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><p>1.携带时间信息（放在验证码后）</p>
+<h3 id="2-重定向和转发的区别"><a href="#2-重定向和转发的区别" class="headerlink" title="2.重定向和转发的区别"></a>2.重定向和转发的区别</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> <span class="string">&quot;redirect:/target&quot;</span>; <span class="comment">// 重定向到指定URL</span></span><br><span class="line"><span class="keyword">return</span> <span class="string">&quot;forward:/target&quot;</span>; <span class="comment">// 转发到指定URL</span></span><br></pre></td></tr></table></figure>
+
+<p>重定向（Redirect）和转发（Forward）是两种不同的HTTP请求处理方式，它们有以下区别：</p>
+<ol>
+<li>目标位置：<code>重定向</code>将请求发送到<code>不同的URL</code>，而转发将请求发送到<code>同一个服务器上的不同资源</code>。</li>
+<li>客户端行为：<code>重定向是客户端行为</code>，客户端会发送新的请求到重定向的URL。<code>转发是服务器行为</code>，客户端不知道转发的过程，它仅发送一次请求到服务器。</li>
+<li>请求和响应：<code>重定向</code>会生成<code>两次请求和响应</code>，首先是初始请求和响应，然后是重定向请求和响应。<code>转发</code>只涉及<code>一次请求和响应</code>。</li>
+<li>URL变化：重定向会<code>改变浏览器的URL</code>，因为它会使用新的URL进行请求。转发不会改变浏览器的URL，因为它仅是服务器内部的资源跳转。</li>
+<li>上下文信息：<code>重定向会丢失上下文信息</code>，例如请求参数、Session信息等，因为它是发送一个<code>全新的请求</code>。<code>转发可以保留上下文信息</code>，因为它是在服务器内部进行资源跳转。</li>
+<li>地址栏显示：重定向会显示重定向目标的URL地址，因为浏览器会重新加载页面。转发不会改变地址栏的URL，因为浏览器仍然显示初始请求的URL。</li>
+</ol>
+<p>总的来说，重定向用于将请求发送到不同的URL，并在客户端进行新的请求和响应。转发用于将请求发送到同一个服务器上的不同资源，不涉及地址栏的URL变化和额外的请求和响应。选择使用重定向还是转发取决于具体的需求和场景。</p>
+<h3 id="3-注册流程注意事项"><a href="#3-注册流程注意事项" class="headerlink" title="3.注册流程注意事项"></a>3.注册流程注意事项</h3><p>前后端都需要校验，前端校验不可靠，而且可以绕过前端校验，目的只是为了用户体验更好  </p>
+<p>使用验证码证明是否是这个用户，验证码存在redis中，调用远程服务进行注册，在验证成功后就<code>删除</code>掉这个验证码，防止下次还能通过这个验证码进行登录。(<code>令牌机制</code>)</p>
+<h4 id="密码加密"><a href="#密码加密" class="headerlink" title="密码加密"></a>密码加密</h4><ul>
+<li><p>秒传原理(上传文件时先进行一个MD5计算,如果库中存在一样的,就不进行上传了)</p>
+</li>
+<li><p>MD5&amp;MD5盐值加密</p>
+<ul>
+<li>MD5是一种哈希算法,具有以下特性(可能被彩虹表破解)<ul>
+<li>不可逆</li>
+<li>输入相同,输出相同</li>
+<li>哈希冲突概率较小</li>
+</ul>
+</li>
+<li>盐值加密,就是对于每个加密的过程加入一个随机值<ul>
+<li>需要在数据库维护一个盐值字段</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-Session"><a href="#4-Session" class="headerlink" title="4.Session"></a>4.Session</h3><h4 id="1-重定向携带数据的问题"><a href="#1-重定向携带数据的问题" class="headerlink" title="1.重定向携带数据的问题"></a>1.重定向携带数据的问题</h4><p>利用session，将数据防在session，只要跳转到下一个页面取出这个数据以后，session中的数据就会删掉。</p>
+<h4 id="2-分布式下的session问题"><a href="#2-分布式下的session问题" class="headerlink" title="2.分布式下的session问题"></a>2.分布式下的session问题</h4><h3 id="5-社交登录"><a href="#5-社交登录" class="headerlink" title="5.社交登录"></a>5.社交登录</h3><h4 id="OAuth2"><a href="#OAuth2" class="headerlink" title="OAuth2"></a>OAuth2</h4><p><strong>OAuth2.0：</strong>对于用户相关的 OpenAPI（例如获取用户信息，动态同步，照片，日志，分享等），为了保存用户数据的安全和隐私，第三方网站访问用户数据前都需要显示向用户授权.</p>
+<p>流程:</p>
+<p><img src="file://C:/Users/15958/Desktop/%E8%B0%B7%E7%B2%92%E5%95%86%E5%9F%8E/%E8%B0%B7%E7%B2%92%E5%95%86%E5%9F%8E%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0/%E5%88%86%E5%B8%83%E5%BC%8F%E9%AB%98%E7%BA%A7%E7%AF%87/image/oAuth2_01.gif?lastModify=1685951031" alt="img"></p>
+<p><img src="C:\Users\15958\AppData\Roaming\Typora\typora-user-images\image-20230609144207914.png" alt="image-20230609144207914"></p>
+<p>回调地址和失败回调地址:就是成功和失败后跳转的页面</p>
+<h5 id="微博测试实例"><a href="#微博测试实例" class="headerlink" title="微博测试实例"></a>微博测试实例</h5><p><img src="C:\Users\15958\AppData\Roaming\Typora\typora-user-images\image-20230609154714932.png" alt="image-20230609154714932"></p>
 
       
     </div>
@@ -644,6 +826,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2023/06/11/JAVA%E7%AE%97%E6%B3%95%E5%BA%94%E7%94%A8%E5%9F%BA%E7%A1%80/" rel="prev" title="JAVA算法应用基础">
+                JAVA算法应用基础 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -720,7 +906,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -733,7 +919,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
@@ -766,7 +952,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#YaoGuaiMall"><span class="nav-number">1.</span> <span class="nav-text">YaoGuaiMall</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83"><span class="nav-number">1.1.</span> <span class="nav-text">一、虚拟环境</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">网络地址转换</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker"><span class="nav-number">1.1.1.</span> <span class="nav-text">Docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3"><span class="nav-number">1.1.2.</span> <span class="nav-text">端口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81SpringCloudAlibaba"><span class="nav-number">1.2.</span> <span class="nav-text">二、SpringCloudAlibaba</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Nacos-%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.Nacos-注册中心</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-openfeign-%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.openfeign-远程调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-nacos%E4%BD%9C%E4%B8%BA%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83"><span class="nav-number">1.2.3.</span> <span class="nav-text">3.nacos作为配置中心</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-SpringCloudGateway"><span class="nav-number">1.2.4.</span> <span class="nav-text">4.SpringCloudGateway</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E4%B8%9A%E5%8A%A1"><span class="nav-number">1.3.</span> <span class="nav-text">三、业务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">1.3.1.</span> <span class="nav-text">1.Lambda表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%B7%A8%E5%9F%9F"><span class="nav-number">1.3.2.</span> <span class="nav-text">2.跨域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.文件上传</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C"><span class="nav-number">1.3.4.</span> <span class="nav-text">4.异常处理与数据校验</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-JSR303"><span class="nav-number">1.3.4.1.</span> <span class="nav-text">1.JSR303</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%BC%82%E5%B8%B8"><span class="nav-number">1.3.4.2.</span> <span class="nav-text">2.异常</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Feign%E5%92%8CDubbo%E5%8C%BA%E5%88%AB"><span class="nav-number">1.3.5.</span> <span class="nav-text">5.Feign和Dubbo区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81Elasticsearch"><span class="nav-number">1.4.</span> <span class="nav-text">四、Elasticsearch</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.4.0.1.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-index-%E7%B4%A2%E5%BC%95"><span class="nav-number">1.4.0.1.1.</span> <span class="nav-text">1 index(索引)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-Type-%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.4.0.1.2.</span> <span class="nav-text">2 Type(类型)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-Document-%E6%96%87%E6%A1%A3"><span class="nav-number">1.4.0.1.3.</span> <span class="nav-text">3 Document(文档)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-%E5%80%92%E6%8E%92%E7%B4%A2%E5%BC%95%E6%9C%BA%E5%88%B6"><span class="nav-number">1.4.0.1.4.</span> <span class="nav-text">4 倒排索引机制</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81Nginx"><span class="nav-number">1.5.</span> <span class="nav-text">五、Nginx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95%E4%B8%8E%E4%BC%98%E5%8C%96"><span class="nav-number">1.6.</span> <span class="nav-text">六、压力测试与优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%98%E5%8C%96"><span class="nav-number">1.6.1.</span> <span class="nav-text">1.数据库优化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E7%B4%A2%E5%BC%95"><span class="nav-number">1.6.1.1.</span> <span class="nav-text">添加索引</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-nginx%E5%8A%A8%E9%9D%99%E5%88%86%E7%A6%BB"><span class="nav-number">1.6.2.</span> <span class="nav-text">2.nginx动静分离</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9F%A5%E8%AF%A2%E9%80%BB%E8%BE%91%E5%8F%98%E6%9B%B4"><span class="nav-number">1.6.3.</span> <span class="nav-text">3.数据库查询逻辑变更</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%B3%E4%BA%8EMySql"><span class="nav-number">1.6.3.0.1.</span> <span class="nav-text">关于MySql</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E7%BC%93%E5%AD%98%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%EF%BC%88redis%EF%BC%89"><span class="nav-number">1.6.4.</span> <span class="nav-text">4.缓存与分布式锁（redis）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E6%96%B9%E5%BC%8F%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="nav-number">1.6.4.1.</span> <span class="nav-text">缓存方式有哪些?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98-%E6%AF%94%E5%A6%82Map"><span class="nav-number">1.6.4.2.</span> <span class="nav-text">1.本地缓存(比如Map);</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Redis"><span class="nav-number">1.6.4.3.</span> <span class="nav-text">2.Redis</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E5%A4%B1%E6%95%88%E9%97%AE%E9%A2%98"><span class="nav-number">1.6.4.3.1.</span> <span class="nav-text">缓存失效问题</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F"><span class="nav-number">1.6.4.3.1.1.</span> <span class="nav-text">缓存穿透</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9"><span class="nav-number">1.6.4.3.1.2.</span> <span class="nav-text">缓存雪崩</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF"><span class="nav-number">1.6.4.3.1.3.</span> <span class="nav-text">缓存击穿</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E5%80%BE%E6%96%9C%E9%97%AE%E9%A2%98"><span class="nav-number">1.6.4.3.2.</span> <span class="nav-text">缓存倾斜问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E5%8A%A0%E9%94%81%E7%AD%96%E7%95%A5"><span class="nav-number">1.6.4.3.3.</span> <span class="nav-text">缓存加锁策略</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-synchronized-this-%E6%9C%AC%E5%9C%B0%E9%94%81"><span class="nav-number">1.6.4.3.3.1.</span> <span class="nav-text">1.synchronized(this)	(本地锁)</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%8B%E5%A6%82%E4%BD%95%E5%8A%A0%E9%94%81"><span class="nav-number">1.6.4.3.3.2.</span> <span class="nav-text">2.分布式下如何加锁</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-redisson-%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81"><span class="nav-number">1.6.4.4.</span> <span class="nav-text">3.redisson(分布式锁)</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#YaoGuaiMall"><span class="nav-number">1.</span> <span class="nav-text">YaoGuaiMall</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83"><span class="nav-number">1.1.</span> <span class="nav-text">一、虚拟环境</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">网络地址转换</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker"><span class="nav-number">1.1.1.</span> <span class="nav-text">Docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3"><span class="nav-number">1.1.2.</span> <span class="nav-text">端口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81SpringCloudAlibaba"><span class="nav-number">1.2.</span> <span class="nav-text">二、SpringCloudAlibaba</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Nacos-%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.Nacos-注册中心</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-openfeign-%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.openfeign-远程调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-nacos%E4%BD%9C%E4%B8%BA%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83"><span class="nav-number">1.2.3.</span> <span class="nav-text">3.nacos作为配置中心</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-SpringCloudGateway"><span class="nav-number">1.2.4.</span> <span class="nav-text">4.SpringCloudGateway</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E4%B8%9A%E5%8A%A1"><span class="nav-number">1.3.</span> <span class="nav-text">三、业务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">1.3.1.</span> <span class="nav-text">1.Lambda表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%B7%A8%E5%9F%9F"><span class="nav-number">1.3.2.</span> <span class="nav-text">2.跨域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.文件上传</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C"><span class="nav-number">1.3.4.</span> <span class="nav-text">4.异常处理与数据校验</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-JSR303"><span class="nav-number">1.3.4.1.</span> <span class="nav-text">1.JSR303</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%BC%82%E5%B8%B8"><span class="nav-number">1.3.4.2.</span> <span class="nav-text">2.异常</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Feign%E5%92%8CDubbo%E5%8C%BA%E5%88%AB"><span class="nav-number">1.3.5.</span> <span class="nav-text">5.Feign和Dubbo区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81Elasticsearch"><span class="nav-number">1.4.</span> <span class="nav-text">四、Elasticsearch</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.4.0.1.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-index-%E7%B4%A2%E5%BC%95"><span class="nav-number">1.4.0.1.1.</span> <span class="nav-text">1 index(索引)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-Type-%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.4.0.1.2.</span> <span class="nav-text">2 Type(类型)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-Document-%E6%96%87%E6%A1%A3"><span class="nav-number">1.4.0.1.3.</span> <span class="nav-text">3 Document(文档)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-%E5%80%92%E6%8E%92%E7%B4%A2%E5%BC%95%E6%9C%BA%E5%88%B6"><span class="nav-number">1.4.0.1.4.</span> <span class="nav-text">4 倒排索引机制</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81Nginx"><span class="nav-number">1.5.</span> <span class="nav-text">五、Nginx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95%E4%B8%8E%E4%BC%98%E5%8C%96"><span class="nav-number">1.6.</span> <span class="nav-text">六、压力测试与优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%98%E5%8C%96"><span class="nav-number">1.6.1.</span> <span class="nav-text">1.数据库优化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E7%B4%A2%E5%BC%95"><span class="nav-number">1.6.1.1.</span> <span class="nav-text">添加索引</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-nginx%E5%8A%A8%E9%9D%99%E5%88%86%E7%A6%BB"><span class="nav-number">1.6.2.</span> <span class="nav-text">2.nginx动静分离</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9F%A5%E8%AF%A2%E9%80%BB%E8%BE%91%E5%8F%98%E6%9B%B4"><span class="nav-number">1.6.3.</span> <span class="nav-text">3.数据库查询逻辑变更</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%B3%E4%BA%8EMySql"><span class="nav-number">1.6.3.0.1.</span> <span class="nav-text">关于MySql</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E7%BC%93%E5%AD%98%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%EF%BC%88redis%EF%BC%89"><span class="nav-number">1.6.4.</span> <span class="nav-text">4.缓存与分布式锁（redis）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E6%96%B9%E5%BC%8F%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="nav-number">1.6.4.1.</span> <span class="nav-text">缓存方式有哪些?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98-%E6%AF%94%E5%A6%82Map"><span class="nav-number">1.6.4.2.</span> <span class="nav-text">1.本地缓存(比如Map);</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Redis"><span class="nav-number">1.6.4.3.</span> <span class="nav-text">2.Redis</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E5%A4%B1%E6%95%88%E9%97%AE%E9%A2%98"><span class="nav-number">1.6.4.3.1.</span> <span class="nav-text">缓存失效问题</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F"><span class="nav-number">1.6.4.3.1.1.</span> <span class="nav-text">缓存穿透</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9"><span class="nav-number">1.6.4.3.1.2.</span> <span class="nav-text">缓存雪崩</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF"><span class="nav-number">1.6.4.3.1.3.</span> <span class="nav-text">缓存击穿</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E5%80%BE%E6%96%9C%E9%97%AE%E9%A2%98"><span class="nav-number">1.6.4.3.2.</span> <span class="nav-text">缓存倾斜问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E5%8A%A0%E9%94%81%E7%AD%96%E7%95%A5"><span class="nav-number">1.6.4.3.3.</span> <span class="nav-text">缓存加锁策略</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-synchronized-this-%E6%9C%AC%E5%9C%B0%E9%94%81"><span class="nav-number">1.6.4.3.3.1.</span> <span class="nav-text">1.synchronized(this)	(本地锁)</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%8B%E5%A6%82%E4%BD%95%E5%8A%A0%E9%94%81"><span class="nav-number">1.6.4.3.3.2.</span> <span class="nav-text">2.分布式下如何加锁</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-redisson-%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81"><span class="nav-number">1.6.4.4.</span> <span class="nav-text">3.redisson(分布式锁)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">1.6.4.4.1.</span> <span class="nav-text">缓存数据一致性解决方案</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-SpringCache"><span class="nav-number">1.6.4.5.</span> <span class="nav-text">4.SpringCache</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%BB%A5%E5%8F%8A%E8%A7%A3%E5%86%B3"><span class="nav-number">1.6.4.5.1.</span> <span class="nav-text">问题以及解决</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%AF%BB%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.6.4.5.1.1.</span> <span class="nav-text">读模式</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%86%99%E6%A8%A1%E5%BC%8F%EF%BC%9A%EF%BC%88%E7%BC%93%E5%AD%98%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BA%93%E4%B8%8D%E4%B8%80%E8%87%B4%EF%BC%89"><span class="nav-number">1.6.4.5.1.2.</span> <span class="nav-text">写模式：（缓存与数据库库不一致）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.6.4.5.1.3.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E7%BA%BF%E7%A8%8B%E3%80%81%E5%BC%82%E6%AD%A5%E7%BC%96%E6%8E%92"><span class="nav-number">1.7.</span> <span class="nav-text">七、线程、异步编排</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E7%BA%BF%E7%A8%8B%E7%9A%844%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%88%E7%BA%BF%E7%A8%8B%E6%B1%A0%EF%BC%89"><span class="nav-number">1.7.1.</span> <span class="nav-text">初始化线程的4种方式（线程池）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E8%BF%90%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="nav-number">1.7.2.</span> <span class="nav-text">线程池运行流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%A7%8D%E7%B1%BB"><span class="nav-number">1.7.3.</span> <span class="nav-text">线程池种类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%82%E6%AD%A5%E7%BC%96%E6%8E%92"><span class="nav-number">1.7.4.</span> <span class="nav-text">异步编排</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CompletableFuture"><span class="nav-number">1.7.4.1.</span> <span class="nav-text">CompletableFuture</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E5%88%9B%E5%BB%BA%E5%BC%82%E6%AD%A5%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.7.4.1.1.</span> <span class="nav-text">1.创建异步对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E8%AE%A1%E7%AE%97%E5%AE%8C%E6%88%90%E6%97%B6%E7%9A%84%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0"><span class="nav-number">1.7.4.1.2.</span> <span class="nav-text">2.计算完成时的回调函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-handle%E6%96%B9%E6%B3%95"><span class="nav-number">1.7.4.1.3.</span> <span class="nav-text">3.handle方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-%E7%BA%BF%E7%A8%8B%E4%B8%B2%E8%A1%8C%E5%8C%96%E6%96%B9%E6%B3%95%EF%BC%88%E4%BB%BB%E5%8A%A1%E9%80%BB%E8%BE%91%E7%BB%84%E5%90%88%EF%BC%89"><span class="nav-number">1.7.4.1.4.</span> <span class="nav-text">4.线程串行化方法（任务逻辑组合）</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AB%E3%80%81%E8%AE%A4%E8%AF%81%EF%BC%88%E7%99%BB%E5%BD%95%E6%9C%8D%E5%8A%A1%EF%BC%89"><span class="nav-number">1.8.</span> <span class="nav-text">八、认证（登录服务）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%AA%8C%E8%AF%81%E7%A0%81%E9%98%B2%E5%88%B7%E6%A0%A1%E9%AA%8C"><span class="nav-number">1.8.1.</span> <span class="nav-text">1.验证码防刷校验</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">1.8.1.1.</span> <span class="nav-text">方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E9%87%8D%E5%AE%9A%E5%90%91%E5%92%8C%E8%BD%AC%E5%8F%91%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.8.2.</span> <span class="nav-text">2.重定向和转发的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%B3%A8%E5%86%8C%E6%B5%81%E7%A8%8B%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">1.8.3.</span> <span class="nav-text">3.注册流程注意事项</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%86%E7%A0%81%E5%8A%A0%E5%AF%86"><span class="nav-number">1.8.3.1.</span> <span class="nav-text">密码加密</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Session"><span class="nav-number">1.8.4.</span> <span class="nav-text">4.Session</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E9%87%8D%E5%AE%9A%E5%90%91%E6%90%BA%E5%B8%A6%E6%95%B0%E6%8D%AE%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.8.4.1.</span> <span class="nav-text">1.重定向携带数据的问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%8B%E7%9A%84session%E9%97%AE%E9%A2%98"><span class="nav-number">1.8.4.2.</span> <span class="nav-text">2.分布式下的session问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E7%A4%BE%E4%BA%A4%E7%99%BB%E5%BD%95"><span class="nav-number">1.8.5.</span> <span class="nav-text">5.社交登录</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#OAuth2"><span class="nav-number">1.8.5.1.</span> <span class="nav-text">OAuth2</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BE%AE%E5%8D%9A%E6%B5%8B%E8%AF%95%E5%AE%9E%E4%BE%8B"><span class="nav-number">1.8.5.1.1.</span> <span class="nav-text">微博测试实例</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>

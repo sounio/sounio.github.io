@@ -87,7 +87,7 @@
 <meta property="og:description" content="###单例模式 单例模式是Java中最简单的设计模式之一。这种类型的设计模式属于创建者模式，它提供了一种访问对象的最佳方式。 这种设计模式涉及到一个单一的类，该类负责创建自己的对象，同时确保只有单个对象被创建。这个类提供了一种访问其唯一对象的方式，可以直接访问，不需要实例化该类的对象。 #####分类 饿汉式：类加载就会导致该单实例对象被创建。 懒汉式：类加载不会导致该单实例对象被创建，而是首次使">
 <meta property="og:locale">
 <meta property="article:published_time" content="2023-04-24T12:22:24.000Z">
-<meta property="article:modified_time" content="2023-06-06T05:45:16.209Z">
+<meta property="article:modified_time" content="2023-06-08T06:07:32.511Z">
 <meta property="article:author" content="sounio">
 <meta property="article:tag" content="JAVASE">
 <meta name="twitter:card" content="summary">
@@ -372,7 +372,10 @@
 
 
 
-<h3 id="享元模式"><a href="#享元模式" class="headerlink" title="享元模式"></a>享元模式</h3><p>享元模式（Flyweight Pattern）主要用于减少创建对象的数量，以减少内存占用和提高性能。这种类型的设计模式属于结构型模式，它提供了减少对象数量从而改善应用所需的对象结构的方式。</p>
+<h3 id="享元模式"><a href="#享元模式" class="headerlink" title="享元模式"></a>享元模式</h3><p>享元模式（Flyweight Pattern）主要用于减少创建对象的数量（共享对象），以减少内存占用和提高性能。这种类型的设计模式属于结构型模式，它提供了减少对象数量从而改善应用所需的对象结构的方式。</p>
+<p>在享元模式中，对象分为两个部分：内部状态（Intrinsic State）和外部状态（Extrinsic State）。内部状态是对象共享的部分，它不依赖于对象的上下文，并且在对象创建后不会发生变化。外部状态是对象特定的部分，它取决于对象的上下文并可能在运行时发生变化。</p>
+<p>享元模式的核心思想是将内部状态和外部状态分离。内部状态存储在享元对象内部，并可共享。外部状态由客户端传递给享元对象，因此客户端负责管理外部状态。通过这种方式，可以在多个对象之间共享相同的内部状态，而每个对象都可以具有不同的外部状态。</p>
+<p>String的字符串常量池就用到了这一点，当创建一个字符串时，如果字符串常量池中已经存在相同内容的字符串对象，则直接返回该对象的引用，而不会创建新的对象。同时也可以自己将字符串添加到常量池。</p>
 
       
     </div>
@@ -492,7 +495,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -505,7 +508,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
