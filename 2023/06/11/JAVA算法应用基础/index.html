@@ -87,7 +87,7 @@
 <meta property="og:description" content="Linkedlist链表结构 LinkedList 实现了 Queue 接口，可作为队列使用。 LinkedList 实现了 List 接口，可进行列表的相关操作。 LinkedList 实现了 Deque 接口，可作为队列使用。 LinkedList 实现了 Cloneable 接口，可实现克隆。 123456789101112131415161718   LinkedList&lt;Strin">
 <meta property="og:locale">
 <meta property="article:published_time" content="2023-06-11T14:07:28.000Z">
-<meta property="article:modified_time" content="2023-06-16T07:51:25.105Z">
+<meta property="article:modified_time" content="2023-06-21T06:10:07.393Z">
 <meta property="article:author" content="sounio">
 <meta property="article:tag" content="Java ， leetcode">
 <meta name="twitter:card" content="summary">
@@ -392,6 +392,12 @@
 
 
 
+<h2 id="双端队列"><a href="#双端队列" class="headerlink" title="双端队列"></a>双端队列</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Deque有三种用途：</span><br><span class="line">普通队列(一端进另一端出):</span><br><span class="line"><span class="type">Queue</span> <span class="variable">queue</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">LinkedList</span>()或<span class="type">Deque</span> <span class="variable">deque</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">LinkedList</span>()</span><br><span class="line">双端队列(两端都可进出)</span><br><span class="line"><span class="type">Deque</span> <span class="variable">deque</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">LinkedList</span>()</span><br><span class="line">堆栈</span><br><span class="line"><span class="type">Deque</span> <span class="variable">deque</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">LinkedList</span>()</span><br></pre></td></tr></table></figure>
+
+
+
+
+
 <h2 id="StringBuilder"><a href="#StringBuilder" class="headerlink" title="StringBuilder"></a>StringBuilder</h2><p>StringBuilder和new String有以下区别：</p>
 <ol>
 <li>可变性：StringBuilder是可变的字符串，可以通过追加、插入、删除等操作修改其内容。而new String创建的字符串对象是不可变的，一旦创建后就不能被修改。</li>
@@ -400,6 +406,12 @@
 <li>性能：由于StringBuilder是可变的，不需要频繁地创建新的字符串对象，所以在进行大量字符串拼接操作时，使用StringBuilder通常比使用new String具有更好的性能。</li>
 </ol>
 <p>综上所述，如果需要频繁地进行字符串拼接或修改操作，建议使用StringBuilder，而如果不需要修改字符串内容或需要保证线程安全性，则可以使用new String创建不可变字符串对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">StringBuilder</span> <span class="variable">res</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">res.append(strs[i] + <span class="string">&quot; &quot;</span>)；</span><br></pre></td></tr></table></figure>
+
+
+
+
+
 <h2 id="关于compareTo-函数"><a href="#关于compareTo-函数" class="headerlink" title="关于compareTo()函数"></a>关于compareTo()函数</h2><p>如果给的参数是字符串，比如比较1011和1101</p>
 <p>根据字典顺序，字符串 “1011” 在字符串 “1101” 之前。字典顺序是通过逐个比较字符串的字符来确定的。</p>
 <p>在比较这两个字符串时，从左到右逐个比较对应位置上的字符，直到找到第一个不相等的字符。在这个例子中，第一个字符是 “1”，在两个字符串中都存在，所以继续比较下一个字符。第二个字符是 “1”，在两个字符串中也都存在，继续比较下一个字符。第三个字符是 “0”，在两个字符串中仍然都存在，继续比较最后一个字符。第四个字符是 “1”，在两个字符串中仍然都存在。</p>
@@ -409,7 +421,7 @@
 
 
 
-<h2 id="截取字符串"><a href="#截取字符串" class="headerlink" title="截取字符串"></a>截取字符串</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str.substring(<span class="number">0</span>,<span class="number">2</span>);<span class="comment">// 截出01</span></span><br></pre></td></tr></table></figure>
+<h2 id="截取字符串、分割"><a href="#截取字符串、分割" class="headerlink" title="截取字符串、分割"></a>截取字符串、分割</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">str.substring(<span class="number">0</span>,<span class="number">2</span>);<span class="comment">// 截出01</span></span><br><span class="line"></span><br><span class="line">String[] str = s.trim().split(<span class="string">&quot; &quot;</span>);<span class="comment">// tirm()删除首位空格，分割字符串</span></span><br></pre></td></tr></table></figure>
 
 
 
@@ -423,14 +435,9 @@
 
 
 
+<h2 id="Map的遍历"><a href="#Map的遍历" class="headerlink" title="Map的遍历"></a>Map的遍历</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// map.entrySet()返回示例[1=Google, 2=Runoob, 3=Taobao]，返回的是一个集合</span></span><br><span class="line"><span class="comment">//增强for获取实体	，无法remove等操作</span></span><br><span class="line">Map&lt;Integer ,Integer&gt; map = HashMap&lt;&gt;();</span><br><span class="line"><span class="keyword">for</span>(Map.Entry&lt;Integer , Integer&gt; entry : map.entrySet())&#123;	</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">if</span>(entry.getValue() == <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> entry.getKey();    </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 迭代器</span></span><br><span class="line">Iterator&lt;Map.Entry&lt;String,String&gt;&gt; it = map.entrySet().iterator();</span><br><span class="line"><span class="keyword">while</span>(it.hasNext())&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 只能获取values，不能获取key</span></span><br><span class="line"><span class="keyword">for</span>(String v : map,values())&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-
-
-
-
-
-
+<p>Map的entrySet()方法返回一个实现Map.Entry接口的对象合集，集合中的每个对象都是底层Map中一个特定的键值对</p>
 
       
     </div>
@@ -592,7 +599,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linkedlist"><span class="nav-number">1.</span> <span class="nav-text">Linkedlist</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ArrayList"><span class="nav-number">2.</span> <span class="nav-text">ArrayList</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%AB%E6%8E%92"><span class="nav-number">3.</span> <span class="nav-text">快排</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97"><span class="nav-number">4.</span> <span class="nav-text">优先队列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#StringBuilder"><span class="nav-number">5.</span> <span class="nav-text">StringBuilder</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8EcompareTo-%E5%87%BD%E6%95%B0"><span class="nav-number">6.</span> <span class="nav-text">关于compareTo()函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Int%E8%BD%AC%E4%B8%BAString"><span class="nav-number">7.</span> <span class="nav-text">Int转为String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%AA%E5%8F%96%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">8.</span> <span class="nav-text">截取字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DP"><span class="nav-number">9.</span> <span class="nav-text">DP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B0%E7%BB%84"><span class="nav-number">10.</span> <span class="nav-text">字符串转数组</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linkedlist"><span class="nav-number">1.</span> <span class="nav-text">Linkedlist</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ArrayList"><span class="nav-number">2.</span> <span class="nav-text">ArrayList</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%AB%E6%8E%92"><span class="nav-number">3.</span> <span class="nav-text">快排</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97"><span class="nav-number">4.</span> <span class="nav-text">优先队列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97"><span class="nav-number">5.</span> <span class="nav-text">双端队列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#StringBuilder"><span class="nav-number">6.</span> <span class="nav-text">StringBuilder</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8EcompareTo-%E5%87%BD%E6%95%B0"><span class="nav-number">7.</span> <span class="nav-text">关于compareTo()函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Int%E8%BD%AC%E4%B8%BAString"><span class="nav-number">8.</span> <span class="nav-text">Int转为String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%AA%E5%8F%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%81%E5%88%86%E5%89%B2"><span class="nav-number">9.</span> <span class="nav-text">截取字符串、分割</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DP"><span class="nav-number">10.</span> <span class="nav-text">DP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B0%E7%BB%84"><span class="nav-number">11.</span> <span class="nav-text">字符串转数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Map%E7%9A%84%E9%81%8D%E5%8E%86"><span class="nav-number">12.</span> <span class="nav-text">Map的遍历</span></a></li></ol></div>
             
 
           </div>
