@@ -87,7 +87,7 @@
 <meta property="og:description" content="jarjar包就是 Java Archive File。其实就是一个项目的打包,或者说是一些能够直接拿来用的业务模块。 jar 与 zip 唯一的区别就是在 jar 文件的内容中，包含了一个 META-INF&#x2F;MANIFEST.MF 文件，该文件是在生成 jar 文件的时候自动创建的，作为jar里面的”详情单”，包含了该Jar包的版本、创建人和类搜索路径Class-Path等信息，当然如">
 <meta property="og:locale">
 <meta property="article:published_time" content="2023-05-08T05:02:53.000Z">
-<meta property="article:modified_time" content="2023-06-08T06:19:11.240Z">
+<meta property="article:modified_time" content="2023-06-25T03:36:06.354Z">
 <meta property="article:author" content="sounio">
 <meta name="twitter:card" content="summary">
 
@@ -347,6 +347,7 @@
 <h2 id="hsahcode"><a href="#hsahcode" class="headerlink" title="hsahcode"></a>hsahcode</h2><p>每个 Java 对象都有一个默认的 hashCode() 实现，该实现<code>一般基于对象的内存地址</code>计算哈希码。通常情况下，每个对象的哈希码是不同的，因为每个对象在内存中都有其自己的地址。但是，如果两个对象的内存地址相同，它们的哈希码也相同。</p>
 <p>HashCode是根据对象的<code>内容</code>生成的一个整数值(重写了hashcode方法)，用于快速地判断对象在哈希表等数据结构中的位置。值得注意的是，根据对象的内容生成哈希码时，应该保证<code>相等的对象具有相同的哈希码</code>，但<code>不要求不相等的对象具有不同的哈希码</code>。这是因为哈希码是一个有限的整数范围，而对象的内容可能是无限的，因此<code>不同对象的内容可能会产生相同的哈希码</code>（这就是哈希冲突）。</p>
 <p>哈希冲突是不能避免的,只能进行优化,比如散列函数优化\开放地址\链表法\再哈希.</p>
+<h2 id="B站倍速"><a href="#B站倍速" class="headerlink" title="B站倍速"></a>B站倍速</h2><p>控制台：document.querySelector(‘video’).playbackRate&#x3D;2.5</p>
 
       
     </div>
@@ -381,8 +382,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2023/05/31/Redis/" rel="prev" title="Redis">
-                Redis <i class="fa fa-chevron-right"></i>
+              <a href="/2023/05/31/Redis%E7%9B%B8%E5%85%B3/" rel="prev" title="Redis相关">
+                Redis相关 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -460,7 +461,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -506,7 +507,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#jar"><span class="nav-number">1.</span> <span class="nav-text">jar</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8EString"><span class="nav-number">2.</span> <span class="nav-text">关于String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hsahcode"><span class="nav-number">3.</span> <span class="nav-text">hsahcode</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#jar"><span class="nav-number">1.</span> <span class="nav-text">jar</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8EString"><span class="nav-number">2.</span> <span class="nav-text">关于String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hsahcode"><span class="nav-number">3.</span> <span class="nav-text">hsahcode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B%E7%AB%99%E5%80%8D%E9%80%9F"><span class="nav-number">4.</span> <span class="nav-text">B站倍速</span></a></li></ol></div>
             
 
           </div>
