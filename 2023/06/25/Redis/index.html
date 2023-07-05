@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Redis," />
 
 
 
@@ -79,17 +79,86 @@
 
 
 
-<meta name="description" content="一个记录学习的博客">
+<meta name="description" content="RedisRedis十大数据类型redis中的数据都是用k-v键值对存储的，所有的key都是String类型，所说的十大&#x3D;&#x3D;数据类型指的是value值的数据类型&#x3D;&#x3D;。 准确来说这十大数据类型只有&#x3D;&#x3D;六大数据类型&#x3D;&#x3D;，分别是&#x3D;&#x3D;String、List、Hash、Set、Zset、Stream&amp;#x3D">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis">
 <meta property="og:url" content="https://sounio.github.io/2023/06/25/Redis/index.html">
 <meta property="og:site_name" content="Sounio">
-<meta property="og:description" content="一个记录学习的博客">
+<meta property="og:description" content="RedisRedis十大数据类型redis中的数据都是用k-v键值对存储的，所有的key都是String类型，所说的十大&#x3D;&#x3D;数据类型指的是value值的数据类型&#x3D;&#x3D;。 准确来说这十大数据类型只有&#x3D;&#x3D;六大数据类型&#x3D;&#x3D;，分别是&#x3D;&#x3D;String、List、Hash、Set、Zset、Stream&amp;#x3D">
 <meta property="og:locale">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_005049.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_010246.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/image-20230406012146601.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-05_222939.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-05_224947.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-05_225406.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-05_230537.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-05_232643.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-05_234446.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_000031.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_001053.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_002335.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_002704.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_014722.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/InWMfeD.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_051330.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_064933.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_194926.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_052827.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_054714.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_062102.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_062833.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_204113.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_063939.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_200230.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_205240.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_210818.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_212624.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_214201.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/1652941995945.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/1652942027719.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-07_013020.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-07_001928.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-07_013751.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-07_005809.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-07_014536.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-07_014841.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-07_015539.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-07_015823.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-07_024911.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-07_030549.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-07_043514.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-08_040923.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-07_052026.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-07_053352.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-07_095412.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-07_113723.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-07_215248.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-08_005458.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-08_010353.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-08_010905.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-08_012107.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-08_040833.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-08_191915.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-08_180150.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-08_044438.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-08_045728.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-08_185848.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-08_181243.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-08_181658.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/image-20230408193813874.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-08_200015.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-08_202047.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-08_232347.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-09_000056.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-09_051719.png">
+<meta property="og:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/stream%E5%8E%9F%E7%90%86.png">
 <meta property="article:published_time" content="2023-06-25T02:55:05.000Z">
-<meta property="article:modified_time" content="2023-07-03T06:36:42.038Z">
+<meta property="article:modified_time" content="2023-07-05T06:58:52.264Z">
 <meta property="article:author" content="sounio">
+<meta property="article:tag" content="Redis">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_005049.png">
 
 
 
@@ -333,7 +402,1014 @@
       
 
       
-        
+        <h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><h2 id="Redis十大数据类型"><a href="#Redis十大数据类型" class="headerlink" title="Redis十大数据类型"></a>Redis十大数据类型</h2><p>redis中的数据都是用k-v键值对存储的，所有的key都是String类型，所说的十大&#x3D;&#x3D;数据类型指的是value值的数据类型&#x3D;&#x3D;。</p>
+<p>准确来说这十大数据类型只有&#x3D;&#x3D;六大数据类型&#x3D;&#x3D;，分别是&#x3D;&#x3D;String、List、Hash、Set、Zset、Stream&#x3D;&#x3D;。 其余的四种是对这数据类型封装出来的数据结构，分别是Bitmap(String)、HyperLogLog(String)、Geospatial(Zset)、BitField(String)。</p>
+<hr>
+<h3 id="一-Stirng"><a href="#一-Stirng" class="headerlink" title="一. Stirng"></a>一. Stirng</h3><blockquote>
+<p><strong>字符串</strong></p>
+<p>String类型，也就是字符串类型，是Redis中最简单的存储类型，单key单value结构。 其value是字符串，不过根据字符串的格式不同，又可以分为3类： String：普通字符串 int：整数类型，可以做自增、自减操作 float：浮点类型，可以做自增、自减操作</p>
+<p>不管是哪种格式，底层都是字节数组形式存储，只不过是编码方式不同。字符串类型的最大空间不能超过512m.</p>
+</blockquote>
+<hr>
+<p><em><strong>String类型的常用命令：</strong></em></p>
+<h4 id="SET和GET"><a href="#SET和GET" class="headerlink" title="SET和GET"></a><strong>SET和GET</strong></h4><p>**<code>set key value [可选参数]</code>**：添加或者修改一个String类型的键值对</p>
+<p>**<code>get key</code>**：根据key获取String类型的value，不存在返回nil</p>
+<blockquote>
+<p>可选参数：</p>
+<p>EX：以秒为单位设置过期时间</p>
+<p>PX：以毫秒为单位设置过期时间</p>
+<p>EXAT：设置以秒为单位的时间戳为过期时间</p>
+<p>PXAT：设置以毫秒为单位的时间戳为过期时间</p>
+<p>NX：键不存在的时候添加键值对，存在返回nil</p>
+<p>XX：键存在的时候设置键值，也就是覆盖，不存在返回nil</p>
+<p>GET：返回指定键原本的值，若不存在返回nil</p>
+<p>KEEPTTL：保留键之前的生存时间，即在覆盖键值时过期时间还是之前的过期时间</p>
+<p>提示：set命令使用EX、PX、NX参数，效果等同于SETEX、SETPX、SETNX。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">set name Tom	# 设置name=Tom</span><br><span class="line">set name Bob get # 重新设置name值并返回原来的name值</span><br><span class="line">set name Bob ex 20 get # 重新设置name值并设置过期时间20秒，并返回之前的name值</span><br><span class="line">get name	# 获取name的值</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-06_005049.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_005049.png" alt="2023-04-06_005049"></a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set name Marry keepttl	# 表示保持之前的过期时间</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-06_010246.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_010246.png" alt="2023-04-06_010246"></a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set name Mike XX	# name已存在时才创建(覆盖)</span><br><span class="line">set name Mike NX	# name不存在时创建，已存在时不创建</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/image-20230406012146601.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/image-20230406012146601.png" alt="image-20230406012146601"></a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set name Mike EXAT 1680715582	# 设置以秒为单位的时间戳的过期时间</span><br><span class="line">set name Mike PXAT 1680715582123	# 设置以毫秒为单位的时间戳的过期时间</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h4 id="MSET和MGET"><a href="#MSET和MGET" class="headerlink" title="MSET和MGET"></a><strong>MSET和MGET</strong></h4><blockquote>
+<p>M是multi的缩写，表示多个的意思。</p>
+</blockquote>
+<p>**<code>mset key value [key value ...]</code>**：批量添加多个String类型的键值对</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mset name Tom age 18 sex man	# 设置name=Tom，age=18，sex=man</span><br></pre></td></tr></table></figure>
+
+
+
+<p>**<code>mget key [key ...]</code>**：批量获取String类型的value</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mget name age sex	# 获取name、age、sex的值</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-05_222939.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-05_222939.png" alt="2023-04-05_222939"></a></p>
+<hr>
+<h4 id="INCR、INCRBY"><a href="#INCR、INCRBY" class="headerlink" title="INCR、INCRBY"></a><strong>INCR、INCRBY</strong></h4><blockquote>
+<p>increase的缩写，表示自增</p>
+</blockquote>
+<p>**<code>incr key</code>**：让一个整型的key自增1</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set age 20</span><br><span class="line">incr age	# 让age自增1</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-05_224947.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-05_224947.png" alt="2023-04-05_224947"></a></p>
+<p>**<code>incrby key step</code>**：指定步长step，让一个整型的key自增step</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">incrby age 2	# 让age自增2</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-05_225406.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-05_225406.png" alt="2023-04-05_225406"></a></p>
+<p>**<code>incrbyfloat key step</code>**：让一个浮点类型的数字指定步长自增（浮点类型只能指定步长自增，incrbyfloat也是用整型）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set weight 66.6</span><br><span class="line">INCRBYFLOAT weight 0.2	# 让weight自增0.2</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-05_230537.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-05_230537.png" alt="2023-04-05_230537"></a></p>
+<ul>
+<li><p><strong>DECR、DECRBY、DECRBYFLOAT</strong></p>
+<p>自减，操作和上述自增一样。</p>
+</li>
+</ul>
+<hr>
+<h4 id="SETNX和SETEX"><a href="#SETNX和SETEX" class="headerlink" title="SETNX和SETEX"></a><strong>SETNX和SETEX</strong></h4><blockquote>
+<p>setnx：已存在就不会改变键的值。NX是not exists的缩写。</p>
+<p>setex：设定键的过期时间。EX是expire的缩写。</p>
+</blockquote>
+<p>**<code>setnx key value</code>**：如果key不存在则创建一个String类型的键值对，如果key存在，则不执行。创建成功返回1，失败返回0。</p>
+<p>**<code>setex key second</code>**：创建一个String类型的键值对，并设置过期时间，second为秒数</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-05_232643.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-05_232643.png" alt="2023-04-05_232643"></a></p>
+<hr>
+<h4 id="MSETNX"><a href="#MSETNX" class="headerlink" title="MSETNX"></a><strong>MSETNX</strong></h4><p>**<code>msetnx key value [key value ...]</code>**：批量添加多个String类型的键值对。</p>
+<p>当且仅当要创建的所有key都不存在时才创建成功。只要有一个键已存在，则都创建失败。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-05_234446.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-05_234446.png" alt="2023-04-05_234446"></a></p>
+<hr>
+<h4 id="SETRANGE和GETRANGE"><a href="#SETRANGE和GETRANGE" class="headerlink" title="SETRANGE和GETRANGE"></a><strong>SETRANGE和GETRANGE</strong></h4><p>**<code>setrange key offset value</code>**：从指定位置替换值的内容，offset表示偏移量，如果为1表示从第二个字符开始。value为替换的内容。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-06_000031.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_000031.png" alt="2023-04-06_000031"></a></p>
+<p>**<code>getrange key start end</code>**：获取key值指定范围的内容，start表示开始索引，end表示结束索引。0到-1表示获取全部。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-06_001053.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_001053.png" alt="2023-04-06_001053"></a></p>
+<hr>
+<h4 id="STRLEN"><a href="#STRLEN" class="headerlink" title="STRLEN"></a><strong>STRLEN</strong></h4><p>**<code>strlen key</code>**：获取key值的长度</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strlen str # 获取str值的长度</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-06_002335.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_002335.png" alt="2023-04-06_002335"></a></p>
+<hr>
+<h4 id="APPEND"><a href="#APPEND" class="headerlink" title="APPEND"></a><strong>APPEND</strong></h4><p>**<code>append key value</code>**：在key值后追加内容value</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">append str hijklmn	# 在str值后追加内容hijklmn</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-06_002704.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_002704.png" alt="2023-04-06_002704"></a></p>
+<hr>
+<h4 id="GETSET"><a href="#GETSET" class="headerlink" title="GETSET"></a>GETSET</h4><p>**<code>getset key value</code>**：设置键值对时先获取原先的key值再设置新的key值，等价于set key get。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-06_014722.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_014722.png" alt="2023-04-06_014722"></a></p>
+<hr>
+<h4 id="key的结构"><a href="#key的结构" class="headerlink" title="key的结构"></a><strong>key的结构</strong></h4><p>Redis没有类似MySQL中的Table的概念，我们该如何区分不同类型的key呢？</p>
+<p>例如，需要存储用户、商品信息到redis，有一个用户id是1，有一个商品id恰好也是1，此时如果使用id作为key，那就冲突了该怎么办？</p>
+<p>我们可以通过给key添加前缀加以区分，不过这个前缀不是随便加的，有一定的规范：</p>
+<p>Redis的key允许有多个单词形成层级结构，多个单词之间用’:’隔开，格式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">项目名:业务名:类型:id</span><br></pre></td></tr></table></figure>
+
+
+
+<p>这个格式并非固定，也可以根据自己的需求设计。这样我们就可以把不同类型的数据区分开了，从而避免了key的冲突问题。</p>
+<p>例如我们的项目名称叫 heima，有user和product两种不同类型的数据，我们可以这样定义key：</p>
+<ul>
+<li>user相关的key：<strong>heima:user:1</strong></li>
+<li>product相关的key：<strong>heima:product:1</strong></li>
+</ul>
+<p>如果Value是一个Java对象，例如一个User对象，则可以将对象序列化为JSON字符串后存储：</p>
+<table>
+<thead>
+<tr>
+<th><strong>KEY</strong></th>
+<th><strong>VALUE</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>heima:user:1</td>
+<td>{“id”:1, “name”: “Jack”, “age”: 21}</td>
+</tr>
+<tr>
+<td>heima:product:1</td>
+<td>{“id”:1, “name”: “小米11”, “price”: 4999}</td>
+</tr>
+</tbody></table>
+<p>并且，在Redis的桌面客户端中，还会以相同前缀作为层级结构，让数据看起来层次分明，关系清晰：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/InWMfeD.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/InWMfeD.png" alt="InWMfeD"></a></p>
+<hr>
+<hr>
+<h3 id="二-List"><a href="#二-List" class="headerlink" title="二. List"></a>二. List</h3><blockquote>
+<p><strong>列表</strong></p>
+<p>Redis的List类型是一个单Key多Value的集合，其value值是有序可重复的。</p>
+<p>Redis中的List类型与Java中的LinkedList类似，可以看做是一个双向链表结构。既可以支持正向检索和也可以支持反向检索。</p>
+<p><em>如果键不存在，创建新的链表；</em></p>
+<p><em>如果键已存在，新增内容，可重复；</em></p>
+<p><em>如果值全移除，对应的键也就消失了。</em></p>
+<p>特征与LinkedList类似：①有序 ②可重复 ③插入和删除速度快 ④查询速度一般</p>
+<p>常用来存储一个有序数据，例如朋友圈点赞列表，评论列表等等。</p>
+</blockquote>
+<hr>
+<p><em><strong>List类型常用命令：</strong></em></p>
+<h4 id="LPUSH和RPUSH"><a href="#LPUSH和RPUSH" class="headerlink" title="LPUSH和RPUSH"></a>LPUSH和RPUSH</h4><blockquote>
+<p>向列表头部或尾部插入元素。返回值为执行命令后列表的长度。当key不存在时则创建key。</p>
+</blockquote>
+<p>**<code>LPUSH key element [element ...]</code>**：在列表key左边添加一个或多个元素，也就是在列表的头部添加元素。</p>
+<p>**<code>RPUSH key element [element ...]</code>**：在列表key右边添加一个或多个元素，也就是在列表的尾部添加元素。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lpush list A B	# 创建一个列表，key为list</span><br><span class="line">lpush list C D E	# 在列表左边（前面）追加C、D、E三个元素</span><br><span class="line">rpush list X Y Z	# 在列表右边（后面）追加X、Y、Z三个元素</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-06_051330.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_051330.png" alt="2023-04-06_051330"></a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-06_064933.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_064933.png" alt="2023-04-06_064933"></a></p>
+<hr>
+<h4 id="LPUSHX和RPUSHX"><a href="#LPUSHX和RPUSHX" class="headerlink" title="LPUSHX和RPUSHX"></a>LPUSHX和RPUSHX</h4><blockquote>
+<p>仅当列表存在时入栈，返回值为执行命令后列表的长度。</p>
+</blockquote>
+<p>**<code>LPUSHX key vlaue</code>**：将value值插入到列表Key的表头，当且仅当 key存在并且是一个列表。当key不存在，执行失败，返回0。</p>
+<p>**<code>RPUSHX key value</code>**：将值 value插入到列表key的表尾，当且仅当 key存在并且是一个列表。当key不存在，执行失败，返回0。<a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-06_194926.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_194926.png" alt="2023-04-06_194926"></a></p>
+<hr>
+<h4 id="LRANGE"><a href="#LRANGE" class="headerlink" title="LRANGE"></a>LRANGE</h4><p>没有RRANGE。</p>
+<p>**<code>LRANGE key start stop</code>**：返回列表 key中指定区间内的元素，区间以偏移量(索引) <code>start</code> 和 <code>stop</code> 指定。</p>
+<blockquote>
+<p>0表示第一个元素，1表示列表第二个元素；-1表示列表最后一个元素，-2表示列表倒数第二个元素，以此类推。</p>
+<p>如果start的下标比列表最大的下标end(LLEN list减一)还大，那么Lrange返回一个空列表。</p>
+<p>如果stop的下标比end的下标还要大，Redis将stop的值设置为end。<code>0到-1表示列表的所有元素</code>。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-06_052827.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_052827.png" alt="2023-04-06_052827"></a></p>
+<hr>
+<h4 id="LPOP和RPOP"><a href="#LPOP和RPOP" class="headerlink" title="LPOP和RPOP"></a>LPOP和RPOP</h4><blockquote>
+<p>弹出列表最左端或最右端的元素。</p>
+</blockquote>
+<p>**<code>LPOP key [count]</code>**：移除列表最左侧的元素并返回该元素，没有则返回nil，count为移除的个数。</p>
+<p>**<code>RPOP key [count]</code>**：移除列表最右侧的元素并返回该元素，没有则返回nil，count为移除的个数。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-06_054714.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_054714.png" alt="2023-04-06_054714"></a></p>
+<hr>
+<h4 id="BLPOP和BRPOP"><a href="#BLPOP和BRPOP" class="headerlink" title="BLPOP和BRPOP"></a>BLPOP和BRPOP</h4><blockquote>
+<p>B是blocking的缩写，表示阻塞的意思。</p>
+<p>与LPOP和RPOP类似，只不过在没有元素时等待指定时间，而不是直接返回nil。</p>
+</blockquote>
+<p>**<code>BLPOP key [key ...] timeout</code>**：移除列表第一个元素并返回该元素，如果列表没有元素会阻塞队列直到等待超时或发现可弹出元素为止</p>
+<p>**<code>BRPOP key [key ...] timeout</code>**：移除列表最后一个元素并返回该元素，如果列表没有元素会阻塞队列直到等待超时或发现可弹出元素为止</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-06_062102.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_062102.png" alt="2023-04-06_062102"></a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-06_062833.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_062833.png" alt="2023-04-06_062833"></a></p>
+<hr>
+<h4 id="RPOPLPUSH"><a href="#RPOPLPUSH" class="headerlink" title="RPOPLPUSH"></a>RPOPLPUSH</h4><p>**<code>RPOPLPUSH source destination</code>**：将列表source中的尾元素弹出插入到列表destination的头部，并返回该元素。</p>
+<blockquote>
+<p>如果source不存在，返回nil。 如果source和destination相同，则列表中的表尾元素被移动到表头，并返回该元素，这种情况可以视为列表的旋转操作。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-06_204113.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_204113.png" alt="2023-04-06_204113"></a></p>
+<p>Redis的列表经常被用作队列(queue)，用于在不同程序之间有序地交换消息(message)。一个客户端通过 LPUSH命令将消息放入队列中，而另一个客户端通过 RPOP或者 BRPOP命令取出队列中等待时间最长的消息。</p>
+<p>上面的队列方法是『不安全』的，因为在这个过程中，一个客户端可能在取出一个消息之后崩溃，而未处理完的消息也就因此丢失。</p>
+<p>使用RPOPLPUSH命令(或者它的阻塞版本 BRPOPLPUSH )可以解决这个问题：因为它不仅返回一个消息，同时还将这个消息添加到另一个备份列表当中，如果一切正常的话，当一个客户端完成某个消息的处理之后，可以用 LREM 命令将这个消息从备份表删除。</p>
+<p>最后，还可以添加一个客户端专门用于监视备份表，它自动地将超过一定处理时限的消息重新放入队列中去(负责处理该消息的客户端可能已经崩溃)，这样就不会丢失任何消息了。</p>
+<hr>
+<h4 id="LINDEX"><a href="#LINDEX" class="headerlink" title="LINDEX"></a>LINDEX</h4><p>**<code>LINDEX key index</code>**：通过索引获取列表元素。</p>
+<p>下标(index)参数 <code>start</code> 和 <code>stop</code> 都以 <code>0</code> 为底，也就是说，以 <code>0</code> 表示列表的第一个元素，以 <code>1</code> 表示列表的第二个元素，以此类推。</p>
+<p>你也可以使用负数下标，以 <code>-1</code> 表示列表的最后一个元素， <code>-2</code> 表示列表的倒数第二个元素，以此类推。</p>
+<p>如果 <code>index</code> 参数的值不在列表的区间范围内(out of range)，返回 <code>nil</code> 。如果 <code>key</code> 不是列表类型，返回一个错误。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-06_063939.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_063939.png" alt="2023-04-06_063939"></a></p>
+<hr>
+<h4 id="LLEN"><a href="#LLEN" class="headerlink" title="LLEN"></a>LLEN</h4><p>**<code>LLEN key</code>**：返回列表key的长度。</p>
+<blockquote>
+<p>如果key不存在，则key被解释为一个空列表，返回0。</p>
+<p>如果key不是一个列表类型返回一个错误。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-06_200230.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_200230.png" alt="img"></a></p>
+<hr>
+<h4 id="LREM"><a href="#LREM" class="headerlink" title="LREM"></a>LREM</h4><blockquote>
+<p>remove的缩写，移除指定元素。</p>
+<p>返回值：被移除元素的数量。不存在的 <code>key</code> 被视作空表(empty list)，所以当 <code>key</code> 不存在时， LREM命令总是返回 0 。</p>
+</blockquote>
+<p>**<code>LREM key count value</code>**：根据count的值，移除列表中与参数value相等的元素。</p>
+<blockquote>
+<p><code>count</code> 的值可以是以下几种：</p>
+<ul>
+<li><code>count &gt; 0</code> : 从表头开始向表尾搜索，移除与 <code>value</code> 相等的元素，数量为 <code>count</code> 。</li>
+<li><code>count &lt; 0</code> : 从表尾开始向表头搜索，移除与 <code>value</code> 相等的元素，数量为 <code>count</code> 的绝对值。</li>
+<li><code>count = 0</code> : 移除表中所有与 <code>value</code> 相等的值。</li>
+</ul>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-06_205240.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_205240.png" alt="2023-04-06_205240"></a></p>
+<hr>
+<h4 id="LTRIM"><a href="#LTRIM" class="headerlink" title="LTRIM"></a>LTRIM</h4><blockquote>
+<p>对一个列表进行修剪(trim)，让列表只保留指定区间内的元素，不在指定区间之内的元素都将被删除。</p>
+</blockquote>
+<p>**<code>LTRIM key start stop</code>**：让列表key只保留<code>start</code>-<code>stop</code>区间的元素。成功返回ok，若key不是列表类型返回错误。</p>
+<blockquote>
+<p>下标(index)参数 <code>start</code> 和 <code>stop</code> 都以 0 为底，也就是说，以 0 表示列表的第一个元素，以 1 表示列表的第二个元素，以此类推。 也可以使用负数下标，以 -1 表示列表的最后一个元素， -2 表示列表的倒数第二个元素，以此类推。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-06_210818.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_210818.png" alt="2023-04-06_210818"></a></p>
+<hr>
+<h4 id="LSET"><a href="#LSET" class="headerlink" title="LSET"></a>LSET</h4><p>**<code>LSET key index value</code>**：将列表key下标为index的元素的值设置为value。操作成功返回ok。</p>
+<blockquote>
+<p>当index参数超出范围，或对一个空列表(key不存在)进行LSET时，返回一个错误。关于更多的下标信息，参考LINDEX。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-06_212624.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_212624.png" alt="2023-04-06_212624"></a></p>
+<hr>
+<h4 id="LINSERT"><a href="#LINSERT" class="headerlink" title="LINSERT"></a>LINSERT</h4><p>**<code>LINSERT key BEFORE|AFTER element value</code>**：将值value插入到列表key中element元素之前或之后。</p>
+<blockquote>
+<p>当<code>element</code>不存在列表<code>key</code>中时，不执行任何操作。当<code>key</code>不存在时，也不执行任何操作。若<code>key</code>不是列表类型，返回一个错误。</p>
+<p>返回值： 如果命令执行成功，返回插入操作完成之后，列表的长度。 如果没有找到 <code>element</code> ，返回 <code>-1</code> 。 如果 <code>key</code> 不存在或为空列表，返回 <code>0</code> 。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-06_214201.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-06_214201.png" alt="2023-04-06_214201"></a></p>
+<hr>
+<hr>
+<h3 id="三-Hash"><a href="#三-Hash" class="headerlink" title="三. Hash"></a>三. Hash</h3><blockquote>
+<p><strong>哈希表</strong></p>
+<p>hash类型，也叫做散列。其value是一个无序字典，类似于java中的HashMap结构。</p>
+<p>K-V模式不变，但v又是一个键值对：Map&lt;key,Map&lt;key,value&gt;&gt;</p>
+</blockquote>
+<p>String结构是将对象序列化为JSON字符串后存储，当需要修改对象某个字段时很不方便：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/1652941995945.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/1652941995945.png" alt="img"></a></p>
+<p>Hash结构可以将对象中的每个字段独立存储，可以针对单个字段做CRUD，下面是两个哈希表：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/1652942027719.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/1652942027719.png" alt="img"></a></p>
+<hr>
+<p><em><strong>Hash类型的常用命令：</strong></em></p>
+<h4 id="HSET和HGET"><a href="#HSET和HGET" class="headerlink" title="HSET和HGET"></a>HSET和HGET</h4><p>**<code>HSET key field value [field value ...]</code>**：将hash表key中的域field的值设置为value，支持同时设置多个域-值对。</p>
+<blockquote>
+<p>如果key不存在，一个新的hash表被创建并执行HSET操作。 如果域field不存在，表示新增<code>field-value</code>(域值对)，如果域field已经存在哈希表key中，其旧值将被覆盖。</p>
+<p>返回值： 如果 field 是哈希表中的一个新建域，并且值设置成功，返回 1 。多个则返回对应的个数。 如果哈希表中域 field 已经存在且旧值已被新值覆盖，返回 0。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-07_013020.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-07_013020.png" alt="img"></a></p>
+<p>**<code>HGET key field </code>**：根据给定域field返回对应的value值。当key不存在或者field不存在，返回nil。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-07_001928.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-07_001928.png" alt="2023-04-07_001928"></a></p>
+<hr>
+<h4 id="HMSET和HMGET"><a href="#HMSET和HMGET" class="headerlink" title="HMSET和HMGET"></a>HMSET和HMGET</h4><p>**<code>HMSET key field value [field value ...]</code>**：同时将多个<code>field-value</code>（域-值对）设置到哈希表key中。</p>
+<blockquote>
+<p>此命令会覆盖哈希表中已存在的域，如果key不存在，一个空的哈希表被创建并执行HMSET操作。</p>
+<p>返回值：执行成功返回ok；若key不是hash类型，返回一个错误。</p>
+<p>HSET在Redis版本迭代后也支持同时设置多个值到哈希表中，与HMSET操作完全相同，HMSET今后可能被淘汰。</p>
+</blockquote>
+<p>**<code>HMGET key field [field ...]</code>**：返回哈希表key中一个或多个给定的域值。</p>
+<blockquote>
+<p>如果给定的域不存在于哈希表，那么返回一个 <code>nil</code> 值。key不存在时也返回一个<code>nil</code>值。key不是Hash类型时报错。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-07_013751.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-07_013751.png" alt="img"></a></p>
+<hr>
+<h4 id="HGETALL"><a href="#HGETALL" class="headerlink" title="HGETALL"></a>HGETALL</h4><p>**<code>HGETALL key</code>**：返回哈希表key中所有的<code>field</code>和<code>value</code> 。</p>
+<blockquote>
+<p>在返回值里，紧跟着域名后的是域的值，所以返回值的长度是哈希表大小的两倍。</p>
+<p>返回值：以列表形式返回哈希表的域和值，若key不存在，返回空列表。若key不是hash类型则报错。</p>
+<p>若在Redis客户端这样显示的数据就是列表： 1）”AA” 2）”BB” 3）”CC” …</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-07_005809.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-07_005809.png" alt="2023-04-07_005809"></a></p>
+<hr>
+<h4 id="HDEL"><a href="#HDEL" class="headerlink" title="HDEL"></a>HDEL</h4><p>**<code>HDEL key field [field ...]</code>**：删除哈希表 <code>key</code> 中的一个或多个指定域，不存在的域将被忽略。</p>
+<blockquote>
+<p>返回值：被成功移除的域的数量，不包括被忽略的域。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-07_014536.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-07_014536.png" alt="img"></a></p>
+<hr>
+<h4 id="HLEN"><a href="#HLEN" class="headerlink" title="HLEN"></a>HLEN</h4><p>**<code>HLEN key</code>**：返回哈希表 <code>key</code> 中域的数量。</p>
+<blockquote>
+<p>返回值：返回哈希表中域的数量，当key不存在时返回0，若key不是hash类型则报错。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-07_014841.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-07_014841.png" alt="img"></a></p>
+<hr>
+<h4 id="HEXISTS"><a href="#HEXISTS" class="headerlink" title="HEXISTS"></a>HEXISTS</h4><p>**<code>HEXISTS key field</code>**：查看哈希表key中，给定域field是否存在。</p>
+<blockquote>
+<p>如果哈希表中存在给定域，返回 <code>1</code> 。 如果哈希表中不存在给定域，或 <code>key</code> 不存在，返回 <code>0</code> 。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-07_015539.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-07_015539.png" alt="2023-04-07_015539"></a></p>
+<hr>
+<h4 id="HKEYS和HVALS"><a href="#HKEYS和HVALS" class="headerlink" title="HKEYS和HVALS"></a>HKEYS和HVALS</h4><p>**<code>HKEYS key</code>**：获取哈希表key中所有的<code>field</code></p>
+<blockquote>
+<p>返回值：返回哈希表中所有field的<code>数组</code>，若key不存在返回一个空数组。若key不是hash类型返回错误。</p>
+</blockquote>
+<p>**<code>HVALS key</code>**：获取哈希表key中所有field对应的<code>value</code>值。</p>
+<blockquote>
+<p>返回值：返回哈希表中所有field对应的value的<code>数组</code>，若key不存在返回一个空数组。若key不是hash类型返回错误。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-07_015823.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-07_015823.png" alt="2023-04-07_015823"></a></p>
+<hr>
+<h4 id="HINCR、HINCRBYFLOAT"><a href="#HINCR、HINCRBYFLOAT" class="headerlink" title="HINCR、HINCRBYFLOAT"></a>HINCR、HINCRBYFLOAT</h4><p>**<code>HINCRBY key field increment</code>**：为哈希表 <code>key</code> 中的域 <code>field</code> 的值加上增量 <code>increment</code> 。只适用整型字符串</p>
+<p>**<code>HINCRBYFLOAT key field increment</code>**：为哈希表 <code>key</code> 中的域 <code>field</code> 加上浮点数增量 <code>increment</code> 。只适用浮点型字符串</p>
+<blockquote>
+<p>增量也可以为负数，相当于对给定域进行减法操作。</p>
+<p>如果哈希表 <code>key</code> 不存在，那么会先创建一个哈希表，再创建域 <code>field</code> ，最后再执行<code>HINCRBY</code> 或 <code>HINCRBYFLOAT</code>操作。</p>
+<p>如果域 <code>field</code> 不存在，那么在执行命令前，域的值被初始化为 <code>0</code> ，然后后执行<code>HINCRBY</code> 或 <code>HINCRBYFLOAT</code>操作。</p>
+<p>对一个储存<code>非整型字符串</code>的域 field 执行 <code>HINCRBY</code> 命令将造成一个错误。</p>
+<p>对一个储存<code>非数值型字符串</code>的域 field 执行 <code>HINCRBYFLOAT</code> 命令将造成一个错误。</p>
+<p>本操作的值被限制在 64 位(bit)有符号数字表示之内。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-07_024911.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-07_024911.png" alt="img"></a></p>
+<hr>
+<h4 id="HSETNX"><a href="#HSETNX" class="headerlink" title="HSETNX"></a>HSETNX</h4><p>**<code>HSETNX key field value</code>**：向哈希表key中添加<code>field-value</code>，当且仅当域field不存在。</p>
+<blockquote>
+<p>若field已存在，则该操作无效；若key不存在，则创建该哈希表并执行HSETNX操作。</p>
+<p>返回值：添加成功，返回1；如果给定域已经存在返回 0 。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-07_030549.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-07_030549.png" alt="2023-04-07_030549"></a></p>
+<hr>
+<hr>
+<h3 id="四-Set"><a href="#四-Set" class="headerlink" title="四. Set"></a>四. Set</h3><blockquote>
+<p><strong>集合</strong></p>
+<p>Redis的Set类型是一个和List一样的单key多value的集合，与List不同的是Set的value是无序且不可重复的。</p>
+<p>Redis的set相当于Java语言里面的HashSet，它内部键值对是无序的、唯一的。它的内部实现相当于一个特殊的字典，字典中所有的value都是一个值NULL，可以看做是一个value为null的HashMap。</p>
+<p>具备与HashSet类似的特征：</p>
+<ul>
+<li>无序</li>
+<li>元素不可重复</li>
+<li>查找快</li>
+<li>支持交集、并集、差集等功能</li>
+</ul>
+<p><em>应用场景</em>： 微信抽奖小程序。（SRANDMEMBER） 微信朋友圈共友点赞。（SINTER） QQ推荐可能认识的人。（SDIFF）</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-07_043514.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-07_043514.png" alt="2023-04-07_043514"></a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-08_040923.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-08_040923.png" alt="img"></a></p>
+<hr>
+<p><em><strong>Set类型的常用命令：</strong></em></p>
+<h4 id="SADD"><a href="#SADD" class="headerlink" title="SADD"></a>SADD</h4><p>**<code>SADD key member [member ...]</code>**：将一个或多个 <code>member</code> 元素加入到set集合 <code>key</code> 当中，已经存在于集合的 <code>member</code> 元素将被忽略。</p>
+<blockquote>
+<p>假如 <code>key</code> 不存在，则创建一个只包含 <code>member</code> 元素作成员的集合。</p>
+<p>当 <code>key</code> 不是Set集合类型时，返回一个错误。</p>
+<p><strong>返回值</strong>：被添加到集合中的新元素的数量，不包括被忽略的元素。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-07_052026.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-07_052026.png" alt="2023-04-07_052026"></a></p>
+<hr>
+<h4 id="SMEMBERS"><a href="#SMEMBERS" class="headerlink" title="SMEMBERS"></a>SMEMBERS</h4><p>**<code>SMEMBERS key</code>**：返回集合<code>key</code>中所有的成员。</p>
+<blockquote>
+<p>若key不存在，返回空数组；若key不是Set集合，返回错误。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-07_053352.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-07_053352.png" alt="2023-04-07_053352"></a></p>
+<hr>
+<h4 id="SISMEMBER"><a href="#SISMEMBER" class="headerlink" title="SISMEMBER"></a>SISMEMBER</h4><blockquote>
+<p>S表示Set集合，ISMEMBER表示is member？</p>
+</blockquote>
+<p><strong>SISMEMBER key member</strong>：判断 <code>member</code> 元素是否是集合 <code>key</code> 的成员。</p>
+<blockquote>
+<p>如果 <code>member</code> 元素是集合的成员，返回 <code>1</code> 。</p>
+<p>如果 <code>member</code> 元素不是集合的成员，或 <code>key</code> 不存在，返回 <code>0</code> 。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-07_095412.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-07_095412.png" alt="2023-04-07_095412"></a></p>
+<hr>
+<h4 id="SCARD"><a href="#SCARD" class="headerlink" title="SCARD"></a>SCARD</h4><p>**<code>SCARD key</code>**：返回集合key中成员的个数。当key不存在时，返回0。若key不是Set集合类型，返回错误。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; SCARD course	# 获取集合course中元素的个数</span><br><span class="line">(integer) 4</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h4 id="SREM"><a href="#SREM" class="headerlink" title="SREM"></a>SREM</h4><p>**<code>SREM key member [member ...]</code>**：移除集合key中的一个或多个member元素并返回移除的个数，不存在的member元素会被忽略。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; SREM course C++		# 移除C++</span><br><span class="line">(integer) 1		# 成功移除一个</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h4 id="SRANDMEMBER"><a href="#SRANDMEMBER" class="headerlink" title="SRANDMEMBER"></a>SRANDMEMBER</h4><p>**<code>SRANDMEMBER key [count]</code>**：随机返回集合中一个[或多个]元素。仅仅返回随机元素，而不对集合进行任何改动。</p>
+<blockquote>
+<p>SRANDMEMBER命令可选的 <code>count</code> 参数：</p>
+<ul>
+<li>如果 <code>count</code> 为正数，且小于集合基数，那么命令返回一个包含 <code>count</code> 个元素的数组，数组中的元素<strong>各不相同</strong>。 如果 <code>count</code> 大于等于集合基数，那么返回整个集合。</li>
+<li>如果 <code>count</code> 为负数，那么命令返回一个数组，数组中的元素<strong>可能会重复出现多次</strong>，而数组的长度为 <code>count</code> 的绝对值。</li>
+</ul>
+<p>返回值: 只提供 <code>key</code> 参数时，返回一个元素；如果集合为空，返回 <code>nil</code> 。 如果提供了 <code>count</code> 参数，那么返回一个数组；如果集合为空，返回空数组。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-07_113723.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-07_113723.png" alt="img"></a></p>
+<hr>
+<h4 id="SPOP"><a href="#SPOP" class="headerlink" title="SPOP"></a>SPOP</h4><p><strong><code>SPOP key [count] </code></strong> ：移除并返回集合中的一个[或多个]随机元素。</p>
+<blockquote>
+<p>如果只想获取一个随机元素，但不想该元素从集合中被移除的话，可以使用 SRANDMEMBER命令。</p>
+<p>返回值：被移除的随机元素。当 <code>key</code> 不存在或 <code>key</code> 是空集时，返回 <code>nil</code> 。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-07_215248.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-07_215248.png" alt="2023-04-07_215248"></a></p>
+<hr>
+<h4 id="SMOVE"><a href="#SMOVE" class="headerlink" title="SMOVE"></a>SMOVE</h4><p>**<code>SMOVE source destination member</code>**：将 <code>member</code> 元素从 <code>source</code> 集合移动到 <code>destination</code> 集合。</p>
+<blockquote>
+<p>SMOVE是原子性操作。</p>
+<p>如果 <code>source</code> 集合不存在或不包含指定的 <code>member</code> 元素，则 SMOVE 命令不执行任何操作，仅返回 <code>0</code> 。</p>
+<p>当 <code>destination</code> 集合已经包含 <code>member</code> 元素时， SMOVE 命令只是简单地将 <code>source</code> 集合中的 <code>member</code> 元素删除。</p>
+<p>当 <code>source</code> 或 <code>destination</code> 不是集合类型时，返回一个错误。</p>
+<p><strong>返回值:</strong></p>
+<p>如果 <code>member</code> 元素被成功移除，返回 <code>1</code> 。</p>
+<p>如果 <code>member</code> 元素不是 <code>source</code> 集合的成员，并且没有任何操作对 <code>destination</code> 集合执行，那么返回 <code>0</code> 。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; smembers course					# 集合course有三个成员</span><br><span class="line">1) &quot;Go&quot;</span><br><span class="line">2) &quot;Python&quot;</span><br><span class="line">3) &quot;Java&quot;</span><br><span class="line">127.0.0.1:6379&gt; smembers subject				# 集合subject有四个成员</span><br><span class="line">1) &quot;Chinese&quot;</span><br><span class="line">2) &quot;Physics&quot;</span><br><span class="line">3) &quot;English&quot;</span><br><span class="line">4) &quot;Math&quot;</span><br><span class="line">127.0.0.1:6379&gt; SMOVE subject course Physics	# 将集合subject的成员Physics移动到集合course中</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; SMEMBERS course					# 集合course中新增成员Physics</span><br><span class="line">1) &quot;Physics&quot;</span><br><span class="line">2) &quot;Go&quot;</span><br><span class="line">3) &quot;Python&quot;</span><br><span class="line">4) &quot;Java&quot;</span><br><span class="line">127.0.0.1:6379&gt; SMEMBERS subject				# 集合subject中少了一个成员</span><br><span class="line">1) &quot;Chinese&quot;</span><br><span class="line">2) &quot;English&quot;</span><br><span class="line">3) &quot;Math&quot;</span><br><span class="line">127.0.0.1:6379&gt; SADD subject Go					# 新增成员Go到集合subject</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; SMOVE subject course Go			# 移动成员Go从subject到course(Go在两个集合中都存在)</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; SMEMBERS subject				# 自身减少了一个成员</span><br><span class="line">1) &quot;Chinese&quot;</span><br><span class="line">2) &quot;English&quot;</span><br><span class="line">3) &quot;Math&quot;</span><br><span class="line">127.0.0.1:6379&gt; SMEMBERS course					# course本身就已有Go成员，所以不执行任何操作(也可以理解为覆盖了)</span><br><span class="line">1) &quot;Physics&quot;</span><br><span class="line">2) &quot;Go&quot;</span><br><span class="line">3) &quot;Python&quot;</span><br><span class="line">4) &quot;Java&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h4 id="集合运算"><a href="#集合运算" class="headerlink" title="集合运算"></a>集合运算</h4><h5 id="SDIFF"><a href="#SDIFF" class="headerlink" title="SDIFF"></a>SDIFF</h5><p>**<code>SDIFF key key2 ...</code>**：返回给定集合的差集。</p>
+<blockquote>
+<p>sdiff A B：返回属于集合A但不属于集合B的元素 sdiff B A：返回属于集合B但不属于集合A的元素</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-08_005458.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-08_005458.png" alt="2023-04-08_005458"></a></p>
+<h5 id="SUNION"><a href="#SUNION" class="headerlink" title="SUNION"></a>SUNION</h5><p>**<code>SUNION key [key ...]</code>**：返回给定集合的并集。</p>
+<blockquote>
+<p>比如<code>sunion A B</code>表示返回集合A和集合B的所有元素，公共的只取一份。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-08_010353.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-08_010353.png" alt="2023-04-08_010353"></a></p>
+<h5 id="SINTER"><a href="#SINTER" class="headerlink" title="SINTER"></a>SINTER</h5><p>**<code>SINTER key [key ...]</code>**：返回给定集合的交集。</p>
+<blockquote>
+<p>比如<code>sinter A B</code>表示即返回集合A和集合B共有的元素。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-08_010905.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-08_010905.png" alt="2023-04-08_010905"></a></p>
+<p><strong><code>SINTERCARD numkeys key [key ...] [LIMIT limit]</code></strong> ：返回给定集合交集的个数。</p>
+<blockquote>
+<p>numkeys为key的个数。</p>
+<p>LIMIT为限制返回的个数的最大值，比如交集个数有10个，但是LIMIT为5，则返回5。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-08_012107.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-08_012107.png" alt="2023-04-08_012107"></a></p>
+<hr>
+<hr>
+<h3 id="五-SortedSet"><a href="#五-SortedSet" class="headerlink" title="五. SortedSet"></a>五. SortedSet</h3><blockquote>
+<p><strong>有序集合</strong></p>
+<p>SortedSet也叫ZSet。在Set的基础上，每个member前面加个score属性。</p>
+<p>Redis的SortedSet是一个可排序的set集合，与Java中的TreeSet有些类似，但底层数据结构却差别很大。</p>
+<p>SortedSet中的每一个元素都带有一个score属性，可以基于score属性对元素排序，底层的实现是一个跳表（SkipList）加 hash表。</p>
+<p>score的值是一个<em>整型数值或者浮点数值</em> 的数，是可重复的。</p>
+<p>SortedSet具备下列特性：</p>
+<ul>
+<li>可排序</li>
+<li>元素不重复</li>
+<li>查询速度快</li>
+</ul>
+<p>因为SortedSet的可排序特性，经常被用来实现排行榜这样的功能。比如商品销售排行榜。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-08_040833.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-08_040833.png" alt="img"></a></p>
+<hr>
+<p><em><strong>Zset类型的常用命令：</strong></em></p>
+<h4 id="ZADD"><a href="#ZADD" class="headerlink" title="ZADD"></a>ZADD</h4><p>**<code>ZADD key score member [[score member] [score member] ...]</code>**：将一个或多个元素及其<code>score</code>值添加到有序集合<code>key</code>中。</p>
+<blockquote>
+<p>如果某个 <code>member</code> 已经是有序集的成员，那么更新这个 <code>member</code> 的 <code>score</code> 值，并通过重新插入这个 <code>member</code> 元素，来保证该 <code>member</code> 在正确的位置上。</p>
+<p><code>score</code>是一个用于排序的属性，它的值是整数值或双精度浮点数，<code>score</code>写在<code>member</code>的前面。</p>
+<p>如果 <code>key</code> 不存在，则创建一个空的有序集并执行 <code>ZADD</code> 操作。当 <code>key</code> 存在但不是有序集类型时，返回一个错误。</p>
+<p>当然还可以加其他参数比如<code>NX</code>、<code>XX</code>、<code>INCR</code>等等，对有序集的更多介绍参见 <a target="_blank" rel="noopener" href="http://redis.io/topics/data-types#sorted-sets">sorted set</a> 。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; ZADD userZset 10 Alice 20 Bob 30 Cindy 40 Davie	# 添加四个成员</span><br><span class="line">(integer) 4		# 返回添加成功的个数</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h4 id="ZCARD"><a href="#ZCARD" class="headerlink" title="ZCARD"></a>ZCARD</h4><p>**<code>ZCARD key </code>**：返回有序集 <code>key</code> 中成员的个数。当key不存在时返回0，若key不是有序集类型，返回错误。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; ZCARD userZset		# 获取有序集userZset中成员的个数</span><br><span class="line">(integer) 4		# 四个</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h4 id="ZCOUNT"><a href="#ZCOUNT" class="headerlink" title="ZCOUNT"></a>ZCOUNT</h4><p>**<code>ZCOUNT key min max</code>**：返回有序集 <code>key</code> 中， <code>score</code> 值在 <code>min</code> 和 <code>max</code> 之间(默认包括 <code>score</code> 值等于 <code>min</code> 或 <code>max</code> )的成员的数量。</p>
+<blockquote>
+<p>默认情况下，区间的取值使用闭区间(小于等于或大于等于)，也可以通过给参数前增加 <code>(</code> 符号将其改变为开区间。 比如 <code>(1 5</code> 表示 1&lt;score&lt;&#x3D;5，<code>(1 (5</code> 表示 1&lt;score&lt;5。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-08_191915.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-08_191915.png" alt="2023-04-08_191915"></a></p>
+<hr>
+<h4 id="ZSCORE"><a href="#ZSCORE" class="headerlink" title="ZSCORE"></a>ZSCORE</h4><p>**<code>ZSOCRE key member</code>**：返回有序集 <code>key </code>中指定成员 <code>member</code> 的 <code>score</code> 值。</p>
+<blockquote>
+<p>如果 <code>member</code> 元素不是有序集 <code>key</code> 的成员，或 <code>key</code> 不存在，返回 <code>nil</code> 。</p>
+<p>返回值：<code>member</code> 成员的 <code>score</code> 值，以字符串形式表示。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-08_180150.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-08_180150.png" alt="2023-04-08_180150"></a></p>
+<hr>
+<h4 id="ZRANGE和ZREVRANGE"><a href="#ZRANGE和ZREVRANGE" class="headerlink" title="ZRANGE和ZREVRANGE"></a>ZRANGE和ZREVRANGE</h4><p>**<code>ZRANGE key start stop [WITHSCORES]</code>*<em>：返回有序集合key中指定区间的成员。</em>从小到大排序*</p>
+<blockquote>
+<p>其中成员的位置是按score值从小到大排序，具有相同score的车成员按字典序来排列。区间(下标参数)这里不再赘述。</p>
+<p><code>WITHSCORES</code> 选项，表示让成员和它的 <code>score</code> 值一并返回，返回列表以 <code>member1,score1, ..., memberN,scoreN</code> 的格式表示。 可能会返回一些更复杂的数据类型，比如数组、元组等。</p>
+<p>如果需要按score值从大到小排序，可以适用<code>ZREVRANGE</code>命令。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-08_044438.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-08_044438.png" alt="2023-04-08_044438"></a></p>
+<p>**<code>ZREVRANGE key start stop [WITHSCORES]</code>*<em>：返回有序集合key中指定区间的成员。</em>从大到小排序*</p>
+<blockquote>
+<p>成员的位置是按照<code>score</code>值从大到小排序，其余都和<code>ZRANGE</code>一样。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-08_045728.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-08_045728.png" alt="2023-04-08_045728"></a></p>
+<hr>
+<h4 id="ZRANGEBYSCORE和ZREVRANGEBYSCORE"><a href="#ZRANGEBYSCORE和ZREVRANGEBYSCORE" class="headerlink" title="ZRANGEBYSCORE和ZREVRANGEBYSCORE"></a>ZRANGEBYSCORE和ZREVRANGEBYSCORE</h4><p>**<code>ZRANGEBYSCORE key min max [WITHSCORES] [LIMIT offset count]</code>*<em>：返回有序集 <code>key</code> 中所有 <code>score</code> 值介于 <code>min</code> 和 <code>max</code> 之间(包括等于 <code>min</code> 或 <code>max</code> )的成员。按score值</em>从小到大排序*</p>
+<blockquote>
+<p>默认情况下，区间的取值使用闭区间(小于等于或大于等于)，也可以通过给参数前增加 <code>(</code> 符号来使用可选的开区间(小于或大于)。 比如 <code>(1 5</code> 表示 1&lt;score&lt;&#x3D;5，<code>(1 (5</code> 表示 1&lt;score&lt;5。</p>
+<p><code>LIMIT</code> 参数限制返回结果的区间(就像SQL中的 <code>SELECT ... LIMIT offset, count</code> )，offset为下标偏移量，count为个数。</p>
+<p><code>WITHSCORES</code> 表示将有序集成员及其 <code>score</code> 值一起返回。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-08_185848.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-08_185848.png" alt="2023-04-08_185848"></a></p>
+<p>**<code>ZREVRANGEBYSCORE key min max [WITHSCORES] [LIMIT offset count]</code>*<em>：返回有序集 <code>key</code> 中所有 <code>score</code> 值介于 <code>min</code> 和 <code>max</code> 之间(包括等于 <code>min</code> 或 <code>max</code> )的成员。按score值</em>从大到小排序*，其余参考ZRANGEBYSCORE。</p>
+<hr>
+<h4 id="ZRANK和ZREVRANK"><a href="#ZRANK和ZREVRANK" class="headerlink" title="ZRANK和ZREVRANK"></a>ZRANK和ZREVRANK</h4><p>**<code>ZRANK key member</code>*<em>：返回有序集 <code>key</code> 中指定成员 <code>member</code> 的排名。</em>从小到大*</p>
+<blockquote>
+<p>排名按 <code>score</code> 值递增(从小到大)顺序排列。排名以 <code>0</code> 为底，也就是说<code>score</code> 值最小的成员排名为 <code>0</code> 。</p>
+<p>使用 <code>ZREVRANK</code> 命令可以获得成员按 <code>score</code> 值递减(从大到小)排列的排名。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-08_181243.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-08_181243.png" alt="img"></a></p>
+<p>**<code>ZREVRANK key member</code>*<em>：返回有序集 <code>key</code> 中指定成员 <code>member</code> 的排名。</em>从大到小*</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-08_181658.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-08_181658.png" alt="2023-04-08_181658"></a></p>
+<hr>
+<h4 id="ZREM"><a href="#ZREM" class="headerlink" title="ZREM"></a>ZREM</h4><p>**<code>ZREM key member [member ...]</code>**：移除有序集key中一个或多个成员，不存在的成员将被忽略。</p>
+<blockquote>
+<p>当key不存在时返回0；当key存在但不是有序集时返回一个错误。</p>
+<p>移除成功返回移除成员的数量。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; ZADD testZset 10 A 20 B 30 C 40 D 50 E</span><br><span class="line">(integer) 5</span><br><span class="line">127.0.0.1:6379&gt; ZREM testZset C D E		# 移除三个成员</span><br><span class="line">(integer) 3		# 移除成功返回3</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h4 id="ZINCRBY"><a href="#ZINCRBY" class="headerlink" title="ZINCRBY"></a>ZINCRBY</h4><p>**<code>ZINCRBY key increment member</code>**：为有序集 <code>key</code> 的成员 <code>member</code> 的 <code>score</code> 值加上增量 <code>increment</code></p>
+<blockquote>
+<p>可以通过传递一个负数值 ，让 <code>score</code> 减去相应的值，比如 <code>ZINCRBY key -5 member</code> ，就是让 <code>member</code> 的 <code>score</code> 值减去 <code>5</code> 。</p>
+<p><strong>返回值</strong>：返回<code>member</code> 成员的新 <code>score</code> 值，以字符串形式表示。 当 <code>key</code> 不是有序集类型时，返回一个错误。 当 <code>key</code> 不存在，或 <code>member</code> 不是 <code>key</code> 的成员时， <code>ZINCRBY key increment member</code> 等同于 <code>ZADD key increment member</code> 。</p>
+<p><code>score</code> 值可以是整数值或双精度浮点数。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/image-20230408193813874.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/image-20230408193813874.png" alt="image-20230408193813874"></a></p>
+<hr>
+<h4 id="ZPOPMAX和ZPOPMIN"><a href="#ZPOPMAX和ZPOPMIN" class="headerlink" title="ZPOPMAX和ZPOPMIN"></a>ZPOPMAX和ZPOPMIN</h4><p>**<code>ZPOPMAX key [count]</code>**：删除并返回有序集<code>key</code>中<code>score</code>值最大的一个[或多个]成员。</p>
+<p>**<code>ZPOPMIN key [count]</code>**：删除并返回有序集<code>key</code>中<code>score</code>值最小的一个[或多个]成员。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-08_200015.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-08_200015.png" alt="2023-04-08_200015"></a></p>
+<hr>
+<h4 id="ZMPOP"><a href="#ZMPOP" class="headerlink" title="ZMPOP"></a>ZMPOP</h4><p>**<code>ZMPOP numkeys key [key ...] &lt;MIN | MAX&gt; [COUNT count] </code>**：从所提供的键名列表中的第一个非空排序集中弹出一个[或多个]元素，这些元素是成员分数对。</p>
+<blockquote>
+<p>这个指令就是ZPOPMAX和ZPOPMIN的升级版，可以对多个有序集合进行操作。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-08_202047.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-08_202047.png" alt="2023-04-08_202047"></a></p>
+<hr>
+<h4 id="集合运算-1"><a href="#集合运算-1" class="headerlink" title="集合运算"></a>集合运算</h4><p>集合运算参考Set的集合运算，这里不再赘述。</p>
+<blockquote>
+<p>ZDIFF：求差集 ZINTER：求交集 ZUNION：求并集</p>
+</blockquote>
+<hr>
+<hr>
+<h3 id="六-Bitmap"><a href="#六-Bitmap" class="headerlink" title="六. Bitmap"></a>六. Bitmap</h3><blockquote>
+<p><strong>位图</strong></p>
+<p>用String类型作为底层数据结构实现的一种统计二值状态的数据类型。</p>
+<p>位图本质是数组，该数组由多个二进制位组成，其值只能是1或0，默认0，每个二进制位都对应一个偏移量(我们称之为一个索引)。</p>
+<p>Bitmap支持的最大位数是2^32位，它可以极大的节约存储空间，使用512M内存就可以存储多达42.9亿的字节信息。 (512<em>1024</em>1024<em>8&#x3D;2^9</em>2^10<em>2^10</em>2^3&#x3D;2^32)</p>
+<p>一个字节占有8位，若在一个bitmap类型的key中，偏移量(索引)为8的位置存入1，前面7位会默认设置为0，那么该key占用两个字节，因为偏移量为8的那一位属于第二个字节了。</p>
+<p><em>&#x3D;&#x3D;应用&#x3D;&#x3D;</em> ：由于offset值得范围是[0,2^32-1]，这个数非常大，可以将用户id和偏移量形成映射关系来存储很多二值数据： 通常先将用户存储到哈希表中，通过field值来标识每一位用户，然后再将field值和偏移量形成映射关系，比如 <code>HSET user 1 uid1001 2 uid1002</code> ：1代表uid1001，2代表uid1002 <code>SETBIT sign:Monday 1 1</code> 偏移量1的位置值为1，偏移量1对应用户uid1001（1表示已签到，0表示未签到） <code>SETBIT sign:Monday 2 1</code> 偏移量2的位置值为1，偏移量2对应用户uid1002 …… <code>SETBIT sign:Monday n 1</code> 再通过<code>BITCOUNT sign:Monday</code>就很容易获取Monday签到的用户数量了。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-08_232347.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-08_232347.png" alt="2023-04-08_232347"></a></p>
+<hr>
+<p><em><strong>Bitmap结构的常用命令：</strong></em></p>
+<h4 id="SETBIT"><a href="#SETBIT" class="headerlink" title="SETBIT"></a>SETBIT</h4><p>**<code>SETBIT key offset value</code>**：设置key的value(字符串)在offset处的bit值。</p>
+<blockquote>
+<p>offset：偏移量，从0开始，最大值2^32-1</p>
+<p>返回值：在offset处原来的bit值。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-09_000056.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-09_000056.png" alt="2023-04-09_000056"></a></p>
+<hr>
+<h4 id="GETBIT"><a href="#GETBIT" class="headerlink" title="GETBIT"></a>GETBIT</h4><p>**<code>GETBIT key offset</code>**：返回key对应的value在offset处的bit值。</p>
+<blockquote>
+<p>当offset超出了字符串长度的时候，超出的部分就被假定为由0比特填充的连续空间。 当key不存在的时候，它就认为是一个空字符串，所以offset总是超出范围，然后value也被认为是由0比特填充的连续空间。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; GETBIT mybit 2		# 获取offset为2的值</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; GETBIT mybit 100	# 获取offset为100的值，100已经超出了该字符串的长度，默认超出的比特位都是0</span><br><span class="line">(integer) 0</span><br><span class="line">127.0.0.1:6379&gt; STRLEN mybit		# 获取mybit的长度(占用字节数)，因为只存储5位，不够一个字节，所以占用一个字节</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; SETBIT mybit 5 1</span><br><span class="line">(integer) 0</span><br><span class="line">127.0.0.1:6379&gt; SETBIT mybit 6 0</span><br><span class="line">(integer) 0</span><br><span class="line">127.0.0.1:6379&gt; SETBIT mybit 7 1</span><br><span class="line">(integer) 0</span><br><span class="line">127.0.0.1:6379&gt; SETBIT mybit 8 1	# 偏移量8，属于第二个字节了，所以mybit的长度为2</span><br><span class="line">(integer) 0</span><br><span class="line">127.0.0.1:6379&gt; STRLEN mybit</span><br><span class="line">(integer) 2</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h4 id="BITCOUNT"><a href="#BITCOUNT" class="headerlink" title="BITCOUNT"></a>BITCOUNT</h4><p>**<code>BITCOUNT key [start end [byte|bit]]</code>**：统计value中比特位为1的个数。</p>
+<blockquote>
+<p>可以指定特定的比特位区间或字节区间，只统计该区间上比特位为1的个数。 byte表示一个字节为一个偏移量，bit表示一个位为一个偏移量。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; BITCOUNT mybit	# 统计整个字符串value中比特位为1的个数</span><br><span class="line">(integer) 6</span><br><span class="line">127.0.0.1:6379&gt; BITCOUNT mybit 3 6 bit	# 统计比特位区间[3,6]中比特位为1的个数</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; BITCOUNT mybit 1 -1 byte	# 统计第二个字节及以后的字节中比特位为1的个数</span><br><span class="line">(integer) 1</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h4 id="BITOP"><a href="#BITOP" class="headerlink" title="BITOP"></a>BITOP</h4><p>**<code>BITOP operation destkey key [key ...]</code>**：对一个或多个保存二进制位的字符串key进行位运算，并将结果保存到destkey中。</p>
+<blockquote>
+<p>operation有四种操作：AND、OR、NOT、XOR</p>
+<ul>
+<li><code>BITOP AND destkey srckey1 srckey2 srckey3 ... srckeyN</code> ：对一个或多个 key 求按位与（同一列都为1则为1）</li>
+<li><code>BITOP OR destkey srckey1 srckey2 srckey3 ... srckeyN</code>：对一个或多个 key 求按位或（同一列有一个1即为1）</li>
+<li><code>BITOP XOR destkey srckey1 srckey2 srckey3 ... srckeyN</code>：对一个或多个 key 求按位异或（不同则为1）</li>
+<li><code>BITOP NOT destkey srckey</code>：对给定 key 求按位取反（1变0，0变1）</li>
+</ul>
+<p>返回值：保存到destkey的字符串的长度（多少字节）</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"># 设置一个bitmap类型的bitmap1，存储1 0 1 0</span><br><span class="line">127.0.0.1:6379&gt; SETBIT bitmap1 0 1</span><br><span class="line">(integer) 0</span><br><span class="line">127.0.0.1:6379&gt; SETBIT bitmap1 1 0</span><br><span class="line">(integer) 0</span><br><span class="line">127.0.0.1:6379&gt; SETBIT bitmap1 2 1</span><br><span class="line">(integer) 0</span><br><span class="line">127.0.0.1:6379&gt; SETBIT bitmap1 3 0</span><br><span class="line">(integer) 0</span><br><span class="line"># 设置一个bitmap类型的bitmap2，存储1 0 1 1</span><br><span class="line">127.0.0.1:6379&gt; SETBIT bitmap2 0 1</span><br><span class="line">(integer) 0</span><br><span class="line">127.0.0.1:6379&gt; SETBIT bitmap2 1 0</span><br><span class="line">(integer) 0</span><br><span class="line">127.0.0.1:6379&gt; SETBIT bitmap2 2 1</span><br><span class="line">(integer) 0</span><br><span class="line">127.0.0.1:6379&gt; SETBIT bitmap2 3 1</span><br><span class="line">(integer) 0</span><br><span class="line"></span><br><span class="line"># 将这两个key做按位与运算，并将结果存到bitmap12中</span><br><span class="line">127.0.0.1:6379&gt; BITOP and bitmap12 bitmap1 bitmap2</span><br><span class="line">(integer) 1		# 返回bitmap12的长度，1个字节</span><br><span class="line"># 获取bitmap12的值</span><br><span class="line">127.0.0.1:6379&gt; GETBIT bitmap12 0	</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; GETBIT bitmap12 1</span><br><span class="line">(integer) 0</span><br><span class="line">127.0.0.1:6379&gt; GETBIT bitmap12 2</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; GETBIT bitmap12 3</span><br><span class="line">(integer) 0</span><br><span class="line">可以看到得出的数是1 0 1 0</span><br><span class="line"></span><br><span class="line"># 将bitmap1做按位取反运算</span><br><span class="line">127.0.0.1:6379&gt; BITOP not destkey1 bitmap1</span><br><span class="line">(integer) 1</span><br><span class="line"># 获取destkey1的值</span><br><span class="line">127.0.0.1:6379&gt; GETBIT destkey1 0</span><br><span class="line">(integer) 0</span><br><span class="line">127.0.0.1:6379&gt; GETBIT destkey1 1</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; GETBIT destkey1 2</span><br><span class="line">(integer) 0</span><br><span class="line">127.0.0.1:6379&gt; GETBIT destkey1 3</span><br><span class="line">(integer) 1</span><br><span class="line">可以看到取反后的数为0 1 0 1</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<hr>
+<h3 id="七-HyperLogLog"><a href="#七-HyperLogLog" class="headerlink" title="七. HyperLogLog"></a>七. HyperLogLog</h3><blockquote>
+<p><strong>基数统计</strong></p>
+<p>HyperLogLog是一种概率数据结构，用于计数唯一的事物(技术上这是指估计一个集合的基数)。 (基数就是一个数据集中去除重复数据后总的个数)</p>
+<p>HyperLogLog的数据类型还是String。在Redis中的HyperLogLog，虽然技术上是不同的数据结构，但被编码为Redis字符串。</p>
+<p>在Redis里面每个HyperLogLog键只需要花费12kb内存就可以统计接近2^64个不同元素的基数。</p>
+<p>HyperLogLog只会根据输入的元素来计算奇数，不会存储输入的元素本身，所以HyperLogLog不能像集合那样返回输入的元素。</p>
+</blockquote>
+<hr>
+<p><em><strong>HyperLogLog结构的常用命令：</strong></em></p>
+<h4 id="PFADD"><a href="#PFADD" class="headerlink" title="PFADD"></a>PFADD</h4><p>**<code>PFADD key element [element ...]</code>**：将元素element添加到HyperLogLog结构的key中。</p>
+<blockquote>
+<p>如果 HyperLogLog 的内部被修改了,那么返回 1,否则返回 0 。</p>
+<p>如果在调用该命令时仅提供变量名而不指定元素也是可以的，如果这个变量名存在，则不会有任何操作。如果不存在，则会创建一个数据结构（返回1）。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; PFADD hll a b c c d d f f g g	# 添加10个元素</span><br><span class="line">(integer) 1		# 添加了10个元素，返回1</span><br><span class="line">127.0.0.1:6379&gt; PFADD hll a b c c d d f f g g	# 重复添加，HLL内部没有改变，返回0</span><br><span class="line">(integer) 0</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h4 id="PFCOUNT"><a href="#PFCOUNT" class="headerlink" title="PFCOUNT"></a>PFCOUNT</h4><p>**<code>PFCOUNT key [key ...]</code>**：返回给定HyperLogLog结构的key的基数。</p>
+<blockquote>
+<p>当参数为一个key时，返回存储在HyperLogLog结构体的该key的近似基数，如果该变量不存在，则返回0。</p>
+<p>当参数为多个key时，返回这些HyperLogLog并集的近似基数，这个值是将所给定的所有key的HyperLoglog结构合并到一个临时的HyperLogLog结构中计算而得到的。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; PFADD hll a b c c d d f f g g</span><br><span class="line">(integer) 0	</span><br><span class="line">127.0.0.1:6379&gt; PFCOUNT hll		# 统计hll的基数（去重统计）</span><br><span class="line">(integer) 6</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h4 id="PFMERGE"><a href="#PFMERGE" class="headerlink" title="PFMERGE"></a>PFMERGE</h4><p>**<code>PFMERGE destkey [sourcekey [sourcekey ...]]</code>**：将多个HyperLogLog合并成一个HyperLogLog。</p>
+<blockquote>
+<p>destkey是合并后的HyperLogLog结构。</p>
+<p>这个命令可以用PFCOUNT命令实现。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; PFADD hll1 a a b b c c d e f	# 创建一个HyperLogLog结构的hll1</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; PFADD hll2 d e f g g h h i i	# 创建一个HyperLogLog结构的hll2</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; PFMERGE hll3 hll1 hll2			# 合并这两个HyperLogLog结构的key</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; PFCOUNT hll3					# 统计合并后HyperLogLog结构的hll3的基数</span><br><span class="line">(integer) 9</span><br><span class="line">127.0.0.1:6379&gt; PFCOUNT hll1 hll2				# 直接统计hll1和hll2</span><br><span class="line">(integer) 9</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<hr>
+<h3 id="八-Geospatial"><a href="#八-Geospatial" class="headerlink" title="八. Geospatial"></a>八. Geospatial</h3><blockquote>
+<p><strong>地理空间</strong></p>
+<p>Redis地理空间索引可以存储坐标并搜索它们。此数据结构用于在给定半径或包围框内查找附近点。</p>
+<p>Geopatial的数据类型是Zset，相当于由之前的<code>score</code>变成了<code>longitude</code>和<code>latitude</code>，可以使用Zset的命令对其进行操作。</p>
+</blockquote>
+<hr>
+<p><em><strong>Geospatial结构的常用命令：</strong></em></p>
+<h4 id="GEOADD"><a href="#GEOADD" class="headerlink" title="GEOADD"></a>GEOADD</h4><p><strong><code>GEOADD key [NX | XX] [CH] longitude latitude member [longitude latitude member ...]</code></strong></p>
+<blockquote>
+<p>将指定的地理空间项(经度、纬度、名称)添加到地理空间结构的key中。</p>
+<p>数据以有序集的形式存储到键中，这样就可以使用GEOSEARCH命令查询项。</p>
+<p>规定如下：</p>
+<ul>
+<li>有效的经度从-180度到180度。</li>
+<li>有效的纬度从-85.05112878度到85.05112878度。</li>
+</ul>
+<p>当坐标位置超出上述指定范围时，该命令将会返回一个错误。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GEOADD city 116.403963 39.915119 &quot;天安门&quot; 116.403414 39.924091 &quot;故宫&quot; 116.024067 40.362639 &quot;长城&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/2023-04-09_051719.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/2023-04-09_051719.png" alt="2023-04-09_051719"></a></p>
+<p>注意：使用–raw启动客户端后，返回数据的类型以及编号不会显示了</p>
+<hr>
+<h4 id="GEOPOS"><a href="#GEOPOS" class="headerlink" title="GEOPOS"></a>GEOPOS</h4><p>**<code>GEOPOS key member [member ...]</code>**：从给定的key里返回所有指定member的位置(经度和纬度)，不存在的member返回nil。</p>
+<blockquote>
+<p>GEOPOS 命令返回一个数组， 数组中的每个项都由两个元素组成： 第一个元素为给定位置元素的经度， 而第二个元素则为给定位置元素的纬度。给定的位置元素不存在时， 对应的数组项为空值。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; GEOPOS city 天安门 故宫 长城</span><br><span class="line">116.40396326780319214</span><br><span class="line">39.91511970338637383</span><br><span class="line">116.40341609716415405</span><br><span class="line">39.92409008156928252</span><br><span class="line">116.02406591176986694</span><br><span class="line">40.36263993239462167</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h4 id="GEOHASH"><a href="#GEOHASH" class="headerlink" title="GEOHASH"></a>GEOHASH</h4><p>**<code>GEOHASH key member [member ...]</code>**：获取一个或多个<code>member</code>的geohash值。</p>
+<blockquote>
+<p>通常使用表示位置的元素使用不同的技术，使用Geohash位置52点整数编码。 由于编码和解码过程中所使用的初始最小和最大坐标不同，编码的编码也不同于标准。此命令返回一个标准的Geohash。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; GEOHASH city 天安门 故宫 长城</span><br><span class="line">wx4g0f6f2v0</span><br><span class="line">wx4g0gfqsj0</span><br><span class="line">wx4t85y1kt0</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h4 id="GEODIST"><a href="#GEODIST" class="headerlink" title="GEODIST"></a>GEODIST</h4><p>**<code>GEODIST key member1 member2 [M | KM | FT | MI]</code>**：返回两个给定<code>member</code>之间的距离。</p>
+<blockquote>
+<p>如果两个位置之间的其中一个不存在， 那么命令返回空值。</p>
+<ul>
+<li><strong>m</strong> 表示单位为米。</li>
+<li><strong>km</strong> 表示单位为千米。</li>
+<li><strong>mi</strong> 表示单位为英里。</li>
+<li><strong>ft</strong> 表示单位为英尺。</li>
+</ul>
+<p>如果用户没有显式地指定单位参数， 那么 <code>GEODIST</code> 默认使用M作为单位。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; GEODIST city 天安门 长城</span><br><span class="line">59338.9814		# 天安门距离长城59338.9814米</span><br><span class="line">127.0.0.1:6379&gt; GEODIST city 天安门 长城 km</span><br><span class="line">59.3390			# 天安门距离长城59.3390千米</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h4 id="GEORADIUS"><a href="#GEORADIUS" class="headerlink" title="GEORADIUS"></a>GEORADIUS</h4><p><strong><code>GEORADIUS key longitude latitude radius &lt;M | KM | FT | MI&gt; [WITHCOORD] [WITHDIST] [WITHHASH] </code></strong> <strong><code>[COUNT count [ANY]] [ASC | DESC] [STORE key] [STOREDIST key]</code></strong></p>
+<blockquote>
+<p>以给定的经纬度为中心， 返回key包含的位置元素当中， 与中心的距离不超过给定最大距离的所有位置元素。</p>
+<p>radius：半径</p>
+<p>WITHDIST：在返回位置元素的同时， 将位置元素与中心之间的距离也一并返回。 距离的单位和用户给定的范围单位保持一致。</p>
+<p>WITHCOORD： 将位置元素的经度和维度也一并返回。</p>
+<p>WITHHASH：将geohash值一并返回。</p>
+<p>COUNT ：限定返回的记录数。</p>
+<p>ASC：由近到远返回（升序）</p>
+<p>DESC：由远到近返回（降序）</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">假设当前位置北京王府井(116.418017 39.914402)</span><br><span class="line"># 由近到远排序</span><br><span class="line">127.0.0.1:6379&gt; GEORADIUS city 116.418017 39.914402 10 km withdist withcoord withhash count 10</span><br><span class="line">天安门					  # member</span><br><span class="line">1.2016					# 天安门距离北京王府井1.2km</span><br><span class="line">4069885555089531		# geohash值</span><br><span class="line">116.40396326780319214	# 经度值</span><br><span class="line">39.91511970338637383	# 纬度值</span><br><span class="line">故宫</span><br><span class="line">1.6470					# 故宫距离北京王府井1.6km</span><br><span class="line">4069885568908290</span><br><span class="line">116.40341609716415405</span><br><span class="line">39.92409008156928252</span><br><span class="line"># 由远到近排序</span><br><span class="line">127.0.0.1:6379&gt; GEORADIUS city 116.418017 39.914402 10 km withdist withcoord withhash count 10 desc</span><br><span class="line">故宫</span><br><span class="line">1.6470</span><br><span class="line">4069885568908290</span><br><span class="line">116.40341609716415405</span><br><span class="line">39.92409008156928252</span><br><span class="line">天安门</span><br><span class="line">1.2016</span><br><span class="line">4069885555089531</span><br><span class="line">116.40396326780319214</span><br><span class="line">39.91511970338637383</span><br><span class="line"># 将半径改为70km，这样长城也在范围内</span><br><span class="line">127.0.0.1:6379&gt; GEORADIUS city 116.418017 39.914402 70 km withdist withcoord withhash count 10 desc</span><br><span class="line">长城</span><br><span class="line">60.0642					# 长城距离北京王府井60km</span><br><span class="line">4069895262981475</span><br><span class="line">116.02406591176986694</span><br><span class="line">40.36263993239462167</span><br><span class="line">故宫</span><br><span class="line">1.6470</span><br><span class="line">4069885568908290</span><br><span class="line">116.40341609716415405</span><br><span class="line">39.92409008156928252</span><br><span class="line">天安门</span><br><span class="line">1.2016</span><br><span class="line">4069885555089531</span><br><span class="line">116.40396326780319214</span><br><span class="line">39.91511970338637383</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h4 id="GEORADIUSBYMEMBER"><a href="#GEORADIUSBYMEMBER" class="headerlink" title="GEORADIUSBYMEMBER"></a>GEORADIUSBYMEMBER</h4><p><strong><code>GEORADIUSBYMEMBER key member radius &lt;M | KM | FT | MI&gt; [WITHCOORD] [WITHDIST] [WITHHASH] </code></strong> <strong><code>[COUNT count [ANY]] [ASC | DESC] [STORE key] [STOREDIST key]</code></strong></p>
+<blockquote>
+<p>以给定的位置元素为中心点，找出位于指定范围内的元素。其他和GEORADIUS命令一样。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 获取距离天安10km范围内的位置元素</span><br><span class="line">127.0.0.1:6379&gt; GEORADIUSBYMEMBER city 天安门 10 km withdist withcoord withhash count 10 desc</span><br><span class="line">故宫</span><br><span class="line">0.9988</span><br><span class="line">4069885568908290</span><br><span class="line">116.40341609716415405</span><br><span class="line">39.92409008156928252</span><br><span class="line">天安门</span><br><span class="line">0.0000</span><br><span class="line">4069885555089531</span><br><span class="line">116.40396326780319214</span><br><span class="line">39.91511970338637383</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<hr>
+<h3 id="九-Stream"><a href="#九-Stream" class="headerlink" title="九. Stream"></a>九. Stream</h3><blockquote>
+<p><strong>流</strong></p>
+<p>Redis流是一种数据结构（Stream类型），它的作用类似于只能追加的日志。您可以使用流来实时记录和同时聚合事件。</p>
+<p>Redis流用例示例包括:</p>
+<ul>
+<li>事件来源(例如，跟踪用户操作、点击等)</li>
+<li>传感器监测(例如，来自现场设备的读数)</li>
+<li>通知(例如，在单独的流中存储每个用户通知的记录)</li>
+</ul>
+<p>Redis为每个流消息生成一个唯一的ID，可以使用这些id检索它们关联的消息，或者读取和处理流中的所有后续消息。</p>
+<p>四种和ID有关的特殊符号： <code>-</code>和<code>+</code>：当前流中最小ID和最大ID <code>$</code>：表示大于当前流中最大的id，用于新添加的消息 <code>&gt;</code>：用于XREANGROUP命令，表示迄今没有发送给组中使用者的信息，会更新消费者组的最后ID <code>*</code>：用于XADD命令中，表示让系统自动生成ID</p>
+</blockquote>
+<p>Stream流就是Redis版的MQ消息中间件+阻塞队列，它能实现消息队列，它支持消息的持久化、支持自动生成全局唯一ID、支持ack确认消息的模式、支持消费组模式等，让消息队列更加的稳定和可靠。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/loneasing/mynote/blob/master/Redis7/img/stream%E5%8E%9F%E7%90%86.png"><img src="https://github.com/loneasing/mynote/raw/master/Redis7/img/stream%E5%8E%9F%E7%90%86.png" alt="stream原理"></a></p>
+<blockquote>
+<p>Message Content：消息内容</p>
+<p>Consumer group：消费组，通过XGROUP CREATE 命令创建，同一个消费组可以有多个消费者</p>
+<p>Last_delivered_id：游标，每个消费组会有个游标 last_delivered_id，任意一消费者读取了消息都会使游标 last_delivered_id 往前移动。</p>
+<p>Consumer：消费者，消费组中的消费者</p>
+<p>Pending_ids：消费者会有一个状态变量，用于记录被当前消费已读取但未ack的消息Id，如果客户端没有ack，这个变量里面的消息ID会越来越多，一旦某个消息被ack它就开始减少。这个pending_ids变量在Redis官方被称之为 PEL(Pending Entries List)，记录了当前已经被客户端读取的消息，但是还没有 ack (Acknowledge character：确认字符），它用来确保客户端至少消费了消息一次，而不会在网络传输的中途丢失了没处理</p>
+</blockquote>
+<hr>
+<p><em><strong>Stream类型的常用命令：</strong></em></p>
+<h4 id="XADD"><a href="#XADD" class="headerlink" title="XADD"></a>XADD</h4><p><strong><code>XADD key [NOMKSTREAM] [&lt;MAXLEN | MINID&gt; [= | ~] threshold [LIMIT count]] &lt;\* | id&gt; field value [field value ...] </code></strong></p>
+<blockquote>
+<p>将消息追加到指定流<code>key</code>的末尾，添加的消息ID要比上个消息的ID大。如果key不存在，将自动创建流key然后执行XADD操作。</p>
+<p>ID用于标识给定消息，如果指定的ID参数是字符<code>*</code>，<code>XADD</code>命令会自动生成一个唯一的ID。ID是由时间戳-序列号两部分组成，当自动生成ID时，第一部分是生成ID的Redis实例的毫秒格式的Unix时间。 第二部分是一个序列号，用来区分同一毫秒内生成的ID的。序列号是64位长度(18446744073709551615)，理论上在同一毫秒内生成的数据量无法到达这个级别，因此不用担心序列号会不够用。</p>
+<p>该命令返回添加的消息的ID。如果ID参数传的是<code>*</code>，那么ID是自动生成的， 否则，命令仅返回用户在插入期间指定的相同的ID。</p>
+<p>通常使用命令<code>XADD ID filed value [field value ...]</code>，其他的花里胡哨的参数了解即可。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; XADD mystream * name tom age 20	# 添加一条消息到mystream队列末尾，自动生成id</span><br><span class="line">&quot;1681002319038-0&quot;	# 返回生成消息的id</span><br><span class="line">127.0.0.1:6379&gt; XADD mystream 1681002319038-0 name tom age 20	# 如果添加消息的id不比上一消息id大，则报错</span><br><span class="line">(error) ERR The ID specified in XADD is equal or smaller than the target stream top item</span><br><span class="line">127.0.0.1:6379&gt; XADD mystream 1681002319038-1 name tom age 20	# 比上一消息id大，添加成功，返回添加消息的id</span><br><span class="line">&quot;1681002319038-1&quot;</span><br><span class="line">127.0.0.1:6379&gt; </span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h4 id="XRANGE"><a href="#XRANGE" class="headerlink" title="XRANGE"></a>XRANGE</h4><p>**<code>XRANGE key start end [COUNT count]</code>**：返回给定id范围内流key的消息。</p>
+<blockquote>
+<p>id范围由[start,end]指定。特殊ID：<code>-</code> 表示流中最小的消息id，<code>+</code>表示流中最大的消息id。</p>
+<p>返回的消息由id从小到大排序。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; XADD mystream * name Alice age 20</span><br><span class="line">&quot;1681003546319-0&quot;</span><br><span class="line">127.0.0.1:6379&gt; XADD mystream * name Bob age 21</span><br><span class="line">&quot;1681003556153-0&quot;</span><br><span class="line">127.0.0.1:6379&gt; XADD mystream * name Cindy age 22</span><br><span class="line">&quot;1681003570177-0&quot;</span><br><span class="line">127.0.0.1:6379&gt; XADD mystream * name Davie age 23</span><br><span class="line">&quot;1681003595504-0&quot;</span><br><span class="line">127.0.0.1:6379&gt; XRANGE mystream - +		# - + 表示返回流mystream中所有的消息，且根据id从小到大排序</span><br><span class="line">1) 1) &quot;1681003546319-0&quot;</span><br><span class="line">   2) 1) &quot;name&quot;</span><br><span class="line">      2) &quot;Alice&quot;</span><br><span class="line">      3) &quot;age&quot;</span><br><span class="line">      4) &quot;20&quot;</span><br><span class="line">2) 1) &quot;1681003556153-0&quot;</span><br><span class="line">   2) 1) &quot;name&quot;</span><br><span class="line">      2) &quot;Bob&quot;</span><br><span class="line">      3) &quot;age&quot;</span><br><span class="line">      4) &quot;21&quot;</span><br><span class="line">3) 1) &quot;1681003570177-0&quot;</span><br><span class="line">   2) 1) &quot;name&quot;</span><br><span class="line">      2) &quot;Cindy&quot;</span><br><span class="line">      3) &quot;age&quot;</span><br><span class="line">      4) &quot;22&quot;</span><br><span class="line">4) 1) &quot;1681003595504-0&quot;</span><br><span class="line">   2) 1) &quot;name&quot;</span><br><span class="line">      2) &quot;Davie&quot;</span><br><span class="line">      3) &quot;age&quot;</span><br><span class="line">      4) &quot;23&quot;</span><br><span class="line">127.0.0.1:6379&gt; XRANGE mystream - + count 2		# 限制返回两个</span><br><span class="line">1) 1) &quot;1681003546319-0&quot;</span><br><span class="line">   2) 1) &quot;name&quot;</span><br><span class="line">      2) &quot;Alice&quot;</span><br><span class="line">      3) &quot;age&quot;</span><br><span class="line">      4) &quot;20&quot;</span><br><span class="line">2) 1) &quot;1681003556153-0&quot;</span><br><span class="line">   2) 1) &quot;name&quot;</span><br><span class="line">      2) &quot;Bob&quot;</span><br><span class="line">      3) &quot;age&quot;</span><br><span class="line">      4) &quot;21&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h4 id="XREVRANGE"><a href="#XREVRANGE" class="headerlink" title="XREVRANGE"></a>XREVRANGE</h4><p>**<code>XREVRANGE key end start [COUNT count]</code>**：返回给定id范围内流key的消息。</p>
+<blockquote>
+<p>在<code>XREVRANGE</code>中，要先指定结束ID，再指定开始ID，返回消息的顺序是根据id从大到小排序。其余和XRANGE一样。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; XREVRANGE mystream + -</span><br><span class="line">1) 1) &quot;1681003595504-0&quot;</span><br><span class="line">   2) 1) &quot;name&quot;</span><br><span class="line">      2) &quot;Davie&quot;</span><br><span class="line">      3) &quot;age&quot;</span><br><span class="line">      4) &quot;23&quot;</span><br><span class="line">2) 1) &quot;1681003570177-0&quot;</span><br><span class="line">   2) 1) &quot;name&quot;</span><br><span class="line">      2) &quot;Cindy&quot;</span><br><span class="line">      3) &quot;age&quot;</span><br><span class="line">      4) &quot;22&quot;</span><br><span class="line">3) 1) &quot;1681003556153-0&quot;</span><br><span class="line">   2) 1) &quot;name&quot;</span><br><span class="line">      2) &quot;Bob&quot;</span><br><span class="line">      3) &quot;age&quot;</span><br><span class="line">      4) &quot;21&quot;</span><br><span class="line">4) 1) &quot;1681003546319-0&quot;</span><br><span class="line">   2) 1) &quot;name&quot;</span><br><span class="line">      2) &quot;Alice&quot;</span><br><span class="line">      3) &quot;age&quot;</span><br><span class="line">      4) &quot;20&quot;</span><br><span class="line">127.0.0.1:6379&gt; XREVRANGE mystream + - count 2</span><br><span class="line">1) 1) &quot;1681003595504-0&quot;</span><br><span class="line">   2) 1) &quot;name&quot;</span><br><span class="line">      2) &quot;Davie&quot;</span><br><span class="line">      3) &quot;age&quot;</span><br><span class="line">      4) &quot;23&quot;</span><br><span class="line">2) 1) &quot;1681003570177-0&quot;</span><br><span class="line">   2) 1) &quot;name&quot;</span><br><span class="line">      2) &quot;Cindy&quot;</span><br><span class="line">      3) &quot;age&quot;</span><br><span class="line">      4) &quot;22&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h4 id="XDEL"><a href="#XDEL" class="headerlink" title="XDEL"></a>XDEL</h4><p>**<code>XDEL key id [id ...]</code>**：从流key中删除指定id(消息)。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; XDEL mystream 1681003595504-0 1681003556153-0	# 删除Bob和Davie对应的id</span><br><span class="line">(integer) 2		# 成功删除两个</span><br><span class="line">127.0.0.1:6379&gt; XRANGE mystream - +</span><br><span class="line">1) 1) &quot;1681003546319-0&quot;</span><br><span class="line">   2) 1) &quot;name&quot;</span><br><span class="line">      2) &quot;Alice&quot;</span><br><span class="line">      3) &quot;age&quot;</span><br><span class="line">      4) &quot;20&quot;</span><br><span class="line">2) 1) &quot;1681003570177-0&quot;</span><br><span class="line">   2) 1) &quot;name&quot;</span><br><span class="line">      2) &quot;Cindy&quot;</span><br><span class="line">      3) &quot;age&quot;</span><br><span class="line">      4) &quot;22&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h4 id="XLEN"><a href="#XLEN" class="headerlink" title="XLEN"></a>XLEN</h4><p>**<code>XLEN mystream</code>**：返回流key中消息的条数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; XLEN mystream	# 流mystream中有两条消息</span><br><span class="line">(integer) 2</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h4 id="XTRIM"><a href="#XTRIM" class="headerlink" title="XTRIM"></a>XTRIM</h4><p>**<code>XTRIM key &lt;MAXLEN | MINID&gt; [= | ~] threshold [LIMIT count]</code>**：将流消息裁剪为指定数量的消息。</p>
+<blockquote>
+<p>MAXLEN：表示允许最大的消息长度(个数)，超过此数量会优先删除id较小的消息。</p>
+<p>MINID：表示允许最小的id，比此id还小的消息会被删除。</p>
+<p>返回值：删除消息的数量。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"># 创建五条消息存入流mystream中</span><br><span class="line">127.0.0.1:6379&gt; XADD mystream 1681006080120-0 name Alice age 18</span><br><span class="line">&quot;1681006080120-0&quot;</span><br><span class="line">127.0.0.1:6379&gt; XADD mystream 1681006080120-1 name Bob age 19</span><br><span class="line">&quot;1681006080120-1&quot;</span><br><span class="line">127.0.0.1:6379&gt; XADD mystream 1681006080120-2 name Cindy age 20</span><br><span class="line">&quot;1681006080120-2&quot;</span><br><span class="line">127.0.0.1:6379&gt; XADD mystream 1681006080120-3 name Davie age 21</span><br><span class="line">&quot;1681006080120-3&quot;</span><br><span class="line">127.0.0.1:6379&gt; XADD mystream 1681006080120-4 name Eric age 22</span><br><span class="line">&quot;1681006080120-4&quot;</span><br><span class="line">127.0.0.1:6379&gt; XTRIM mystream maxlen 3		# 获取最近的3条消息，id较小的被删除（id是递增的）</span><br><span class="line">(integer) 2</span><br><span class="line">127.0.0.1:6379&gt; XRANGE mystream - +</span><br><span class="line">1) 1) &quot;1681006080120-2&quot;</span><br><span class="line">   2) 1) &quot;name&quot;</span><br><span class="line">      2) &quot;Cindy&quot;</span><br><span class="line">      3) &quot;age&quot;</span><br><span class="line">      4) &quot;20&quot;</span><br><span class="line">2) 1) &quot;1681006080120-3&quot;</span><br><span class="line">   2) 1) &quot;name&quot;</span><br><span class="line">      2) &quot;Davie&quot;</span><br><span class="line">      3) &quot;age&quot;</span><br><span class="line">      4) &quot;21&quot;</span><br><span class="line">3) 1) &quot;1681006080120-4&quot;</span><br><span class="line">   2) 1) &quot;name&quot;</span><br><span class="line">      2) &quot;Eric&quot;</span><br><span class="line">      3) &quot;age&quot;</span><br><span class="line">      4) &quot;22&quot;	</span><br><span class="line">127.0.0.1:6379&gt; XTRIM mystream minid 1681006080120-3	# 获取id不小于1681006080120-3的消息</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; XRANGE mystream - +</span><br><span class="line">1) 1) &quot;1681006080120-3&quot;</span><br><span class="line">   2) 1) &quot;name&quot;</span><br><span class="line">      2) &quot;Davie&quot;</span><br><span class="line">      3) &quot;age&quot;</span><br><span class="line">      4) &quot;21&quot;</span><br><span class="line">2) 1) &quot;1681006080120-4&quot;</span><br><span class="line">   2) 1) &quot;name&quot;</span><br><span class="line">      2) &quot;Eric&quot;</span><br><span class="line">      3) &quot;age&quot;</span><br><span class="line">      4) &quot;22&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h4 id="XREAD"><a href="#XREAD" class="headerlink" title="XREAD"></a>XREAD</h4><p><strong><code>XREAD [COUNT count] [BLOCK milliseconds] STREAMS key [key ...] id  [id ...]</code></strong></p>
+<blockquote>
+<p>从一个或者多个流中读取数据，仅返回id大于对应流中最大id的消息（也就是新添加的消息）。</p>
+<p>count：最多读取多少条</p>
+<p>block：是否以阻塞的方式读取，如果开启且milliseconds设为0，表示永远阻塞直到读取到消息。</p>
+<p>id：表示读取ID大于指定id的消息。</p>
+<p>特殊ID：符号<code>$</code>。表示以当前Stream已经存储的最大的ID作为最后一个ID，当前Stream中不存在大于当前最大ID的消息，因此此时返回nil。一般用于阻塞队列获取新消息。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"># 数据准备，创建两个流stream1和stream2</span><br><span class="line">127.0.0.1:6379&gt; XADD stream1 1681006080120-0 name Alice</span><br><span class="line">&quot;1681006080120-0&quot;</span><br><span class="line">127.0.0.1:6379&gt; XADD stream1 1681006080120-1 name Bob</span><br><span class="line">&quot;1681006080120-1&quot;</span><br><span class="line">127.0.0.1:6379&gt; XADD stream1 1681006080120-2 name Cindy</span><br><span class="line">&quot;1681006080120-2&quot;</span><br><span class="line">127.0.0.1:6379&gt; XADD stream1 1681006080120-3 name Davie</span><br><span class="line">&quot;1681006080120-3&quot;</span><br><span class="line">127.0.0.1:6379&gt; XADD stream1 1681006080120-4 name Eric</span><br><span class="line">&quot;1681006080120-4&quot;</span><br><span class="line">127.0.0.1:6379&gt; XADD stream2 1681008731850-0 1 one</span><br><span class="line">&quot;1681008731850-0&quot;</span><br><span class="line">127.0.0.1:6379&gt; XADD stream2 1681008731850-1 2 two</span><br><span class="line">&quot;1681008731850-1&quot;</span><br><span class="line">127.0.0.1:6379&gt; XADD stream2 1681008731850-2 3 three</span><br><span class="line">&quot;1681008731850-2&quot;</span><br><span class="line">127.0.0.1:6379&gt; XADD stream2 1681008731850-3 4 four</span><br><span class="line">&quot;1681008731850-3&quot;</span><br><span class="line">127.0.0.1:6379&gt; XADD stream2 1681008731850-4 5 five</span><br><span class="line">&quot;1681008731850-4&quot;</span><br><span class="line">127.0.0.1:6379&gt; XADD stream2 1681008731850-5 6 six</span><br><span class="line">&quot;1681008731850-5&quot;</span><br><span class="line"></span><br><span class="line">127.0.0.1:6379&gt; XREAD count 3 streams stream1 0-0	# count 3表示只获取3个，0-0表示从最小的ID开始获取Stream中的消息</span><br><span class="line">1) 1) &quot;stream1&quot;</span><br><span class="line">   2) 1) 1) &quot;1681006080120-0&quot;</span><br><span class="line">         2) 1) &quot;name&quot;</span><br><span class="line">            2) &quot;Alice&quot;</span><br><span class="line">      2) 1) &quot;1681006080120-1&quot;</span><br><span class="line">         2) 1) &quot;name&quot;</span><br><span class="line">            2) &quot;Bob&quot;</span><br><span class="line">      3) 1) &quot;1681006080120-2&quot;</span><br><span class="line">         2) 1) &quot;name&quot;</span><br><span class="line">            2) &quot;Cindy&quot;</span><br><span class="line">            </span><br><span class="line">127.0.0.1:6379&gt; XREAD count 3 streams stream1 0		# 使用0也可以表示从最小的ID开始获取Stream中的消息，000也可以</span><br><span class="line">1) 1) &quot;stream1&quot;</span><br><span class="line">   2) 1) 1) &quot;1681006080120-0&quot;</span><br><span class="line">         2) 1) &quot;name&quot;</span><br><span class="line">            2) &quot;Alice&quot;</span><br><span class="line">      2) 1) &quot;1681006080120-1&quot;</span><br><span class="line">         2) 1) &quot;name&quot;</span><br><span class="line">            2) &quot;Bob&quot;</span><br><span class="line">      3) 1) &quot;1681006080120-2&quot;</span><br><span class="line">         2) 1) &quot;name&quot;</span><br><span class="line">            2) &quot;Cindy&quot;</span><br><span class="line">            </span><br><span class="line">127.0.0.1:6379&gt; XREAD count 3 streams stream1 $		# $表示读取大于当前流中最大的id的消息</span><br><span class="line">(nil)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 读取stream1中id大于1681006080120-2的三条消息，读取stream2中id大于1681008731850-3的三条消息</span><br><span class="line">127.0.0.1:6379&gt; XREAD count 3 block 0 streams stream1 stream2 1681006080120-2 1681008731850-3</span><br><span class="line">1) 1) &quot;stream1&quot;					# 读取到了stream1中id大于1681006080120-2的3条消息（如果有多条则读取最新的消息）</span><br><span class="line">   2) 1) 1) &quot;1681006080120-3&quot;</span><br><span class="line">         2) 1) &quot;name&quot;</span><br><span class="line">            2) &quot;Davie&quot;</span><br><span class="line">      2) 1) &quot;1681006080120-4&quot;</span><br><span class="line">         2) 1) &quot;name&quot;</span><br><span class="line">            2) &quot;Eric&quot;</span><br><span class="line">      3) 1) &quot;1681008731850-0&quot;</span><br><span class="line">         2) 1) &quot;name&quot;</span><br><span class="line">            2) &quot;Jack&quot;</span><br><span class="line">2) 1) &quot;stream2&quot;					# stream2中有两条id大于1681008731850-3的消息</span><br><span class="line">   2) 1) 1) &quot;1681008731850-4&quot;</span><br><span class="line">         2) 1) &quot;5&quot;</span><br><span class="line">            2) &quot;five&quot;</span><br><span class="line">      2) 1) &quot;1681008731850-5&quot;</span><br><span class="line">         2) 1) &quot;6&quot;</span><br><span class="line">            2) &quot;six&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 加入阻塞选项，此时开启另一个redis客户端存入消息到stream1中，观察当前客户端的变化</span><br><span class="line">127.0.0.1:6379&gt; XREAD count 3 block 0 streams stream1 $</span><br><span class="line">1) 1) &quot;stream1&quot;</span><br><span class="line">   2) 1) 1) &quot;1681008731850-0&quot;	# 读取到了一条消息</span><br><span class="line">         2) 1) &quot;name&quot;</span><br><span class="line">            2) &quot;Jack&quot;</span><br><span class="line">(53.24s)	# 等待了53.24s</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<p><em><strong>消费组相关指令</strong></em></p>
+<h4 id="XGROUP"><a href="#XGROUP" class="headerlink" title="XGROUP"></a>XGROUP</h4><p>**<code>XGROUP CREATE key group &lt;id | $&gt; </code>**：创建消费者组。</p>
+<blockquote>
+<p>最后一个参数是要考虑已传递的流中最后一项的ID。</p>
+<p>$表示从Stream尾部开始消费，在这种情况下，从该消费者组获取数据的消费者只能看到到达流的新元素。</p>
+<p>0表示从Stream头部开始消费，消费者组可以获取整个流的历史记录。</p>
+<p>创建消费者组的时候必须指定 ID, ID 为 0 表示从头开始消费，为 $ 表示只消费新的消息。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 创建消费者组</span><br><span class="line">127.0.0.1:6379&gt; XGROUP create mystream1 groupA $</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; XGROUP create mystream1 groupB 0</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
+
+
+
+<p>**<code>XGROUP CREATECONSUMER key group consumer</code>**：创建消费者。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; XGROUP CREATECONSUMER mystream1 groupA consumerA	#在流mystream1的groupA中创建消费者consumerA</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; XINFO CONSUMERS mystream1 groupA	# 查看流mystream1的消费组groupA的消费者信息</span><br><span class="line">1) 1) &quot;name&quot;</span><br><span class="line">   2) &quot;consumerA&quot;	# 消费者名称</span><br><span class="line">   3) &quot;pending&quot;		</span><br><span class="line">   4) (integer) 0	# 消费者读取消息的数量（此时还未读取消息，所以为0）</span><br><span class="line">   5) &quot;idle&quot;</span><br><span class="line">   6) (integer) 26277</span><br></pre></td></tr></table></figure>
+
+
+
+<p>**<code>XGROUP DESTORY key group</code>**：删除流key中指定的消费组。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; XGROUP create mystream1 groupC 0	# 在流stream1中创建消费组groupC</span><br><span class="line">OK</span><br><span class="line"># 删除消费组</span><br><span class="line">127.0.0.1:6379&gt; XGROUP DESTROY mystream1 groupC	# 删除流stream1中的消费组groupC</span><br><span class="line">(integer) 1		# 返回删除的个数</span><br></pre></td></tr></table></figure>
+
+
+
+<p>**<code>XGROUP DELCONSUMER key group consumer</code>**：删除流key中消费组group的指定消费者。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; XGROUP CREATECONSUMER mystream1 groupA consumerA</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; XGROUP DELCONSUMER mystream1 groupA consumerA</span><br><span class="line">(integer) 0		</span><br><span class="line">127.0.0.1:6379&gt; XINFO CONSUMERS mystream1 groupA</span><br><span class="line">(empty array)	# 消费者consumerA已经被删除</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h4 id="XREADGROUP"><a href="#XREADGROUP" class="headerlink" title="XREADGROUP"></a>XREADGROUP</h4><p><strong><code>XREADGROUP GROUP group consumer [COUNT count] [BLOCK milliseconds] [NOACK] STREAMS key [key ...] id [id ...]</code></strong></p>
+<blockquote>
+<p>读取消费者组中的消息。</p>
+<p>消费者不存在则自动创建该消费者。</p>
+<p>特殊ID：<code>&gt;</code>表示从第一条未被消费的消息开始读取。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"># 创建消费组</span><br><span class="line">127.0.0.1:6379&gt; XGROUP create stream1 groupA 0</span><br><span class="line">ok</span><br><span class="line">127.0.0.1:6379&gt; XGROUP create stream1 groupB 0</span><br><span class="line">OK</span><br><span class="line"></span><br><span class="line"># 消费组groupA内的消费者consumer1从stream1消息队列中读取所有信息</span><br><span class="line">127.0.0.1:6379&gt; XREADGROUP GROUP groupA consumer1 STREAMS stream1  &gt;	# &gt;表示从第一条未被消费的消息开始读取。</span><br><span class="line">1) 1) &quot;stream1&quot;</span><br><span class="line">   2) 1) 1) &quot;1681006080120-0&quot;</span><br><span class="line">         2) 1) &quot;name&quot;</span><br><span class="line">            2) &quot;Alice&quot;</span><br><span class="line">      2) 1) &quot;1681006080120-1&quot;</span><br><span class="line">         2) 1) &quot;name&quot;</span><br><span class="line">            2) &quot;Bob&quot;</span><br><span class="line">      3) 1) &quot;1681006080120-2&quot;</span><br><span class="line">         2) 1) &quot;name&quot;</span><br><span class="line">            2) &quot;Cindy&quot;</span><br><span class="line">      4) 1) &quot;1681006080120-3&quot;</span><br><span class="line">         2) 1) &quot;name&quot;</span><br><span class="line">            2) &quot;Davie&quot;</span><br><span class="line">      5) 1) &quot;1681006080120-4&quot;</span><br><span class="line">         2) 1) &quot;name&quot;</span><br><span class="line">            2) &quot;Eric&quot;</span><br><span class="line">      6) 1) &quot;1681008731850-0&quot;</span><br><span class="line">         2) 1) &quot;name&quot;</span><br><span class="line">            2) &quot;Jack&quot;</span><br><span class="line"># 消费组groupA中消费者consumer1一口气读取完所有消息，组中其他消费者就不能读取消息了（同一个消费组里的消费者不能消费同一条消息）</span><br><span class="line">127.0.0.1:6379&gt; XREADGROUP GROUP groupA consumer2 STREAMS stream1  &gt;	</span><br><span class="line">(nil)	# 已经被消费者cumstomer1消费完了，所以返回nil</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 创建消费组</span><br><span class="line">127.0.0.1:6379&gt; XGROUP create stream2 groupA 0</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; XGROUP create stream2 groupB 0</span><br><span class="line">OK</span><br><span class="line"># 让组内的多个消费者共同分担读取消息，所以让每个消费者读取部分消息，从而实现消息读取负载在多个消费者间是均衡分布的</span><br><span class="line">127.0.0.1:6379&gt; XREADGROUP GROUP groupA consumer1 count 3 STREAMS stream2 &gt;		# 限制读取3个</span><br><span class="line">1) 1) &quot;stream2&quot;</span><br><span class="line">   2) 1) 1) &quot;1681008731850-0&quot;</span><br><span class="line">         2) 1) &quot;1&quot;</span><br><span class="line">            2) &quot;one&quot;</span><br><span class="line">      2) 1) &quot;1681008731850-1&quot;</span><br><span class="line">         2) 1) &quot;2&quot;</span><br><span class="line">            2) &quot;two&quot;</span><br><span class="line">      3) 1) &quot;1681008731850-2&quot;</span><br><span class="line">         2) 1) &quot;3&quot;</span><br><span class="line">            2) &quot;three&quot;</span><br><span class="line">127.0.0.1:6379&gt; XREADGROUP GROUP groupA consumer2 count 3 STREAMS stream2 &gt;		# 读取另外三个</span><br><span class="line">1) 1) &quot;stream2&quot;</span><br><span class="line">   2) 1) 1) &quot;1681008731850-3&quot;</span><br><span class="line">         2) 1) &quot;4&quot;</span><br><span class="line">            2) &quot;four&quot;</span><br><span class="line">      2) 1) &quot;1681008731850-4&quot;</span><br><span class="line">         2) 1) &quot;5&quot;</span><br><span class="line">            2) &quot;five&quot;</span><br><span class="line">      3) 1) &quot;1681008731850-5&quot;</span><br><span class="line">         2) 1) &quot;6&quot;</span><br><span class="line">            2) &quot;six&quot;</span><br><span class="line">127.0.0.1:6379&gt; XREADGROUP GROUP groupA consumer3 count 3 STREAMS stream2 &gt;</span><br><span class="line">(nil)		# 已经没有消息可读，返回nil</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h4 id="XPENDING"><a href="#XPENDING" class="headerlink" title="XPENDING"></a>XPENDING</h4><p>**<code>XPENDING key group</code>**：返回待处理消息相关信息。（读取到的消息没有经过XACK确认即为待处理消息）</p>
+<blockquote>
+<p>返回一组数据，包括消费组待处理消息的数量、所有消费者读取的消息最小id、所有消费者所读取id的最大值、每个消费者待处理消息的数量。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; XPENDING stream1 groupA</span><br><span class="line">1) (integer) 6			# 待处理消息数</span><br><span class="line">2) &quot;1681006080120-0&quot;	# 待处理消息最小id</span><br><span class="line">3) &quot;1681008731850-0&quot;	# 待处理消息最大id</span><br><span class="line">4) 1) 1) &quot;consumer1&quot;	# 消费者consumer1</span><br><span class="line">      2) &quot;6&quot;			# 消费者consumer1有6条待处理消息</span><br><span class="line">127.0.0.1:6379&gt; XPENDING stream2 groupA</span><br><span class="line">1) (integer) 6			# 待处理消息数</span><br><span class="line">2) &quot;1681008731850-0&quot;	# 待处理消息最小id</span><br><span class="line">3) &quot;1681008731850-5&quot;	# 待处理消息最大id</span><br><span class="line">4) 1) 1) &quot;consumer1&quot;	# 消费者consumer1</span><br><span class="line">      2) &quot;3&quot;			# 消费者consumer1有3条待处理消息</span><br><span class="line">   2) 1) &quot;consumer2&quot;	# 消费者consumer2</span><br><span class="line">      2) &quot;3&quot;			# 消费者consumer2有3条待处理消息</span><br></pre></td></tr></table></figure>
+
+
+
+<p>**<code>XPENDING key group start end count consumer</code>**：查看指定消费者具体读取了哪些数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 查看消费者consumer1具体读取了哪些数据</span><br><span class="line">127.0.0.1:6379&gt; XPENDING stream2 groupA - + 5 consumer1	# 查看groupA组consumer1具体读取了哪些数据，设置最大返回5条</span><br><span class="line">1) 1) &quot;1681008731850-0&quot;</span><br><span class="line">   2) &quot;consumer1&quot;</span><br><span class="line">   3) (integer) 2089450</span><br><span class="line">   4) (integer) 1</span><br><span class="line">2) 1) &quot;1681008731850-1&quot;</span><br><span class="line">   2) &quot;consumer1&quot;</span><br><span class="line">   3) (integer) 2089450</span><br><span class="line">   4) (integer) 1</span><br><span class="line">3) 1) &quot;1681008731850-2&quot;</span><br><span class="line">   2) &quot;consumer1&quot;</span><br><span class="line">   3) (integer) 2089450</span><br><span class="line">   4) (integer) 1</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h4 id="XACK"><a href="#XACK" class="headerlink" title="XACK"></a>XACK</h4><p>**<code>XACK key group id [id ...]</code>**：向消息队列确认id对应的消息已处理完成，XACK会从待处理消息列表中删除该消息。</p>
+<blockquote>
+<p>返回值：该命令返回成功确认的消息数。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; XACK stream1 groupA 1681006080120-0	# 确认id1681006080120-0处理完成</span><br><span class="line">(integer) 1		# 成功确认一条</span><br><span class="line">127.0.0.1:6379&gt; XPENDING stream1 groupA</span><br><span class="line">1) (integer) 5	# 待确认消息数减1</span><br><span class="line">2) &quot;1681006080120-1&quot;</span><br><span class="line">3) &quot;1681008731850-0&quot;</span><br><span class="line">4) 1) 1) &quot;consumer1&quot;</span><br><span class="line">      2) &quot;5&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h4 id="XINFO"><a href="#XINFO" class="headerlink" title="XINFO"></a>XINFO</h4><p>**<code>XINFO stream key</code>**：获取流key的详细信息。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; XINFO stream stream2 	# 获取流stream2的详细信息</span><br><span class="line"> 1) &quot;length&quot;</span><br><span class="line"> 2) (integer) 6</span><br><span class="line"> 3) &quot;radix-tree-keys&quot;</span><br><span class="line"> 4) (integer) 1</span><br><span class="line"> 5) &quot;radix-tree-nodes&quot;</span><br><span class="line"> 6) (integer) 2</span><br><span class="line"> 7) &quot;last-generated-id&quot;</span><br><span class="line"> 8) &quot;1681008731850-5&quot;</span><br><span class="line"> 9) &quot;max-deleted-entry-id&quot;</span><br><span class="line">10) &quot;0-0&quot;</span><br><span class="line">11) &quot;entries-added&quot;</span><br><span class="line">12) (integer) 6</span><br><span class="line">13) &quot;recorded-first-entry-id&quot;</span><br><span class="line">14) &quot;1681008731850-0&quot;</span><br><span class="line">15) &quot;groups&quot;</span><br><span class="line">16) (integer) 2</span><br><span class="line">17) &quot;first-entry&quot;</span><br><span class="line">18) 1) &quot;1681008731850-0&quot;</span><br><span class="line">    2) 1) &quot;1&quot;</span><br><span class="line">       2) &quot;one&quot;</span><br><span class="line">19) &quot;last-entry&quot;</span><br><span class="line">20) 1) &quot;1681008731850-5&quot;</span><br><span class="line">    2) 1) &quot;6&quot;</span><br><span class="line">       2) &quot;six&quot;</span><br><span class="line">      </span><br></pre></td></tr></table></figure>
+
+
+
+<p>**<code>XINFO GROUPS key</code>**：获取流key中消费组信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; XINFO GROUPS stream2	# 获取流stream2中的消费组信息</span><br><span class="line">1)  1) &quot;name&quot;</span><br><span class="line">    2) &quot;groupA&quot;		# 消费组groupA</span><br><span class="line">    3) &quot;consumers&quot;</span><br><span class="line">    4) (integer) 2</span><br><span class="line">    5) &quot;pending&quot;</span><br><span class="line">    6) (integer) 6</span><br><span class="line">    7) &quot;last-delivered-id&quot;</span><br><span class="line">    8) &quot;1681008731850-5&quot;</span><br><span class="line">    9) &quot;entries-read&quot;</span><br><span class="line">   10) (integer) 6</span><br><span class="line">   11) &quot;lag&quot;</span><br><span class="line">   12) (integer) 0</span><br><span class="line">2)  1) &quot;name&quot;</span><br><span class="line">    2) &quot;groupB&quot;		# 消费组groupB</span><br><span class="line">    3) &quot;consumers&quot;</span><br><span class="line">    4) (integer) 1</span><br><span class="line">    5) &quot;pending&quot;</span><br><span class="line">    6) (integer) 3</span><br><span class="line">    7) &quot;last-delivered-id&quot;</span><br><span class="line">    8) &quot;1681008731850-2&quot;</span><br><span class="line">    9) &quot;entries-read&quot;</span><br><span class="line">   10) (integer) 3</span><br><span class="line">   11) &quot;lag&quot;</span><br><span class="line">   12) (integer) 3</span><br></pre></td></tr></table></figure>
+
+
+
+<p>**<code>XINFO CONSUMERS key group</code>**：获取流key中消费组group中消费者信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; XINFO CONSUMERS stream2 groupA	# 获取流stream2中消费组groupA中的消费者信息</span><br><span class="line">1) 1) &quot;name&quot;</span><br><span class="line">   2) &quot;consumer1&quot;</span><br><span class="line">   3) &quot;pending&quot;</span><br><span class="line">   4) (integer) 3</span><br><span class="line">   5) &quot;idle&quot;</span><br><span class="line">   6) (integer) 30195569</span><br><span class="line">2) 1) &quot;name&quot;</span><br><span class="line">   2) &quot;consumer2&quot;</span><br><span class="line">   3) &quot;pending&quot;</span><br><span class="line">   4) (integer) 3</span><br><span class="line">   5) &quot;idle&quot;</span><br><span class="line">   6) (integer) 30166362</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<hr>
+<h3 id="十-Bitfield"><a href="#十-Bitfield" class="headerlink" title="十. Bitfield"></a>十. Bitfield</h3><blockquote>
+<p><strong>位域</strong></p>
+<p>Bitfield结构的底层也是String类型。</p>
+<p>Redis位字段允许设置、递增和获取任意位长度的整数值。例如可以对从无符号1位整数到有符号63位整数的任何数字进行操作。</p>
+<p>这些值使用二进制编码的Redis字符串存储。位字段支持原子读、写和递增操作，这使它们成为管理计数器和类似数值的好选择。</p>
+<p>例如 hello 等价于 0110100001100101011011000110110001101111，每八位对应一个字母，也对应一个十进制值。可以修改每一位的数字从而改变对应的数值从而改变对应的字母。</p>
+</blockquote>
+<hr>
+<p><em><strong>Bitfield结构的常用命令：</strong></em></p>
+<h4 id="BITFIELD"><a href="#BITFIELD" class="headerlink" title="BITFIELD"></a>BITFIELD</h4><p><strong><code>BITFIELD key [GET type offset] [SET type offset value] [INCRBY type offset increment] </code></strong> <strong><code>[OVERFLOW WRAP|SAT|FAIL]</code></strong></p>
+<blockquote>
+<p>此命令会把Redis字符串当作位数组，并能对变长位宽和任意未字节对齐的指定整型位域进行寻址。</p>
+<p>下面是已支持的命令列表：</p>
+<ul>
+<li>GET ：返回指定的位域的数值。</li>
+<li>SET ： 设置指定位域的数值并返回它的原值。</li>
+<li>INCRBY ： 自增或自减（如果increment为负数）指定位域的值并返回它的新值。</li>
+</ul>
+<p>type表示多少位的有符号还是无符号整型。有符号整型需在位数前加<code>i</code>，无符号在位数前加<code>u</code>。例如，<code>u8</code>是一个8位的无符号整型，<code>i16</code>是一个16位的有符号整型。offset表示偏移量，比如i4表示以4个比特位为一个偏移量。</p>
+<p>还有一个命令通过设置溢出行为来改变调用<code>INCRBY</code>指令的后序操作：OVERFLOW [WRAP|SAT|FAIL] wrap：使用回环方式处理有符号整数和无符号整数的溢出情况。 sat：使用饱和计算方式处理溢出，下溢计算的结果为最小的整数值，上溢计算的结果为最大的整数值。 fail：命令将拒绝执行那些会导致上溢或者下溢情况出现的计算，并向用户返回空值表示计算未被执行。</p>
+<p>有符号整型最大支持64位，而无符号整型最大支持63位。对无符号整型的限制，是由于当前Redis协议不能在响应消息中返回64位无符号整数。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>字母</th>
+<th>数值</th>
+<th>二进制（高位-&gt;低位）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>h</td>
+<td>104</td>
+<td>0110 1000</td>
+</tr>
+<tr>
+<td>e</td>
+<td>101</td>
+<td>0110 0101</td>
+</tr>
+<tr>
+<td>l</td>
+<td>108</td>
+<td>0110 1100</td>
+</tr>
+<tr>
+<td>l</td>
+<td>108</td>
+<td>0110 1100</td>
+</tr>
+<tr>
+<td>o</td>
+<td>111</td>
+<td>0110 1111</td>
+</tr>
+<tr>
+<td>x</td>
+<td>120</td>
+<td>0111 1000</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>GET和SET选项</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; set mybitfield hello</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; BITFIELD mybitfield get i8 0	# 以8位位一组，偏移量0表示第一个字符</span><br><span class="line">1) (integer) 104	# 返回该字符对应的十进制值数值</span><br><span class="line">127.0.0.1:6379&gt; BITFIELD mybitfield get i8 8	# 偏移量8表示第二个字符</span><br><span class="line">1) (integer) 101</span><br><span class="line">127.0.0.1:6379&gt; BITFIELD mybitfield get i8 16</span><br><span class="line">1) (integer) 108</span><br><span class="line">127.0.0.1:6379&gt; BITFIELD mybitfield get i8 24</span><br><span class="line">1) (integer) 108</span><br><span class="line">127.0.0.1:6379&gt; BITFIELD mybitfield get i8 32</span><br><span class="line">1) (integer) 111</span><br><span class="line">127.0.0.1:6379&gt; BITFIELD mybitfield set i8 32 120	#将偏移量为32的那一组的数值替换为120(字母x)</span><br><span class="line">1) (integer) 111</span><br><span class="line">127.0.0.1:6379&gt; get mybitfield</span><br><span class="line">hellx</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><strong>INCRBY选项</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; set fieldkey hello</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; BITFIELD fieldkey incrby u4 2 1	# 从第三个比特位开始，对接下来的4位无符号数加1</span><br><span class="line">1) (integer) 11		# 返回指定域增加后的数值</span><br><span class="line">127.0.0.1:6379&gt; get fieldkey	# 因为比特位的数值发生了变化，所以对应的数值也会发生变化，对应的字母也就变了</span><br><span class="line">lello</span><br><span class="line">127.0.0.1:6379&gt; BITFIELD fieldkey incrby u4 2 1</span><br><span class="line">1) (integer) 12</span><br><span class="line">127.0.0.1:6379&gt; BITFIELD fieldkey incrby u4 2 1</span><br><span class="line">1) (integer) 13</span><br><span class="line">127.0.0.1:6379&gt; BITFIELD fieldkey incrby u4 2 1</span><br><span class="line">1) (integer) 14</span><br><span class="line">127.0.0.1:6379&gt; BITFIELD fieldkey incrby u4 2 1</span><br><span class="line">1) (integer) 15</span><br><span class="line">127.0.0.1:6379&gt; BITFIELD fieldkey incrby u4 2 1	# 4位表示最大的数为15，溢出控制默认为wrap（循环溢出），超出后从0开始</span><br><span class="line">1) (integer) 0	# 从0开始</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><strong>OVERFLOW选项</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; set fieldkey2 a</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; BITFIELD fieldkey2 overflow sat set i8 0 126	# 从偏移量0开始后八位对应的数值改为126</span><br><span class="line">1) (integer) 97		# 返回之前的数值</span><br><span class="line">127.0.0.1:6379&gt; get fieldkey2</span><br><span class="line">&quot;~&quot;					# 126对应这个~符号</span><br><span class="line">127.0.0.1:6379&gt; BITFIELD fieldkey2 overflow sat set i8 0 128	# 将数值改为128（超出了8位表示的最大值127）</span><br><span class="line">1) (integer) 126	# 返回之前的数值</span><br><span class="line">127.0.0.1:6379&gt; get fieldkey2</span><br><span class="line">&quot;\x7f&quot;				# 127对应的编码</span><br><span class="line">127.0.0.1:6379&gt; BITFIELD fieldkey2 overflow sat set i8 0 128	# 再次改为128</span><br><span class="line">1) (integer) 127	# 使用sat溢出控制，超出了最大值的表示范围会取最大值127</span><br><span class="line">127.0.0.1:6379&gt; BITFIELD fieldkey2 overflow fail set i8 0 128	# 使用fail溢出控制，再次改为128</span><br><span class="line">1) (nil)			# 使用fail溢出控制，超出了最大值的表示范围返回nil</span><br></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -347,6 +1423,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Redis/" rel="tag"># Redis</a>
+          
+        </div>
       
 
       
@@ -421,8 +1503,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -437,7 +1528,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -450,7 +1541,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
@@ -473,6 +1564,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis"><span class="nav-number">1.</span> <span class="nav-text">Redis</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E5%8D%81%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.1.</span> <span class="nav-text">Redis十大数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80-Stirng"><span class="nav-number">1.1.1.</span> <span class="nav-text">一. Stirng</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SET%E5%92%8CGET"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">SET和GET</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MSET%E5%92%8CMGET"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">MSET和MGET</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#INCR%E3%80%81INCRBY"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">INCR、INCRBY</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SETNX%E5%92%8CSETEX"><span class="nav-number">1.1.1.4.</span> <span class="nav-text">SETNX和SETEX</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MSETNX"><span class="nav-number">1.1.1.5.</span> <span class="nav-text">MSETNX</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SETRANGE%E5%92%8CGETRANGE"><span class="nav-number">1.1.1.6.</span> <span class="nav-text">SETRANGE和GETRANGE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#STRLEN"><span class="nav-number">1.1.1.7.</span> <span class="nav-text">STRLEN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#APPEND"><span class="nav-number">1.1.1.8.</span> <span class="nav-text">APPEND</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GETSET"><span class="nav-number">1.1.1.9.</span> <span class="nav-text">GETSET</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#key%E7%9A%84%E7%BB%93%E6%9E%84"><span class="nav-number">1.1.1.10.</span> <span class="nav-text">key的结构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C-List"><span class="nav-number">1.1.2.</span> <span class="nav-text">二. List</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#LPUSH%E5%92%8CRPUSH"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">LPUSH和RPUSH</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LPUSHX%E5%92%8CRPUSHX"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">LPUSHX和RPUSHX</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LRANGE"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">LRANGE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LPOP%E5%92%8CRPOP"><span class="nav-number">1.1.2.4.</span> <span class="nav-text">LPOP和RPOP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BLPOP%E5%92%8CBRPOP"><span class="nav-number">1.1.2.5.</span> <span class="nav-text">BLPOP和BRPOP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RPOPLPUSH"><span class="nav-number">1.1.2.6.</span> <span class="nav-text">RPOPLPUSH</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LINDEX"><span class="nav-number">1.1.2.7.</span> <span class="nav-text">LINDEX</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LLEN"><span class="nav-number">1.1.2.8.</span> <span class="nav-text">LLEN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LREM"><span class="nav-number">1.1.2.9.</span> <span class="nav-text">LREM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LTRIM"><span class="nav-number">1.1.2.10.</span> <span class="nav-text">LTRIM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LSET"><span class="nav-number">1.1.2.11.</span> <span class="nav-text">LSET</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LINSERT"><span class="nav-number">1.1.2.12.</span> <span class="nav-text">LINSERT</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89-Hash"><span class="nav-number">1.1.3.</span> <span class="nav-text">三. Hash</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HSET%E5%92%8CHGET"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">HSET和HGET</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HMSET%E5%92%8CHMGET"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">HMSET和HMGET</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HGETALL"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">HGETALL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HDEL"><span class="nav-number">1.1.3.4.</span> <span class="nav-text">HDEL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HLEN"><span class="nav-number">1.1.3.5.</span> <span class="nav-text">HLEN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HEXISTS"><span class="nav-number">1.1.3.6.</span> <span class="nav-text">HEXISTS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HKEYS%E5%92%8CHVALS"><span class="nav-number">1.1.3.7.</span> <span class="nav-text">HKEYS和HVALS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HINCR%E3%80%81HINCRBYFLOAT"><span class="nav-number">1.1.3.8.</span> <span class="nav-text">HINCR、HINCRBYFLOAT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HSETNX"><span class="nav-number">1.1.3.9.</span> <span class="nav-text">HSETNX</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B-Set"><span class="nav-number">1.1.4.</span> <span class="nav-text">四. Set</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SADD"><span class="nav-number">1.1.4.1.</span> <span class="nav-text">SADD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SMEMBERS"><span class="nav-number">1.1.4.2.</span> <span class="nav-text">SMEMBERS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SISMEMBER"><span class="nav-number">1.1.4.3.</span> <span class="nav-text">SISMEMBER</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SCARD"><span class="nav-number">1.1.4.4.</span> <span class="nav-text">SCARD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SREM"><span class="nav-number">1.1.4.5.</span> <span class="nav-text">SREM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SRANDMEMBER"><span class="nav-number">1.1.4.6.</span> <span class="nav-text">SRANDMEMBER</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SPOP"><span class="nav-number">1.1.4.7.</span> <span class="nav-text">SPOP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SMOVE"><span class="nav-number">1.1.4.8.</span> <span class="nav-text">SMOVE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9B%86%E5%90%88%E8%BF%90%E7%AE%97"><span class="nav-number">1.1.4.9.</span> <span class="nav-text">集合运算</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#SDIFF"><span class="nav-number">1.1.4.9.1.</span> <span class="nav-text">SDIFF</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SUNION"><span class="nav-number">1.1.4.9.2.</span> <span class="nav-text">SUNION</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SINTER"><span class="nav-number">1.1.4.9.3.</span> <span class="nav-text">SINTER</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94-SortedSet"><span class="nav-number">1.1.5.</span> <span class="nav-text">五. SortedSet</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ZADD"><span class="nav-number">1.1.5.1.</span> <span class="nav-text">ZADD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ZCARD"><span class="nav-number">1.1.5.2.</span> <span class="nav-text">ZCARD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ZCOUNT"><span class="nav-number">1.1.5.3.</span> <span class="nav-text">ZCOUNT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ZSCORE"><span class="nav-number">1.1.5.4.</span> <span class="nav-text">ZSCORE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ZRANGE%E5%92%8CZREVRANGE"><span class="nav-number">1.1.5.5.</span> <span class="nav-text">ZRANGE和ZREVRANGE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ZRANGEBYSCORE%E5%92%8CZREVRANGEBYSCORE"><span class="nav-number">1.1.5.6.</span> <span class="nav-text">ZRANGEBYSCORE和ZREVRANGEBYSCORE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ZRANK%E5%92%8CZREVRANK"><span class="nav-number">1.1.5.7.</span> <span class="nav-text">ZRANK和ZREVRANK</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ZREM"><span class="nav-number">1.1.5.8.</span> <span class="nav-text">ZREM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ZINCRBY"><span class="nav-number">1.1.5.9.</span> <span class="nav-text">ZINCRBY</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ZPOPMAX%E5%92%8CZPOPMIN"><span class="nav-number">1.1.5.10.</span> <span class="nav-text">ZPOPMAX和ZPOPMIN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ZMPOP"><span class="nav-number">1.1.5.11.</span> <span class="nav-text">ZMPOP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9B%86%E5%90%88%E8%BF%90%E7%AE%97-1"><span class="nav-number">1.1.5.12.</span> <span class="nav-text">集合运算</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AD-Bitmap"><span class="nav-number">1.1.6.</span> <span class="nav-text">六. Bitmap</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SETBIT"><span class="nav-number">1.1.6.1.</span> <span class="nav-text">SETBIT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GETBIT"><span class="nav-number">1.1.6.2.</span> <span class="nav-text">GETBIT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BITCOUNT"><span class="nav-number">1.1.6.3.</span> <span class="nav-text">BITCOUNT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BITOP"><span class="nav-number">1.1.6.4.</span> <span class="nav-text">BITOP</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%83-HyperLogLog"><span class="nav-number">1.1.7.</span> <span class="nav-text">七. HyperLogLog</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#PFADD"><span class="nav-number">1.1.7.1.</span> <span class="nav-text">PFADD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PFCOUNT"><span class="nav-number">1.1.7.2.</span> <span class="nav-text">PFCOUNT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PFMERGE"><span class="nav-number">1.1.7.3.</span> <span class="nav-text">PFMERGE</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AB-Geospatial"><span class="nav-number">1.1.8.</span> <span class="nav-text">八. Geospatial</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#GEOADD"><span class="nav-number">1.1.8.1.</span> <span class="nav-text">GEOADD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GEOPOS"><span class="nav-number">1.1.8.2.</span> <span class="nav-text">GEOPOS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GEOHASH"><span class="nav-number">1.1.8.3.</span> <span class="nav-text">GEOHASH</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GEODIST"><span class="nav-number">1.1.8.4.</span> <span class="nav-text">GEODIST</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GEORADIUS"><span class="nav-number">1.1.8.5.</span> <span class="nav-text">GEORADIUS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GEORADIUSBYMEMBER"><span class="nav-number">1.1.8.6.</span> <span class="nav-text">GEORADIUSBYMEMBER</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B9%9D-Stream"><span class="nav-number">1.1.9.</span> <span class="nav-text">九. Stream</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#XADD"><span class="nav-number">1.1.9.1.</span> <span class="nav-text">XADD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XRANGE"><span class="nav-number">1.1.9.2.</span> <span class="nav-text">XRANGE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XREVRANGE"><span class="nav-number">1.1.9.3.</span> <span class="nav-text">XREVRANGE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XDEL"><span class="nav-number">1.1.9.4.</span> <span class="nav-text">XDEL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XLEN"><span class="nav-number">1.1.9.5.</span> <span class="nav-text">XLEN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XTRIM"><span class="nav-number">1.1.9.6.</span> <span class="nav-text">XTRIM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XREAD"><span class="nav-number">1.1.9.7.</span> <span class="nav-text">XREAD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XGROUP"><span class="nav-number">1.1.9.8.</span> <span class="nav-text">XGROUP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XREADGROUP"><span class="nav-number">1.1.9.9.</span> <span class="nav-text">XREADGROUP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XPENDING"><span class="nav-number">1.1.9.10.</span> <span class="nav-text">XPENDING</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XACK"><span class="nav-number">1.1.9.11.</span> <span class="nav-text">XACK</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XINFO"><span class="nav-number">1.1.9.12.</span> <span class="nav-text">XINFO</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%81-Bitfield"><span class="nav-number">1.1.10.</span> <span class="nav-text">十. Bitfield</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#BITFIELD"><span class="nav-number">1.1.10.1.</span> <span class="nav-text">BITFIELD</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

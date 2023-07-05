@@ -110,7 +110,7 @@
 <meta property="og:image" content="https://github.com/Buildings-Lei/mysql_note/raw/main/images/readview0.png">
 <meta property="og:image" content="https://github.com/Buildings-Lei/mysql_note/raw/main/images/readview.png">
 <meta property="article:published_time" content="2023-06-25T03:25:45.000Z">
-<meta property="article:modified_time" content="2023-07-04T15:17:55.058Z">
+<meta property="article:modified_time" content="2023-07-05T05:58:13.497Z">
 <meta property="article:author" content="sounio">
 <meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
@@ -1657,31 +1657,31 @@
 <p>NOTE : 针对事物才有加锁的意义。</p>
 <p>分类：MySQL中的锁，按照锁的粒度分，分为以下三类：</p>
 <ol>
-<li><code>全局锁</code>：锁定数据库中的<code>所有表</code>。</li>
+<li><code>全局锁</code>：锁定数据库中的<code>所有表</code>。 </li>
 <li><code>表级锁</code>：每次操作锁住<code>整张表</code>。</li>
 <li><code>行级锁</code>：每次操作锁住对应的<code>行数据</code>。</li>
 </ol>
 <p>全局锁：</p>
-<p>全局锁就是对<code>整个数据库</code>实例加锁，加锁后整个实例就处于<code>只读</code>状态，后续的DML的写语句，DDL语句，已经更新操作的事务提交语句都将被阻塞。<br>其典型的使用场景是做全库的逻辑备份，对所有的表进行锁定，从而获取一致性视图，保证数据的完整性。</p>
+<p>全局锁就是对<code>整个数据库</code>实例加锁，加锁后整个实例就处于<code>只读</code>状态，后续的DML的写语句，DDL语句，已经更新操作的事务提交语句都将被阻塞。<br>其典型的使用场景是做全库的逻辑备份，对所有的表进行锁定，从而获取一致性视图，保证数据的完整性。<code>全局锁时，会有两种情况，一种是主库备份，业务可能得停摆，一种是从库备份，那么会导致主从延迟，在InnoDB引擎中，可以在备份的时候加上--single-transaction参数来完成不加锁的一致性数据备份。</code></p>
 <p>表锁：</p>
-<p>表级锁，每次操作锁住整张表。锁定粒度大，发生锁冲突的概率最高，并发度最低。应用在MyISAM、InnoDB、BDB等存储引擎中。</p>
+<p>表级锁，每次操作<code>锁住整张表</code>。锁定<code>粒度大</code>，发生锁冲突的概率最高，并发度最低。应用在MyISAM、InnoDB、BDB等存储引擎中。</p>
 <p>对于表级锁，主要分为以下三类：</p>
 <ol>
-<li>表锁：对于表锁，分为两类：1.表共享读锁（read lock）所有的事物都只能读（当前加锁的客户端也只能读，不能写），不能写 2.表独占写锁（write lock），对当前加锁的客户端，可读可写，对于其他的客户端，不可读也不可写。<br>读锁不会阻塞其他客户端的读，但是会阻塞写。写锁既会阻塞其他客户端的读，又会阻塞其他客户端的写。</li>
-<li>元数据锁（meta data lock，MDL），MDL加锁过程是系统自动控制，无需显式使用，在访问一张表的时候会自动加上。MDL锁主要作用是维护表元数据的数据一致性，在表上有活动事务的时候，不可以对元数据进行写入操作。在MySQL5.5中引入了MDL，当对一张表进行增删改查的时候，加MDL读锁（共享）;当对表结构进行变更操作的时候，加MDL写锁（排他）。</li>
-<li>意向锁: 为了避免DML在执行时，加的行锁与表锁的冲突，在InnoDB中引入了意向锁，使得表锁不用检查每行数据是否加锁，使用意向锁来减少表锁的检查。<br>一个客户端对某一行加上了行锁，那么系统也会对其加上一个意向锁，当别的客户端来想要对其加上表锁时，便会检查意向锁是否兼容，若是不兼容，便会阻塞直到意向锁释放。</li>
+<li><code>表锁</code>：对于表锁，分为两类：1.<code>表共享读锁</code>（read lock）所有的事物都只<code>能读</code>（当前加锁的客户端也只能读，不能写），<code>不能写</code> 2.<code>表独占写锁</code>（write lock），对<code>当前加锁的客户端</code>，可读可写，对于其他的客户端，不可读也不可写。<br>读锁不会阻塞其他客户端的读，但是会阻塞写。写锁既会阻塞其他客户端的读，又会阻塞其他客户端的写。</li>
+<li><code>元数据锁</code>（meta data lock，MDL），MDL加锁过程是系统<code>自动控制</code>，无需显式使用，在访问一张表的时候会自动加上。MDL锁主要作用是<code>维护表元数据的数据一致性</code>，在表上有活动事务的时候，不可以对元数据进行写入操作。在MySQL5.5中引入了MDL，当对一张表进行增删改查的时候，加MDL读锁（共享）;当对表结构进行变更操作的时候，加MDL写锁（排他）。<code>防止DML（数据操作）和DDL（数据定义）语句冲突</code></li>
+<li><code>意向锁</code>: 为了避免DML在执行时，加的<code>行锁与表锁的冲突</code>，在InnoDB中引入了意向锁，使得表锁不用检查每行数据是否加锁，使用<code>意向锁来减少表锁的检查</code>。<br>一个客户端对某一行加上了行锁，那么系统也会对其加上一个意向锁，当别的客户端来想要对其加上表锁时，便会检查意向锁是否兼容，若是不兼容，便会阻塞直到意向锁释放。</li>
 </ol>
 <p>意向锁兼容性：</p>
 <ol>
-<li>意向共享锁（IS）：与表锁共享锁（read）兼容，与表锁排它锁（write）互斥。</li>
-<li>意向排他锁（lX）：与表锁共享锁（read）及排它锁（write）都互斥。意向锁之间不会互斥。</li>
+<li><code>意向共享</code>锁（IS）：与表锁共享锁（read）兼容，与表锁排它锁（write）互斥。</li>
+<li><code>意向排他</code>锁（lX）：与表锁共享锁（read）及排它锁（write）都互斥。意向锁之间不会互斥。</li>
 </ol>
 <p>行锁：</p>
-<p>行级锁，每次操作锁住对应的行数据。锁定粒度最小，发生锁冲突的概率最低，并发度最高。应用在InnoDB存储引擎中。<br>InnoDB的数据是基于索引组织的，行锁是通过对索引上的索引项加锁来实现的，而不是对记录加的锁。对于行级锁，主要分为以下三类：</p>
+<p>行级锁，每次操作锁住对应的行数据。锁定<code>粒度最小</code>，发生<code>锁冲突的概率最低</code>，并发度最高。应用在InnoDB存储引擎中。<br>InnoDB的数据是<code>基于索引组织</code>的，行锁是通过对<code>索引上的索引项加锁</code>来实现的，而不是对记录加的锁。对于行级锁，主要分为以下三类：</p>
 <ol>
-<li>行锁（Record Lock）：锁定单个行记录的锁，防止其他事务对此行进行update和delete。在RC（read commit ）、RR（repeat read）隔离级别下都支持。</li>
-<li>间隙锁（GapLock）：锁定索引记录间隙（不含该记录），确保索引记录间隙不变，防止其他事务在这个间隙进行insert，产生幻读。在RR隔离级别下都支持。比如说 两个临近叶子节点为 15 23，那么间隙就是指 [15 , 23],锁的是这个间隙。</li>
-<li>临键锁（Next-Key Lock）：行锁和间隙锁组合，同时锁住数据，并锁住数据前面的间隙Gap。在RR隔离级别下支持。</li>
+<li>行锁（Record Lock）：锁定<code>单个行记录</code>的锁，防止其他事务对此行进行update和delete。在RC（read commit ）、RR（repeat read）隔离级别下都支持。</li>
+<li>间隙锁（GapLock）：锁定<code>索引记录间隙</code>（<code>不含该记录</code>），确保索引记录间隙<code>不变</code>，防止其他事务在这个间隙进行insert，产生幻读。在<code>RR隔离级别</code>下都支持。比如说 两个临近叶子节点为 15 23，那么间隙就是指 [15 , 23],锁的是这个间隙。</li>
+<li>临键锁（Next-Key Lock）：行锁和间隙锁组合，同时锁住<code>数据</code>，并锁住数据前面的<code>间隙Gap</code>。在RR隔离级别下支持。</li>
 </ol>
 <p>InnoDB实现了以下两种类型的行锁：</p>
 <ol>
@@ -1728,24 +1728,24 @@
 </tr>
 </tbody></table>
 <p>行锁 - 演示</p>
-<p>默认情况下，InnoDB在REPEATABLE READ事务隔离级别运行，InnoDB使用next-key 锁进行搜索和索引扫描，以防止幻读。</p>
+<p>默认情况下，InnoDB在<code>REPEATABLE READ</code>事务隔离级别运行，InnoDB使用<code>next-key 锁</code>进行搜索和索引扫描，以防止幻读。</p>
 <ol>
-<li>针对唯一索引进行检索时，对已存在的记录进行等值匹配时，将会自动优化为行锁。</li>
-<li>InnoDB的行锁是针对于索引加的锁，不通过索引条件检索数据，那么InnoDB将对表中的所有记录加锁，此时就会升级为表锁。</li>
+<li>针对唯一索引进行检索时，对已存在的记录进行等值匹配时，将会<code>自动优化为行锁</code>。</li>
+<li>InnoDB的行锁是针对于索引加的锁，<code>不通过索引条件检索数据</code>，那么InnoDB将对表中的所有记录加锁，此时就会<code>升级为表锁</code>。</li>
 </ol>
 <p>间隙锁&#x2F;临键锁-演示</p>
 <p>默认情况下，InnoDB在REPEATABLE READ事务隔离级别运行，InnoDB使用next-key 锁进行搜索和索引扫描，以防止幻读。</p>
 <ol>
-<li>索引上的等值查询（唯一索引），给不存在的记录加锁时，优化为间隙锁。</li>
-<li>索引上的等值查询（普通索引），向右遍历时最后一个值不满足查询需求时，next-key lock 退化为间隙锁。</li>
+<li>索引上的<code>等值</code>查询（<code>唯一索引</code>），给<code>不存在</code>的记录加锁时，<code>优化为间隙锁</code>。<code>也就是锁住记录在的间隙，防止其余的操作</code></li>
+<li>索引上的等值查询（普通索引），向右遍历时最后一个值不满足查询需求时，next-key lock 退化为间隙锁。<code>防止幻读</code></li>
 <li>索引上的范围查询（唯一索引）–会访问到不满足条件的第一个值为止。</li>
 </ol>
-<p>注意：间隙锁唯一目的是防止其他事务插入间隙。间隙锁可以共存，一个事务采用的间隙锁不会阻止另一个事务在同一间隙上采用间隙锁。</p>
-<h2 id="InnoDB-引擎"><a href="#InnoDB-引擎" class="headerlink" title="InnoDB 引擎"></a>InnoDB 引擎</h2><h3 id="逻辑存储结构"><a href="#逻辑存储结构" class="headerlink" title="逻辑存储结构"></a>逻辑存储结构</h3><p>表空间（ibd文件），一个mysql实例可以对应多个表空间，用于存储记录、索引等数据。</p>
-<p>段，分为数据段（Leaf node segment）、索引段（Non-leaf node segment）、回滚段（Rollback segment），InnoDB是索引组织表，数据段就是B+树的叶子节点，索引段即为B+树的非叶子节点。段用来管理多个Extent（区）。</p>
-<p>区，表空间的单元结构，每个区的大小为1M。默认情况下，InnoDB存储引擎页大小为16K，即一个区中一共有64个连续的页。</p>
-<p>页，是InnoDB存储引擎磁盘管理的最小单元，每个页的大小默认为16KB。为了保证页的连续性，InnoDB存储引擎每从磁盘申请4-5个区。一页包含若干行。</p>
-<p>行，InnoDB存储引擎数据是按进行存放的。</p>
+<p>注意：间隙锁唯一目的是<code>防止其他事务插入间隙</code>。间隙锁可以共存，<code>一个事务采用的间隙锁不会阻止另一个事务在同一间隙上采用间隙锁</code>。</p>
+<h2 id="InnoDB-引擎"><a href="#InnoDB-引擎" class="headerlink" title="InnoDB 引擎"></a>InnoDB 引擎</h2><h3 id="逻辑存储结构"><a href="#逻辑存储结构" class="headerlink" title="逻辑存储结构"></a>逻辑存储结构</h3><p><code>表空间</code>（ibd文件），一个mysql实例可以对应多个表空间，用于存储记录、索引等数据。</p>
+<p><code>段</code>，分为<code>数据段</code>（Leaf node segment）、<code>索引段</code>（Non-leaf node segment）、<code>回滚段</code>（Rollback segment），InnoDB是索引组织表，数据段就是B+树的叶子节点，索引段即为B+树的非叶子节点。段用来管理多个Extent（区）。</p>
+<p><code>区</code>，表空间的单元结构，每个区的大小为<code>1M</code>。默认情况下，InnoDB存储引擎页大小为<code>16K</code>，即一个<code>区中一共有64个连续的页</code>。</p>
+<p><code>页</code>，是InnoDB存储引擎磁盘管理的<code>最小</code>单元，每个页的大小默认为16KB。为了保证页的连续性，InnoDB存储引擎<code>每从磁盘申请4-5个区。一页包含若干行</code>。</p>
+<p><code>行</code>，InnoDB存储引擎数据是按进行存放的。</p>
 <h3 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h3><p><a target="_blank" rel="noopener" href="https://github.com/Buildings-Lei/mysql_note/blob/main/images/artic.png"><img src="https://github.com/Buildings-Lei/mysql_note/raw/main/images/artic.png" alt="images"></a></p>
 <p>Buffer Pool：缓冲池是主内存中的一个区域，里面可以缓存磁盘上经常操作的真实数据，在执行增删改查操作时，先操作缓冲池中的数据（若缓冲池没有数据，则从磁盘加载并缓存），然后再以一定频率刷新到磁盘，从而减少磁盘I0，加快处理速度。</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/Buildings-Lei/mysql_note/blob/main/images/artic2.png"><img src="https://github.com/Buildings-Lei/mysql_note/raw/main/images/artic2.png" alt="images"></a> <a target="_blank" rel="noopener" href="https://github.com/Buildings-Lei/mysql_note/blob/main/images/artic3.png"><img src="https://github.com/Buildings-Lei/mysql_note/raw/main/images/artic3.png" alt="images"></a> <a target="_blank" rel="noopener" href="https://github.com/Buildings-Lei/mysql_note/blob/main/images/artic4.png"><img src="https://github.com/Buildings-Lei/mysql_note/raw/main/images/artic4.png" alt="images"></a> <a target="_blank" rel="noopener" href="https://github.com/Buildings-Lei/mysql_note/blob/main/images/artic5.png"><img src="https://github.com/Buildings-Lei/mysql_note/raw/main/images/artic5.png" alt="images"></a></p>
@@ -1755,24 +1755,25 @@
 <h2 id="事务原理"><a href="#事务原理" class="headerlink" title="事务原理"></a>事务原理</h2><p>事务是一组操作的集合，它是一个不可分割的工作单位，事务会把所有的操作作为一个整体一起向系统提交或撤销操作请求，即这些操作要么同时成功，要么同时败。具有ACID四大特征。</p>
 <p>原子性，一致性，持久性这三大特性由 redo log 和 undo log 日志来保证的。 隔离性 是由锁机制和MVCC保证的。</p>
 <p>redo log:</p>
-<p>重做日志，记录的是事务提交时数据页的物理修改，是用来实现事务的持久性。 该日志文件由两部分组成：重做日志缓冲（redo log buffer）以及重做日志文件（redo log file），前者是在内存中，后者在磁盘中。当事务提交之后会把所有修改信息都存到该日志文件中，用于在刷新脏页到磁盘，发生错误时，进行数据恢复使用。</p>
+<p><code>重做日志</code>，记录的是事务提交时数据页的<code>物理修改</code>，是用来实现事务的持久性。 该日志文件由两部分组成：重做日志缓冲（<code>redo log buffer</code>）以及重做日志文件（<code>redo log file</code>），前者是在内存中，后者在磁盘中。当事务提交之后会把所有修改信息都存到该日志文件中，用于在刷新脏页到磁盘，发生错误时，进行数据恢复使用。</p>
 <blockquote>
-<p>个人理解： 事物每次提交的时候都会将数据刷到redo log中而不是直接将buffer pool中的数据直接刷到磁盘中（ibd文件中），是因为redo log 是顺序写，性能处理的够快，直接刷到ibd中，是随机写，性能慢。所以脏页是在下一次读的时候，或者后台线程采用一定的机制进行刷盘到ibd中。</p>
+<p>个人理解： 事物每次提交的时候都会将数据刷到redo log中而<code>不是直接将buffer pool中的数据直接刷到磁盘中</code>（ibd文件中），是因为redo log 是顺序写，性能处理的够快，<code>直接刷到ibd中，是随机写，性能慢</code>。所以脏页是在下一次读的时候，或者后台线程采用一定的机制进行刷盘到ibd中。</p>
+<p>也就是先刷入日志，在刷脏页，用于确保刷入脏页的时候发生错误能够进行数据恢复。</p>
 </blockquote>
-<p>undo log:<br>回滚日志，用于记录数据被修改前的信息，作用包含两个：提供回滚和MVCC（多版本并发控制）。 undo log和redo log记录物理日志不一样，它是逻辑日志。可以认为当delete一条记录，undo log中会记录一条对应的insert记录，反之亦然，当update一条记录时，它记录一条对应相反的update记录。当执行rollback时，就可以从undo log中的逻辑记录读取到相应的内容并进行回滚。</p>
+<p>undo log:<br><code>回滚日志</code>，用于记录数据被<code>修改前的信息</code>，作用包含两个：<code>提供回滚</code>和<code>MVCC（多版本并发控制）</code>。 undo log和redo log记录物理日志不一样，它是<code>逻辑日志</code>。可以认为当delete一条记录，undo log中会记录一条对应的insert记录，反之亦然，当update一条记录时，它记录一条对应相反的update记录。当执行rollback时，就可以从undo log中的逻辑记录读取到相应的内容并进行回滚。</p>
 <blockquote>
-<p>Undo log销毁：undo log在事务执行时产生，事务提交时，并不会立即删除undo log，因为这些日志可能还用于MVCC。 Undo log存储：undo log采用段的方式进行管理和记录，存放在前面介绍的rollback segment回滚段中，内部包含1024个undo log segment。</p>
+<p>Undo log销毁：undo log在事务执行时产生，<code>事务提交时，并不会立即删除undo log</code>，因为这些日志可能还用于<code>MVCC</code>。 Undo log存储：undo log采用<code>段</code>的方式进行管理和记录，存放在前面介绍的<code>rollback segment回滚段</code>中，内部包含1024个undo log segment。</p>
 </blockquote>
-<h2 id="MVCC"><a href="#MVCC" class="headerlink" title="MVCC"></a>MVCC</h2><h3 id="当前读"><a href="#当前读" class="headerlink" title="当前读:"></a>当前读:</h3><p>读取的是记录的最新版本，读取时还要保证其他并发事务不能修改当前记录，会对读取的记录进行加锁。对于我们日常的操作，如：</p>
+<h2 id="MVCC"><a href="#MVCC" class="headerlink" title="MVCC"></a>MVCC</h2><h3 id="当前读"><a href="#当前读" class="headerlink" title="当前读:"></a>当前读:</h3><p>读取的是<code>记录的最新版本</code>，读取时还要<code>保证其他并发事务不能修改当前记录</code>，会对读取的记录进行加锁。对于我们日常的操作，如：</p>
 <ul>
 <li>select…lock in share mode（共享锁）。</li>
 <li>select..…for update、update、insert、delete（排他锁）都是一种当前读。</li>
 </ul>
-<h3 id="快照读"><a href="#快照读" class="headerlink" title="快照读:"></a>快照读:</h3><p>简单的select（不加锁）就是快照读，快照读，读取的是记录数据的可见版本，有可能是历史数据，不加锁，是非阻塞读。</p>
+<h3 id="快照读"><a href="#快照读" class="headerlink" title="快照读:"></a>快照读:</h3><p>简单的select（<code>不加锁</code>）就是快照读，快照读，读取的是记录数据的<code>可见版本</code>，<code>有可能是历史数据</code>，不加锁，是非阻塞读。比如一个事务内的可重复读。</p>
 <ul>
-<li>Read Committed：每次select，都生成一个快照读。</li>
-<li>Repeatable Read：开启事务后第一个select语句才是快照读的地方。</li>
-<li>Serializable：快照读会退化为当前读。</li>
+<li>Read Committed：<code>每次select</code>，都生成一个快照读。</li>
+<li>Repeatable Read：开启事务后<code>第一个select</code>语句才是快照读的地方。</li>
+<li>Serializable：快照读会<code>退化为当前读</code>。</li>
 </ul>
 <h3 id="MVCC-1"><a href="#MVCC-1" class="headerlink" title="MVCC:"></a>MVCC:</h3><p>全称Multi-Version Concurrency Control，多版本并发控制。指维护一个数据的多个版本，使得读写操作没有冲突，快照读为MySQL实现MVCC提供了一个非阻塞读功能。MVCC的具体实现，还需要依赖于数据库记录中的三个隐式字段、undo log日志、readView。</p>
 <h4 id="MVCC-实现原理"><a href="#MVCC-实现原理" class="headerlink" title="MVCC 实现原理:"></a>MVCC 实现原理:</h4><p>有三个隐藏的字段:</p>
@@ -1780,10 +1781,10 @@
 <blockquote>
 <p>undo log回滚日志，在insert、update、delete的时候产生的便于数据回滚的日志。 当insert的时候，产生的undo log日志只在回滚时需要，在事务提交后，可被立即删除。 而update、delete的时候，产生的undo log日志不仅在回滚时需要，在快照读时也需要，不会立即被删除。</p>
 </blockquote>
-<p>undo log 版本链：</p>
-<p>undo log日志会记录原来的版本的数据，因为是通过undo log 日志进行回滚的。</p>
+<p>undo log <code>版本链</code>：</p>
+<p>undo log日志会记录原来的版本的数据，因为是<code>通过undo log 日志进行回滚</code>的。</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/Buildings-Lei/mysql_note/blob/main/images/MVCCList.png"><img src="https://github.com/Buildings-Lei/mysql_note/raw/main/images/MVCCList.png" alt="images"></a></p>
-<p>如何确定返回哪一个版本 这是由read view决定返回 undo log 中的哪一个版本。</p>
+<p>如何<code>确定返回哪一个版本</code> 这是由<code>read view</code>决定返回 undo log 中的哪一个版本。</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/Buildings-Lei/mysql_note/blob/main/images/readview0.png"><img src="https://github.com/Buildings-Lei/mysql_note/raw/main/images/readview0.png" alt="images"></a></p>
 <blockquote>
 <p>RC隔离级别下，在事务中每一次执行快照读时生成ReadView。<br>RR隔离级别下，在事务中第一次执行快照读时生成ReadView，后续会复用。</p>
@@ -2367,6 +2368,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2023/07/05/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/" rel="prev" title="网络相关">
+                网络相关 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -2442,7 +2447,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2455,7 +2460,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
