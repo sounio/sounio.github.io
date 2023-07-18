@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="JVM、JAVA," />
 
 
 
@@ -79,14 +79,16 @@
 
 
 
-<meta name="description" content="类文件JVM可以理解的代码叫做字节码（扩展名为.class），不面向任何特定的处理器，只面向虚拟机。（跨平台的实现原理，不同的操作系统）。 结构： 123456789101112131415161718ClassFile &amp;#123;    u4             magic; &#x2F;&#x2F;Class 文件的标志	确定这个文件是否为一个能被虚拟机接收的 Class 文件    u2">
+<meta name="description" content="JAVAjava是一种编译与解释并存的语言，也就是java程序要经过先编译后解释两个步骤，编译生成字节码文件(.class)，JAVA解释器解释执行 与c++区别 java不提供指针 java的类是单继承的 java有gc c++支持方法和操作符重载，java只支持方法重载  ##JAVA对象结构 由三部分构成：对象头、实例数据、填充字节。为了保证高效，对象头被设计的很小，并且是非结构化的。 填充">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JVM">
 <meta property="og:url" content="https://sounio.github.io/2023/05/06/JVM/index.html">
 <meta property="og:site_name" content="Sounio">
-<meta property="og:description" content="类文件JVM可以理解的代码叫做字节码（扩展名为.class），不面向任何特定的处理器，只面向虚拟机。（跨平台的实现原理，不同的操作系统）。 结构： 123456789101112131415161718ClassFile &amp;#123;    u4             magic; &#x2F;&#x2F;Class 文件的标志	确定这个文件是否为一个能被虚拟机接收的 Class 文件    u2">
+<meta property="og:description" content="JAVAjava是一种编译与解释并存的语言，也就是java程序要经过先编译后解释两个步骤，编译生成字节码文件(.class)，JAVA解释器解释执行 与c++区别 java不提供指针 java的类是单继承的 java有gc c++支持方法和操作符重载，java只支持方法重载  ##JAVA对象结构 由三部分构成：对象头、实例数据、填充字节。为了保证高效，对象头被设计的很小，并且是非结构化的。 填充">
 <meta property="og:locale">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/7ad6ab858b2d759bc1be9c5852ed4704.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/24506a0020724d209362cde9feea9103.png">
+<meta property="og:image" content="https://oss.javaguide.cn/github/javaguide/java/basis/jdk-jre-jvm-jit.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/a1938e1761cfb2a65e508eea54d9f487.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/d68612e080556634a602b192dc81c6dd.png">
 <meta property="og:image" content="https://camo.githubusercontent.com/e1bcf49e6a732e8f66e1cce576661402f213b8f94471bba6ce41b34d24569964/68747470733a2f2f67697465652e636f6d2f647265616d63617465722f626c6f672d696d672f7261772f6d61737465722f755069632f2545372542312542422545352538412541302545382542442542442545352539392541382d5a31576446742e706e67">
@@ -98,11 +100,16 @@
 <meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/A0bYOQcma0PGgLpviaZ3JSMwUWoVZoYKBPy0wwA5HlI9q8UJoYBQf747KkKMtrIkZpeVlhfC6zYutBUUrJHQvrA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1">
 <meta property="og:image" content="https://camo.githubusercontent.com/3501cb34812d6129ac468b95bf34579a76dcf5cb0fac5c22810bef4e96320c40/68747470733a2f2f67697465652e636f6d2f647265616d63617465722f626c6f672d696d672f7261772f6d61737465722f755069632f2545342542442542462545372539342541382545352538462541352545362539462538342d6634437739782e706e67">
 <meta property="og:image" content="https://camo.githubusercontent.com/d584f6dda010a7bae95b34af5d39b00b4baf6b86dadfd21bc59cd80638f3263c/68747470733a2f2f67697465652e636f6d2f647265616d63617465722f626c6f672d696d672f7261772f6d61737465722f755069632f2545372539422542342545362538452541352545362538432538372545392539322538382d386d3348487a2e706e67">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b2f9206ee02b48578ded417d6db7fcbe~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp">
+<meta property="og:image" content="https://img2020.cnblogs.com/blog/2443180/202108/2443180-20210815122647528-1748134729.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/ac9c2b68edcd459783ad8f6c77a152a7.png">
+<meta property="og:image" content="https://oss.javaguide.cn/github/javaguide/java/concurrent/640.png">
 <meta property="article:published_time" content="2023-05-06T11:16:24.000Z">
-<meta property="article:modified_time" content="2023-06-01T02:10:34.754Z">
+<meta property="article:modified_time" content="2023-07-17T12:58:59.424Z">
 <meta property="article:author" content="sounio">
+<meta property="article:tag" content="JVM、JAVA">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/24506a0020724d209362cde9feea9103.png">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/img_convert/7ad6ab858b2d759bc1be9c5852ed4704.png">
 
 
 
@@ -346,7 +353,40 @@
       
 
       
-        <h2 id="类文件"><a href="#类文件" class="headerlink" title="类文件"></a>类文件</h2><p>JVM可以理解的代码叫做<code>字节码</code>（扩展名为.class），不面向任何特定的处理器，只面向虚拟机。（跨平台的实现原理，不同的操作系统）。</p>
+        <h2 id="JAVA"><a href="#JAVA" class="headerlink" title="JAVA"></a>JAVA</h2><p>java是一种编译与解释并存的语言，也就是java程序要经过先编译后解释两个步骤，编译生成字节码文件(.class)，JAVA解释器解释执行</p>
+<h3 id="与c-区别"><a href="#与c-区别" class="headerlink" title="与c++区别"></a>与c++区别</h3><ul>
+<li>java不提供指针</li>
+<li>java的类是单继承的</li>
+<li>java有gc</li>
+<li>c++支持方法和操作符重载，java只支持方法重载</li>
+</ul>
+<p>##JAVA对象结构</p>
+<p>由三部分构成：对象头、实例数据、填充字节。为了保证高效，对象头被设计的很小，并且是非结构化的。</p>
+<p>填充字节是为了满足JAVA 的对象大小都是8bit的n倍设置的。</p>
+<p>对象头包含了Mark Word和Class Point信息：其中Class point是当前对象类型的指针，指向了当前对象所在方法区的类型数据；Mark Word存储了和当前对象运行时状态有关的数据，比如锁状态标志，HashCode等</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/7ad6ab858b2d759bc1be9c5852ed4704.png" alt="img"></p>
+<ol>
+<li>实例数据：存放类的属性数据信息，包括父类的属性信息；</li>
+<li>对齐填充：由于虚拟机要求 对象起始地址必须是8字节的整数倍。填充数据不是必须存在的，仅仅是为了字节对齐；</li>
+<li>对象头：Java对象头一般占有2个机器码（在32位虚拟机中，1个机器码等于4字节，也就是32bit，在64位虚拟机中，1个机器码是8个字节，也就是64bit），但是如果对象是数组类型，则需要3个机器码，因为JVM虚拟机可以通过Java对象的元数据信息确定Java对象的大小，但是无法从数组的元数据来确认数组的大小，所以用一块来记录数组长度。</li>
+</ol>
+<p>对象头的最后两位存储了锁的标志位，01是初始状态，未加锁，其对象头里存储的是对象本身的哈希码，随着锁级别的不同，对象头里会存储不同的内容。偏向锁存储的是当前占用此对象的线程ID；而轻量级则存储指向线程栈中锁记录的指针。从这里我们可以看到，“锁”这个东西，可能是个锁记录+对象头里的引用指针（判断线程是否拥有锁时将线程的锁记录地址和对象头里的指针地址比较)，也可能是对象头里的线程ID（判断线程是否拥有锁时将线程的ID和对象头里存储的线程ID比较）。</p>
+<h2 id="JAVA内存结构"><a href="#JAVA内存结构" class="headerlink" title="JAVA内存结构"></a>JAVA内存结构</h2><p>五大区域：</p>
+<p><strong>方法区：</strong></p>
+<p>用来<code>存储</code>加载的类信息、常量、静态变量、编译后的代码等数据。</p>
+<p><strong>堆内存</strong>：</p>
+<p>堆内存可以细分为：<code>老年代、新生代</code>(Eden、From Survivor、To Survivor)。JVM启动时创建，用来存放对象的实例。堆内存是垃圾收集器管理的主要区域。</p>
+<p><strong>虚拟机栈</strong>：</p>
+<p><code>线程私有</code>的。虚拟机栈由多个<code>栈帧</code>组成。一个线程会执行一个或多个方法，<code>一个方法对应一个栈帧</code>。每一次方法调用都会有一个对应的栈帧被压入栈中，每一个方法调用结束后，都会有一个栈帧被弹出。栈帧内容包含：<code>局部变量表、操作数栈、动态链接、方法返回地址</code>等信息。</p>
+<p><strong>本地方法栈</strong>：</p>
+<p>和虚拟机栈功能类似，虚拟机栈是为虚拟机执行JAVA方法而准备的，本地方法栈是为虚拟机使用<code>Native本地方法而准备</code>的。</p>
+<p><strong>程序计数器(Program Counter</strong> <strong>Register)：</strong></p>
+<p><code>线程私有</code>的，程序计数器主要有两个作用：</p>
+<ol>
+<li>作为<code>当前线程</code>所执行的字节码的<code>行号指示器</code>，通过它实现代码的流程控制，如：顺序执行、分支、循环、异常处理。</li>
+<li>在<code>多线程</code>的情况下，程序计数器用于记录<code>当前线程执行的位置</code>，当线程被切换回来的时候可以通过程序计数器中的信息获取上次执行的位置，然后继续执行。</li>
+</ol>
+<h2 id="类文件"><a href="#类文件" class="headerlink" title="类文件"></a>类文件</h2><p>JVM可以理解的代码叫做<code>字节码</code>（扩展名为.class），不面向任何特定的处理器，只面向虚拟机。（跨平台的实现原理，不同的操作系统）。</p>
 <p>结构：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">ClassFile &#123;</span><br><span class="line">    u4             magic; <span class="comment">//Class 文件的标志	确定这个文件是否为一个能被虚拟机接收的 Class 文件</span></span><br><span class="line">    u2             minor_version;<span class="comment">//Class 的小版本号</span></span><br><span class="line">    u2             major_version;<span class="comment">//Class 的大版本号	javap -v可以查看类文件的版号信息 ，向上兼容</span></span><br><span class="line">    u2             constant_pool_count;<span class="comment">//常量池的数量</span></span><br><span class="line">    cp_info        constant_pool[constant_pool_count-<span class="number">1</span>];<span class="comment">//常量池	主要存放两大常量：字面量和符号引用</span></span><br><span class="line">    u2             access_flags;<span class="comment">//Class 的访问标记</span></span><br><span class="line">    u2             this_class;<span class="comment">//当前类</span></span><br><span class="line">    u2             super_class;<span class="comment">//父类</span></span><br><span class="line">    u2             interfaces_count;<span class="comment">//接口</span></span><br><span class="line">    u2             interfaces[interfaces_count];<span class="comment">//一个类可以实现多个接口</span></span><br><span class="line">    u2             fields_count;<span class="comment">//Class 文件的字段属性</span></span><br><span class="line">    field_info     fields[fields_count];<span class="comment">//一个类会可以有个字段</span></span><br><span class="line">    u2             methods_count;<span class="comment">//Class 文件的方法数量</span></span><br><span class="line">    method_info    methods[methods_count];<span class="comment">//一个类可以有个多个方法</span></span><br><span class="line">    u2             attributes_count;<span class="comment">//此类的属性表中的属性数</span></span><br><span class="line">    attribute_info attributes[attributes_count];<span class="comment">//属性表集合</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -378,6 +418,9 @@
 <li>将字节流所代表的<code>静态存储结构</code>转换为<code>方法区</code>的<code>运行时数据结构</code></li>
 <li>在内存中生成一个代表该类的 Class 对象,作为方法区这些数据的访问入口</li>
 </ul>
+<h4 id="JIT"><a href="#JIT" class="headerlink" title="JIT"></a>JIT</h4><p>just-in-time compilation 编译器，属于运行时编译，对于热点代码，在第一次编译后存储字节码对应的机器码，下次直接使用</p>
+<p>根据二八定律，消耗大部分资源的往往是小部分代码，也就是热点代码，这就是JIT需要编译的部分</p>
+<p><img src="https://oss.javaguide.cn/github/javaguide/java/basis/jdk-jre-jvm-jit.png" alt="JDK、JRE、JVM、JIT 这四者的关系"></p>
 <p>####方法区、堆、栈</p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/a1938e1761cfb2a65e508eea54d9f487.png" alt="image-20200708094747667"></p>
 <ol>
@@ -405,7 +448,7 @@
 <li><p>Tomcat部署过多工程 30-50(Tomcat是一个免费的web服务器)</p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/d68612e080556634a602b192dc81c6dd.png" alt="img"></p>
 </li>
-<li><p>大量动态生成的反射类（反射就是加载类，解剖出类的各个组成部分）</p>
+<li><p>大量<code>动态生成</code>的反射类（反射就是加载类，解剖出类的各个组成部分）</p>
 </li>
 </ul>
 </li>
@@ -582,7 +625,7 @@
 <p>优缺点：没有内存碎片；可用内存空间只有一半。适用于对象死亡快的场景。</p>
 <p>目前主流的是<code>分代收集算法</code>：</p>
 <p>现在的虚拟机垃圾收集大多采用这种方式，它根据对象的生存周期，将堆分为新生代(Young)和老年代(Tenure)。在新生代中，由于对象生存期短，每次回收都会有大量对象死去，那么这时就采用复制算法。老年代里的对象存活率较高，没有额外的空间进行分配担保，所以可以使用标记-整理 或者 标记-清除。</p>
-<p>当系统创建一个对象的时候，总是在Eden区操作，当这个区满了，那么就会触发一次YoungGC，也就是年轻代的垃圾回收。一般来说这时候不是所有的对象都没用了，所以就会把还能用的对象复制到From区。 这样整个Eden区就被清理干净了，可以继续创建新的对象，当Eden区再次被用完，就再触发一次YoungGC，然后呢，注意，这个时候跟刚才稍稍有点区别。这次触发YoungGC后，会将Eden区与From区还在被使用的对象复制到To区。再下一次YoungGC的时候，则是将Eden区与To区中的还在被使用的对象复制到From区。经过若干次YoungGC后，有些对象在From与To之间来回游荡，这时候From区与To区亮出了底线（阈值），这些家伙要是到现在还没挂掉，对不起，一起滚到（复制）老年代吧。 老年代经过这么几次折腾，也就扛不住了（空间被用完），好，那就来次集体大扫除（<em>Full GC</em>），也就是全量回收。如果Full GC使用太频繁的话，无疑会对系统性能产生很大的影响。所以要合理设置年轻代与老年代的大小，尽量减少Full GC的操作。</p>
+<p>当系统创建一个对象的时候，总是在<code>Eden</code>区操作，当这个区满了，那么就会触发一次<code>YoungGC</code>，也就是年轻代的垃圾回收。一般来说这时候不是所有的对象都没用了，所以就会把还能用的对象<code>复制到From</code>区。 这样整个Eden区就被清理干净了，可以继续创建新的对象，当Eden区再次被用完，就再触发一次YoungGC，然后呢，注意，这个时候跟刚才稍稍有点区别。这次触发YoungGC后，会将<code>Eden区</code>与<code>From区</code>还在被使用的对象<code>复制到To区</code>。再下一次YoungGC的时候，则是将<code>Eden区</code>与<code>To区</code>中的还在被使用的对象复制到<code>From区</code>。经过若干次YoungGC后，有些对象在From与To之间来回游荡，这时候From区与To区亮出了底线（阈值），这些家伙要是到<code>现在还没挂掉</code>，对不起，一起滚到（复制）<code>老年代</code>吧。 <code>老年代</code>经过这么几次折腾，也就扛不住了（空间被用完），好，那就来次集体大扫除（*<code>Full GC</code>*），也就是全量回收。如果Full GC使用太频繁的话，无疑会对系统性能产生很大的影响。所以要合理设置年轻代与老年代的大小，尽量减少Full GC的操作。</p>
 <h3 id="3-Minor-GC和Full-GC"><a href="#3-Minor-GC和Full-GC" class="headerlink" title="3.Minor GC和Full GC"></a>3.Minor GC和Full GC</h3><ul>
 <li>Minor GC触发条件：当<code>Eden区满</code>时，触发Minor GC。</li>
 <li>Full GC触发条件：<ol>
@@ -651,6 +694,166 @@
 <h3 id="1-栈上分配"><a href="#1-栈上分配" class="headerlink" title="1.栈上分配"></a>1.栈上分配</h3><p>Java虚拟机中，如果<code>确定</code>一个对象<code>不会逃逸出方法</code>之外，那让这个对象在<code>栈上分配内</code>存将会是一个很不错的主意，<code>对象所占用的内存空间就可以随栈帧出栈而销毁</code>。在一般应用中，不会逃逸的局部对象所占的比例很大，如果能使用栈上分配，那大量的对象就会随着方法的结束而自动销毁了，<code>垃圾收集系统的压力将会小很多</code>。</p>
 <h3 id="2-同步消除"><a href="#2-同步消除" class="headerlink" title="2.同步消除"></a>2.同步消除</h3><p>线程同步本身是一个相对耗时的过程，如果逃逸分析能够确定一个<code>变量不会逃逸出线程</code>，无法被其他线程访问，那这个变量的<code>读写肯定就不会有竞争</code>，对这个变量实施的<code>同步措施也就可以消除</code>。</p>
 <h3 id="3-标量替换"><a href="#3-标量替换" class="headerlink" title="3.标量替换"></a>3.标量替换</h3><p>标量是指一个<code>数据已经无法再分解成更小的数据</code>来表示了，Java虚拟机的原始数据类型都不能再进一步分解，它们就可以称为标量。如果逃逸分析证明一个对象<code>不会被外部访问</code>，并且这个对象<code>可以被拆散</code>的话，那程序真正执行的时候将可能<code>不创建这个对象</code>，而改为<code>直接创建它的若干个被这个方法使用的成员变量</code>来代替。除了可以让对象的成员变量在栈上（栈上存储的数据，有很大的概率会被虚拟机分配到物理机器高速寄存器中存储）分配和读写之外，还可以为后续进一步的优化手段创建条件。</p>
+<h2 id="JAVA的IO模式"><a href="#JAVA的IO模式" class="headerlink" title="JAVA的IO模式"></a>JAVA的IO模式</h2><p>BIO（Blocking IO）、NIO（Non-Blocking IO）和AIO（Asynchronous IO）是Java中常用的IO模式。它们之间的主要区别在于IO的处理方式和效率。</p>
+<p><code>BIO</code>是<code>同步阻塞IO</code>，在进行IO操作时，必须等待IO操作完成后才能进行下一步操作，这时线程会被阻塞。BIO适用于<code>连接数比较小且固定的架构</code>，由于线程阻塞等待IO操作，所以并发处理能力不强。</p>
+<p><code>NIO</code>是<code>同步非阻塞</code>IO，可以<code>支持多个连接</code>同时进行读写操作，因此可以用较少的线程来处理大量的连接。NIO通过Selector来监听多个Channel的状态，当Channel中有数据可读或可写时，Selector会通知程序进行读写操作。NIO适用于连接数多且连接时间较短的场景。</p>
+<p><code>AIO</code>是<code>异步非阻塞IO</code>，与NIO不同的是，AIO不需要用户线程等待IO操作完成，而是<code>由操作系统来完成IO</code>操作，操作系统完成IO操作后会通知用户线程处理。AIO适用于连接数较多且连接时间较长的场景，如高性能网络服务器等。</p>
+<h3 id="NIO如何实现同步非阻塞"><a href="#NIO如何实现同步非阻塞" class="headerlink" title="NIO如何实现同步非阻塞"></a>NIO如何实现同步非阻塞</h3><p>在NIO中，使用了<code>多路复用器Selector</code>来实现同步非阻塞的IO操作,Selector是一个可以<code>监控多个通道</code>（Channel）是否有数据可读或可写的对象，当一个或多个Channel<code>准备好读或写</code>时，Selector会<code>通知程序进行读写操作</code>,主线程通常只有一个，但是可以使用Selector来管理<code>多个Channel</code>，<code>实现多个连接</code>的非阻塞读写操作.</p>
+<h2 id="JAVA流"><a href="#JAVA流" class="headerlink" title="JAVA流"></a>JAVA流</h2><p>以商品为例，我们要筛选出商品中体积大于200的前两个商品的名字。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Goods</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String Name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Integer Volume;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Goods</span><span class="params">(String name, Integer volume)</span> &#123;</span><br><span class="line">        Name = name;</span><br><span class="line">        Volume = volume;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> Integer <span class="title function_">getVolume</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Volume;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Goods&gt; goods = Arrays.asList(<span class="keyword">new</span> <span class="title class_">Goods</span>(<span class="string">&quot;土豆&quot;</span>,<span class="number">10</span>),</span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Goods</span>(<span class="string">&quot;冰箱&quot;</span>,<span class="number">900</span>),<span class="keyword">new</span> <span class="title class_">Goods</span>(<span class="string">&quot;办公椅&quot;</span>,<span class="number">300</span>));</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; twofoods = goods.stream()<span class="comment">//获取流</span></span><br><span class="line">    .filter(goods1 -&gt; goods1.getVolume()&gt;<span class="number">200</span>)<span class="comment">//筛选商品体积大于200的</span></span><br><span class="line">    .map(Goods::getName)<span class="comment">//获取商品名称</span></span><br><span class="line">    .limit(<span class="number">2</span>)<span class="comment">//筛选头两个商品</span></span><br><span class="line">    .collect(Collectors.toList());<span class="comment">//将结果保存在list中</span></span><br></pre></td></tr></table></figure>
+
+<p>这里使用流来进行筛选的操作。</p>
+<h3 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h3><ul>
+<li>不存储数据</li>
+<li>不会改变数据源</li>
+<li>只可被使用一次（流一般是单向的，在操作之后就会被消耗完毕，不再可用）</li>
+</ul>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b2f9206ee02b48578ded417d6db7fcbe~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="img"></p>
+<h3 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h3><p>管道（Pipeline）是一种用于<code>线程间通信</code>的机制，它允许一个线程将输出数据传递给另一个线程作为输入数据。Java 提供了 <code>PipedInputStream</code> 和 <code>PipedOutputStream</code> 两个类来实现管道通信。</p>
+<h2 id="JAVA泛型擦除原理"><a href="#JAVA泛型擦除原理" class="headerlink" title="JAVA泛型擦除原理"></a>JAVA泛型擦除原理</h2><p>Java 的泛型是伪泛型，因为在编译期间所有的泛型信息都会被擦除掉，泛型擦除具体来说就是在编译成字节码时首先进行类型检查，接着进行类型擦除（即<code>所有类型参数都用他们的限定类型替换，包括类、变量和方法</code>，如果类型变量<code>没有限定</code>，可以替换为<code>Object</code>，如果类型变量有限定则原始类型就用第一个边界的类型来替换，譬如 class Prd&lt;T extends Comparable &amp; Serializable&gt; {} 的原始类型就是 Comparable），接着如果类型擦除和多态性发生冲突时就在子类中生成<u>桥方法</u>解决，接着如果调用泛型方法的返回类型被擦除则在调用该方法时插入强制类型转换。</p>
+<p>先检查再擦除的类型检查是<strong>针对引用</strong>的，用引用调用泛型方法就会对这个引用调用的方法进行类型检测而无关它真正引用的对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;String&gt; arrayList2 = <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">arrayList2.add(<span class="string">&quot;123&quot;</span>); <span class="comment">//编译通过 </span></span><br><span class="line">arrayList2.add(<span class="number">123</span>);<span class="comment">//编译错误</span></span><br><span class="line"><span class="type">String</span> <span class="variable">object2</span> <span class="operator">=</span> arrayList2.get(<span class="number">0</span>); <span class="comment">//返回类型是 String </span></span><br><span class="line"></span><br><span class="line"><span class="type">ArrayList</span> <span class="variable">arrayList3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;String&gt;();</span><br><span class="line">arrayList3.add(<span class="string">&quot;123&quot;</span>); <span class="comment">//编译通过 </span></span><br><span class="line">arrayList3.add(<span class="number">123</span>); <span class="comment">//编译通过 </span></span><br><span class="line"><span class="type">Object</span> <span class="variable">object3</span> <span class="operator">=</span> arrayList3.get(<span class="number">0</span>); <span class="comment">//返回类型是 Object</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>###关于桥方法</p>
+<p>假设有一个超类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Parent</span>&lt;T&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sayHello</span><span class="params">(T value)</span></span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;This is Parent Class, value is &quot;</span> + value);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以及一个子类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Child</span> <span class="keyword">extends</span> <span class="title class_">Parent</span>&lt;String&gt;</span><br><span class="line">&#123;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sayHello</span><span class="params">(String value)</span></span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;This is Child class, value is &quot;</span> + value);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>那么在Parent类编译之后，方法上的泛型没有了，参数类型变成了Object类型，那就出现问题了，子类中的sayHello方法是重写了父类的方法，但是根据Java重写的要求，方法的参数类型必须是一致的，那这样不就出错了吗？<strong>子类是String但是父类是Object</strong>。结果是可以正常运行。</p>
+<p>原因是编译器为了维护这种重写的原则，在Child类中自动生成了一个桥方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sayHello</span><span class="params">(Object value)</span></span><br><span class="line">&#123;</span><br><span class="line">    sayHello((String) value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个桥方法实际上就是对超类中sayHello(Obejct)的<strong>重写</strong>。这样做的原因是，当程序员在子类中写下以下这段代码的时候，本意是对超类中的<strong>同名方法进行重写</strong>，但因为超类发生了类型擦除，所以实际上<strong>并没有重写成功</strong>，因此加入了桥方法的机制来避免类型擦除与多态发生冲突。</p>
+<p>java代码中，判断两个方法是否是同一个方法是根据方法的签名来决定的，方法的签名是不包含方法的返回值的，也就是“方法签名&#x3D;方法名+参数”。如果我们代码里面这样写确实是冲突的Java无法找到是哪一个方法，Java虚拟机中的方法签名规则是不同的，其“方法签名&#x3D;方法名+参数+返回值”，所以他是能正确区分两个方法的，所以字节码中是允许存在上面这种情况的。</p>
+<h3 id="关于泛型擦除与多态性的冲突"><a href="#关于泛型擦除与多态性的冲突" class="headerlink" title="关于泛型擦除与多态性的冲突"></a>关于泛型擦除与多态性的冲突</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GenericClass</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doSomething</span><span class="params">(T obj)</span> &#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    GenericClass&lt;String&gt; genericObj = <span class="keyword">new</span> <span class="title class_">GenericClass</span>&lt;&gt;();	<span class="comment">// 冲突 ，编译时报错</span></span><br><span class="line">    <span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="string">&quot;Hello&quot;</span>;</span><br><span class="line">    genericObj.doSomething(obj); <span class="comment">// 编译错误</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在声明 <code>GenericClass&lt;String&gt; genericObj = new GenericClass&lt;&gt;();</code> 时，泛型类型参数 <code>T</code> 被指定为 <code>String</code>，因此 <code>genericObj</code> 的实例只能接受 <code>String</code> 类型的参数。然而，在 <code>genericObj.doSomething(obj);</code> 这行代码中，<code>obj</code> 的类型是 <code>Object</code>，不是 <code>String</code>，因此会导致编译错误。</p>
+<h3 id="多态的优点"><a href="#多态的优点" class="headerlink" title="多态的优点"></a>多态的优点</h3><p>多态性有以下几个优点：</p>
+<ol>
+<li>可扩展性：多态性允许在不修改现有代码的情况下添加<code>新的子类</code>。这样可以更方便地扩展系统功能。</li>
+<li>灵活性：通过多态性，可以在运行时<code>动态地确定对象的实际类型</code>，并调用相应类型的方法。这样可以根据实际需要灵活地处理对象。</li>
+<li>可替换性：多态性允许将一个子类对象赋值给父类引用变量，这样可以在不改变代码的情况下，通过替换不同的子类对象来改变程序的行为。</li>
+<li>可维护性：多态性可以使代码更加模块化和可维护，因为每个子类都可以独立地实现自己的行为，不会对其他代码产生影响。</li>
+</ol>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>JAVA在1.2之后有着四种引用类型：<code>强引用</code>（Strong Reference）、<code>软引用</code>（Soft Reference）、<code>弱引用</code>（Weak Reference）、<code>虚引用</code>（Phantom Reference）, 4 种引用的强度依次减弱。</p>
+<h4 id="强引用"><a href="#强引用" class="headerlink" title="强引用"></a>强引用</h4><p>Java中默认声明的就是强引用，比如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>(); <span class="comment">//只要obj还指向Object对象，Object对象就不会被回收</span></span><br><span class="line">obj = <span class="literal">null</span>;  <span class="comment">//手动置null</span></span><br></pre></td></tr></table></figure>
+
+<p>只要强引用存在，垃圾回收器将永远不会回收被引用的对象，哪怕内存不足时，JVM也会直接抛出OutOfMemoryError，不会去回收。如果想中断强引用与对象之间的联系，可以显示的将强引用赋值为null，这样一来，JVM就可以适时的回收对象了。</p>
+<h4 id="软引用"><a href="#软引用" class="headerlink" title="软引用"></a>软引用</h4><p>java.lang.ref.SoftReference</p>
+<p>软引用是用来描述一些非必需但仍有用的对象。在<code>内存足够的时候，软引用对象不会被回收，只有在内存不足时，系统则会回收软引用对象</code>，如果回收了软引用对象之后仍然没有足够的内存，才会抛出内存溢出异常。这种特性常常被用来实现缓存技术，比如网页缓存，图片缓存等。</p>
+<p>如果一个对象唯一剩下的引用是软引用，那么该对象是<code>软可及</code>的（softly reachable）。垃圾收集器并不像其收集弱可及的对象一样尽量地收集软可及的对象，相反，它只在真正 “需要” 内存时才收集软可及的对象。</p>
+<h4 id="弱引用"><a href="#弱引用" class="headerlink" title="弱引用"></a>弱引用</h4><p>java.lang.ref.WeakReference</p>
+<p>弱引用的引用强度比软引用要更弱一些，无论内存是否足够，只要 JVM <code>开始进行垃圾回收，那些被弱引用关联的对象都会被回收</code>。</p>
+<h4 id="虚引用"><a href="#虚引用" class="headerlink" title="虚引用"></a>虚引用</h4><p>PhantomReference</p>
+<p>通过查看这个类的源码，发现它只有一个构造函数和一个 get() 方法，而且它的 get() 方法仅仅是返回一个null，也就是说将永远无法通过虚引用来获取对象，虚引用必须要和 ReferenceQueue 引用队列一起使用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PhantomReference</span>&lt;T&gt; <span class="keyword">extends</span> <span class="title class_">Reference</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Returns this reference object&#x27;s referent.  Because the referent of a</span></span><br><span class="line"><span class="comment">     * phantom reference is always inaccessible, this method always returns</span></span><br><span class="line"><span class="comment">     * &lt;code&gt;null&lt;/code&gt;.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span>  &lt;code&gt;null&lt;/code&gt;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">get</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">PhantomReference</span><span class="params">(T referent, ReferenceQueue&lt;? <span class="built_in">super</span> T&gt; q)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(referent, q);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="引用队列"><a href="#引用队列" class="headerlink" title="引用队列"></a>引用队列</h4><p>引用队列可以与软引用、弱引用以及虚引用一起配合使用，当垃圾回收器准备回收一个对象时，如果发现它还有引用，那么就会在回收对象之前，把这个引用加入到与之<code>关联的引用队列</code>中去。程序可以通过判断引用队列中是否已经加入了引用，来判断被引用的对象是否将要被垃圾回收，这样就可以在对象被回收之前采取一些必要的措施。</p>
+<p>ReferenceQueue是使用wati()和notifyAll()实现生产者和消费者模式的一个具体场景。</p>
+<h3 id="Reference类"><a href="#Reference类" class="headerlink" title="Reference类"></a>Reference类</h3><p>引用实例的几个状态：</p>
+<ul>
+<li>Active：当处于Active状态，gc会特殊处理引用实例，一旦gc检测到其可达性发生变化，gc就会更改其状态。此时分两种情况，如果该引用实例创建时有注册引用队列，则会进入pending状态，否则会进入inactive状态。新创建的引用实例为Active。</li>
+<li>Pending：当前为pending-Reference列表中的一个元素，等待被ReferenceHandler线程消费并加入其注册的引用队列。如果该引用实例未注册引用队列，则永远不会处理这个状态。</li>
+<li>Enqueued：该引用实例创建时有注册引用队列并且当前处于入队列状态，属于该引用队列中的一个元素。当该引用实例从其注册引用队列中移除后其状态变为Inactive。如果该引用实例未注册引用队列，则永远不会处理这个状态。</li>
+<li>Inactive：当处于Inactive状态，无需任何处理，一旦变成Inactive状态则其状态永远不会再发生改变。</li>
+</ul>
+<p><img src="https://img2020.cnblogs.com/blog/2443180/202108/2443180-20210815122647528-1748134729.png" alt="img"></p>
+<h2 id="内存泄漏"><a href="#内存泄漏" class="headerlink" title="内存泄漏"></a>内存泄漏</h2><h4 id="什么是内存泄漏"><a href="#什么是内存泄漏" class="headerlink" title="什么是内存泄漏"></a>什么是内存泄漏</h4><p>对象已经没有被应用程序使用，但是垃圾回收器没办法移除它们，因为还在被引用着。</p>
+<p>所以内存泄漏需要满足两个点：</p>
+<p>​	对象可达，对象无用。(JAVA从语言上保证所有对象都是可达的，所有不可达对象都由GC管理)</p>
+<p>​	比如对于一个对象内的对象进行回收，对于整个对象不进行回收（置null），那么这个对象里面是空的，可是GC不会去回收这个对象。</p>
+<p><img src="https://img-blog.csdnimg.cn/ac9c2b68edcd459783ad8f6c77a152a7.png" alt="内存泄漏存在的原因"></p>
+<p>这里的有引用对象和无用对象的交集就是内存泄漏。</p>
+<p>####JAVA中的内存泄漏</p>
+<p>Java会使用有向图的方法进行管理内存，实时监控对象是否可以达到，如果不可到达，则就将其回收。</p>
+<p>在Java语言中，判断一个内存空间是否符合垃圾收集的标准有两个：一个是给对象赋予了空值null，并且以下再没有调用过；另一个是给对象赋予了新值，这样重新分配了内存空间。</p>
+<p>Java内存泄漏的<code>根本原因</code>是什么呢？长生命周期的对象持有短生命周期对象的引用就很可能发生内存泄漏，尽管<code>短生命周期对象已经不再需要</code>，但是因为<code>长生命周期持有它的引用</code>而导致不能被回收，这就是Java中内存泄漏的发生场景。严重时会报Out of memory。</p>
+<p>检查内存泄露的工具： Optimizeit Profiler、JProbe Profiler、JinSight、Rational 公司的 Purify 等。</p>
+<h3 id="JAVA内存分配"><a href="#JAVA内存分配" class="headerlink" title="JAVA内存分配"></a>JAVA内存分配</h3><p>Java 程序运行时的内存分配策略有三种,分别是静态分配,栈式分配,和堆式分配，对应的，三种存储策略使用的内存空间主要分别是静态存储区（也称方法区）、栈区和堆区。</p>
+<p><code>静态存储区</code>（方法区）：主要存放静态数据、全局 static 数据和常量。这块内存在程序编译时就已经分配好，并且在程序整个运行期间都存在。</p>
+<p><code>栈区</code> ：当方法被执行时，方法体内的<code>局部变量</code>（其中包括基础数据类型、对象的引用）都在栈上创建，并在方法执行结束时这些局部变量所持有的内存将会自动被释放。因为栈内存分配运算内置于处理器的指令集中，<code>效率很高</code>，但是分配的<code>内存容量有限</code>。</p>
+<p><code>堆区</code> ：又称动态内存分配，通常就是指在程序运行时直接 new 出来的内存，也就是<code>对象的实例</code>。这部分内存在不使用时将会由 Java <code>垃圾回收器来负责回收</code>。</p>
+<h4 id="堆与栈的区别"><a href="#堆与栈的区别" class="headerlink" title="堆与栈的区别"></a>堆与栈的区别</h4><p>方法体内定义的（<strong>局部变量</strong>）一些基本类型的变量和对象的引用变量都是在方法的栈内存中分配的。当在一段方法块中定义一个变量时，Java 就会在栈中为该变量分配内存空间，当超过该变量的作用域后，该变量也就无效了，分配给它的内存空间也将被释放掉，该<code>内存空间可以被重新使用</code>。</p>
+<p>堆内存用来存放所有由 new 创建的对象（包括该对象其中的所有成员变量）和数组。在堆中分配的内存，将由 Java 垃圾回收器来自动管理。<code>在堆中产生了一个数组或者对象后，还可以在栈中定义一个特殊的变量，这个变量的取值等于数组或者对象在堆内存中的首地址，这个特殊的变量就是我们上面说的引用变量</code>。我们可以通过这个引用变量来访问堆中的对象或者数组。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>jvm中引用有好几种类型的实现，gc针对这几种不同类型的引用有着不同的<code>回收机制</code>，同时它们也有着各自的应用场景, 比如SoftReference可以用来做高速缓存, WeakReference也可以用来做一些普通缓存(WeakHashMap), 而PhantomReference则用在一些特殊场景，比如Cleaner就是一个很好的应用场景，它可以用来回收堆外内存。与此同时，SoftReference, WeakReference, PhantomReference这几种弱类型引用还可以与引用队列结合使用，使得可以在关联引用回收之后可以做一些额外处理，甚至于Finalizer(收尾机制)都可以在对象回收过程中改变对象的生命周期。</p>
+<h2 id="JAVA线程"><a href="#JAVA线程" class="headerlink" title="JAVA线程"></a>JAVA线程</h2><p><img src="https://oss.javaguide.cn/github/javaguide/java/concurrent/640.png" alt="Java 线程状态变迁图"></p>
+<p>RUNNING和READY是操作系统的状态，JVM中只有RUNNABLE状态，操作系统进行区分是因为时间片轮转的需要，对于JVM来说这个转换非常快，所以不做区分。</p>
+<h3 id="sleep-方法和-wait-方法对比"><a href="#sleep-方法和-wait-方法对比" class="headerlink" title="sleep() 方法和 wait() 方法对比"></a>sleep() 方法和 wait() 方法对比</h3><p><strong>共同点</strong>：两者都可以暂停线程的执行。</p>
+<p><strong>区别</strong>：</p>
+<ul>
+<li><strong><code>sleep()</code> 方法没有释放锁，而 <code>wait()</code> 方法释放了锁</strong> 。</li>
+<li><code>wait()</code> 通常被用于线程间交互&#x2F;通信，<code>sleep()</code>通常被用于暂停执行。</li>
+<li><code>wait()</code> 方法被调用后，线程不会自动苏醒，需要别的线程调用同一个对象上的 <code>notify()</code>或者 <code>notifyAll()</code> 方法。<code>sleep()</code>方法执行完成后，线程会自动苏醒，或者也可以使用 <code>wait(long timeout)</code> 超时后线程会自动苏醒。</li>
+<li><code>sleep()</code> 是 <code>Thread</code> 类的静态本地方法，<code>wait()</code> 则是 <code>Object</code> 类的本地方法。**<code>为什么这样设计呢？</code>**</li>
+</ul>
+<blockquote>
+<p><code>wait()</code> 是让获得对象锁的线程实现等待，会自动释放当前线程占有的对象锁。每个对象（<code>Object</code>）都拥有对象锁，既然要释放当前线程占有的对象锁并让其进入 WAITING 状态，自然是要操作对应的对象（<code>Object</code>）而非当前的线程（<code>Thread</code>）。</p>
+</blockquote>
+<h3 id="可以直接调用-Thread-类的-run-方法吗？"><a href="#可以直接调用-Thread-类的-run-方法吗？" class="headerlink" title="可以直接调用 Thread 类的 run 方法吗？"></a>可以直接调用 Thread 类的 run 方法吗？</h3><p>这是另一个非常经典的 Java 多线程面试问题，而且在面试中会经常被问到。很简单，但是很多人都会答不上来！</p>
+<p>new 一个 <code>Thread</code>，线程进入了新建状态。调用 <code>start()</code>方法，会启动一个线程并使线程进入了就绪状态，当分配到时间片后就可以开始运行了。 <code>start()</code> 会执行线程的相应准备工作，然后<strong>自动执行 <code>run()</code> 方法的内容</strong>，这是真正的多线程工作。 但是，<strong>直接执行 <code>run()</code> 方法，会把 <code>run()</code> 方法当成一个 main 线程下的普通方法去执行，并不会在某个线程中执行它，所以这并不是多线程工作</strong>。</p>
+<p>总结：<code>调用 start() 方法方可启动线程并使线程进入就绪状态，直接执行 run() 方法的话不会以多线程的方式执行。</code></p>
+<h2 id="细节题"><a href="#细节题" class="headerlink" title="细节题"></a>细节题</h2><h3 id="0"><a href="#0" class="headerlink" title="0"></a>0</h3><blockquote>
+<p>静态方法为什么不能调用非静态成员？</p>
+</blockquote>
+<p>因为静态方法是属于类的，非静态成员属于实例对象，只有对象实例化之后才存在，需要通过类的实例对象来访问，所以会出现对象还没有实例化，可是静态方法出现调用，这是非法操作。</p>
+<blockquote>
+<p>为什么方法重写需要满足子类方法的返回值小于父类方法？</p>
+</blockquote>
+<p>因为方法的参数列表是方法签名的一部分，所以要求子方法需要保持相同的方法签名，也是为了调用子方法能够完全替代父方法，满足程序设计的一致性。</p>
+<blockquote>
+<p>子类继承父类后能否访问父类的私有方法？</p>
+</blockquote>
+<p>不能，子类继承之后只是<code>拥有</code>父类的私有属性和方法，但是<code>无法访问</code>。也不能重写</p>
+<blockquote>
+<p>举例一个多态的用处？</p>
+</blockquote>
+<p>多态中调用的方法属于哪个类，只有在程序运行期间才能确定。这样可以实现相同的接口调用不同的功能函数。</p>
+<blockquote>
+<p>接口和抽象类的区别？</p>
+</blockquote>
+<p>接口可以实现多个，类只能继承一个；接口主要用于实现类的行为，抽象类用于代码复用；接口的成员变量不能被修改而且要有初始值，抽象类中的成员变量可以在子类重新定义与赋值。</p>
+<h3 id="1"><a href="#1" class="headerlink" title="1"></a>1</h3><blockquote>
+<p>什么是深拷贝、浅拷贝、引用拷贝？</p>
+</blockquote>
+<p>浅拷贝就是<code>新建一个对象</code>，但是对象<code>内部</code>的属性会直接复制为引用，也就是和原来的指向同一个内部对象成员；深拷贝就是直接<code>新建对象</code>进行拷贝；引用拷贝就是复制一个<code>对象的引用</code>。</p>
+<blockquote>
+<p>HashCode()和equals()有什么关系？</p>
+</blockquote>
+<p>两者都能够比较两个对象是不是相等，一般来说HashCode()更快，不过出现哈希冲突的时候需要用到equals()来判断两者是否相等，而且<code>两者的HashCode相同不代表两个对象就相同</code>。</p>
+<blockquote>
+<p>StringBuilder和StringBuffer的区别？</p>
+</blockquote>
+<p>StringBuffer和StringBuilder都是处理可变字符串的类，不过<code>StringBuffer</code>是<code>线程安全</code>的，在方法中加了同步锁，StringBuilder是非线程安全的，不过效率更高(提升百分之10-15)。</p>
+<p>String每次都会新建一个对象，StringBuffer和StringBuilder对对象本身进行操作，不会产生新的对象；而使用字符串重载的“+”，是会产生新对象的，所以在循环内进行大量拼接的时候，建议使用StringBuffer和StringBuilder（<code>在JDK9之后修复</code>）</p>
+<blockquote>
+<p>String不可变的原因？</p>
+</blockquote>
+<p>final修饰的引用类型不能指向其他对象，修饰的基本数据类型则值不能改变，因此final关键字修饰字符串不是不可变的根本原因，根本原因如下：</p>
+<p>1.保存字符串的数组被final修饰并且是私有的，而且没有提供修改这个字符串的方法。</p>
+<p>2.String类被final修饰而<code>不能继承</code>，避免了子类破坏String的不可变。</p>
+<blockquote>
+<p>反射有什么缺点？</p>
+</blockquote>
+<p>反射允许我们在运行的时候分析操作类，可是也会引入一些安全问题，比如泛型参数检查的问题，只会在编译时检查。另外会相对影响性能。</p>
+<blockquote>
+<p>序列化在TCP&#x2F;IP 4层模型的哪一层？</p>
+</blockquote>
+<p>在4层模型的应用层，在7层模型的会话层。</p>
+<h3 id="2"><a href="#2" class="headerlink" title="2"></a>2</h3><blockquote>
+<p>反射是什么？</p>
+</blockquote>
+<p>反射是什么：正常我们创建一个类，是在类中定义属性和方法，从而能够编译得到一个class文件，那么，将这个过程反过来，我们已知class类，来获取该类的属性和方法，就是反射。</p>
 
       
     </div>
@@ -666,6 +869,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/JVM%E3%80%81JAVA/" rel="tag"># JVM、JAVA</a>
+          
+        </div>
+      
 
       
       
@@ -675,8 +884,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2023/05/04/%E5%85%B3%E4%BA%8E%E5%BC%95%E7%94%A8%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/" rel="next" title="关于引用">
-                <i class="fa fa-chevron-left"></i> 关于引用
+              <a href="/2023/05/04/%E5%90%8C%E6%AD%A5%E3%80%81%E9%94%81%E4%B8%8E%E7%BA%BF%E7%A8%8B/" rel="next" title="同步的一些内容">
+                <i class="fa fa-chevron-left"></i> 同步的一些内容
               </a>
             
           </div>
@@ -764,7 +973,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -777,7 +986,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
@@ -810,7 +1019,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E6%96%87%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">类文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E5%B8%B8%E9%87%8F%E6%B1%A0"><span class="nav-number">1.1.</span> <span class="nav-text">运行时常量池</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E6%B1%A0"><span class="nav-number">1.2.</span> <span class="nav-text">字符串常量池</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">类加载过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81"><span class="nav-number">2.1.</span> <span class="nav-text">验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%86%E5%A4%87"><span class="nav-number">2.2.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90"><span class="nav-number">2.3.</span> <span class="nav-text">解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">2.4.</span> <span class="nav-text">初始化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">类加载器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE"><span class="nav-number">3.1.</span> <span class="nav-text">双亲委派</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E9%9C%80%E8%A6%81%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%AD%A5%E9%AA%A4%E4%B8%AD%E7%9A%84%E5%8A%A0%E8%BD%BD"><span class="nav-number">3.2.</span> <span class="nav-text">什么时候需要类加载步骤中的加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98"><span class="nav-number">3.3.</span> <span class="nav-text">直接内存</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-GC%E7%9A%84%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.3.1.</span> <span class="nav-text">2.GC的对象</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%9E%9A%E4%B8%BE%E6%A0%B9%E8%8A%82%E7%82%B9"><span class="nav-number">3.3.1.1.</span> <span class="nav-text">如何枚举根节点</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-GC%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88%E3%80%81%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8"><span class="nav-number">3.3.2.</span> <span class="nav-text">4.GC做了什么、垃圾收集器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%B2%E8%A1%8C%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%EF%BC%9A"><span class="nav-number">3.3.2.1.</span> <span class="nav-text">串行垃圾收集器：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B9%B6%E8%A1%8C%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%EF%BC%9A"><span class="nav-number">3.3.2.2.</span> <span class="nav-text">并行垃圾收集器：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#CMS-Concurrent-Mark-Sweep-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%EF%BC%9A"><span class="nav-number">3.3.2.3.</span> <span class="nav-text">CMS(Concurrent Mark Sweep)垃圾收集器：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#G1"><span class="nav-number">3.3.2.4.</span> <span class="nav-text">G1</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%B7%A8%E4%BB%A3%E5%BC%95%E7%94%A8"><span class="nav-number">3.3.2.4.1.</span> <span class="nav-text">跨代引用</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%9B%9B%E4%B8%AA%E8%BF%87%E7%A8%8B"><span class="nav-number">3.3.2.4.2.</span> <span class="nav-text">四个过程</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#G1%E4%B8%8ECMS%E7%9A%84%E6%AF%94%E8%BE%83"><span class="nav-number">3.3.2.5.</span> <span class="nav-text">G1与CMS的比较</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Minor-GC%E5%92%8CFull-GC"><span class="nav-number">3.4.</span> <span class="nav-text">3.Minor GC和Full GC</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%88%9B%E5%BB%BA%E8%BF%87%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">对象创建过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80"><span class="nav-number">4.1.</span> <span class="nav-text">内存布局</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%A4%B4"><span class="nav-number">4.1.1.</span> <span class="nav-text">对象头</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90"><span class="nav-number">5.</span> <span class="nav-text">逃逸分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%A0%88%E4%B8%8A%E5%88%86%E9%85%8D"><span class="nav-number">5.1.</span> <span class="nav-text">1.栈上分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%90%8C%E6%AD%A5%E6%B6%88%E9%99%A4"><span class="nav-number">5.2.</span> <span class="nav-text">2.同步消除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%A0%87%E9%87%8F%E6%9B%BF%E6%8D%A2"><span class="nav-number">5.3.</span> <span class="nav-text">3.标量替换</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JAVA"><span class="nav-number">1.</span> <span class="nav-text">JAVA</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8Ec-%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.</span> <span class="nav-text">与c++区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JAVA%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">JAVA内存结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E6%96%87%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">类文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E5%B8%B8%E9%87%8F%E6%B1%A0"><span class="nav-number">3.1.</span> <span class="nav-text">运行时常量池</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E6%B1%A0"><span class="nav-number">3.2.</span> <span class="nav-text">字符串常量池</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">类加载过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JIT"><span class="nav-number">4.0.1.</span> <span class="nav-text">JIT</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81"><span class="nav-number">4.1.</span> <span class="nav-text">验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%86%E5%A4%87"><span class="nav-number">4.2.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90"><span class="nav-number">4.3.</span> <span class="nav-text">解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">4.4.</span> <span class="nav-text">初始化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8"><span class="nav-number">5.</span> <span class="nav-text">类加载器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE"><span class="nav-number">5.1.</span> <span class="nav-text">双亲委派</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E9%9C%80%E8%A6%81%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%AD%A5%E9%AA%A4%E4%B8%AD%E7%9A%84%E5%8A%A0%E8%BD%BD"><span class="nav-number">5.2.</span> <span class="nav-text">什么时候需要类加载步骤中的加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98"><span class="nav-number">5.3.</span> <span class="nav-text">直接内存</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-GC%E7%9A%84%E5%AF%B9%E8%B1%A1"><span class="nav-number">5.3.1.</span> <span class="nav-text">2.GC的对象</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%9E%9A%E4%B8%BE%E6%A0%B9%E8%8A%82%E7%82%B9"><span class="nav-number">5.3.1.1.</span> <span class="nav-text">如何枚举根节点</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-GC%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88%E3%80%81%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8"><span class="nav-number">5.3.2.</span> <span class="nav-text">4.GC做了什么、垃圾收集器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%B2%E8%A1%8C%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%EF%BC%9A"><span class="nav-number">5.3.2.1.</span> <span class="nav-text">串行垃圾收集器：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B9%B6%E8%A1%8C%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%EF%BC%9A"><span class="nav-number">5.3.2.2.</span> <span class="nav-text">并行垃圾收集器：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#CMS-Concurrent-Mark-Sweep-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%EF%BC%9A"><span class="nav-number">5.3.2.3.</span> <span class="nav-text">CMS(Concurrent Mark Sweep)垃圾收集器：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#G1"><span class="nav-number">5.3.2.4.</span> <span class="nav-text">G1</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%B7%A8%E4%BB%A3%E5%BC%95%E7%94%A8"><span class="nav-number">5.3.2.4.1.</span> <span class="nav-text">跨代引用</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%9B%9B%E4%B8%AA%E8%BF%87%E7%A8%8B"><span class="nav-number">5.3.2.4.2.</span> <span class="nav-text">四个过程</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#G1%E4%B8%8ECMS%E7%9A%84%E6%AF%94%E8%BE%83"><span class="nav-number">5.3.2.5.</span> <span class="nav-text">G1与CMS的比较</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Minor-GC%E5%92%8CFull-GC"><span class="nav-number">5.4.</span> <span class="nav-text">3.Minor GC和Full GC</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%88%9B%E5%BB%BA%E8%BF%87%E7%A8%8B"><span class="nav-number">6.</span> <span class="nav-text">对象创建过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80"><span class="nav-number">6.1.</span> <span class="nav-text">内存布局</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%A4%B4"><span class="nav-number">6.1.1.</span> <span class="nav-text">对象头</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90"><span class="nav-number">7.</span> <span class="nav-text">逃逸分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%A0%88%E4%B8%8A%E5%88%86%E9%85%8D"><span class="nav-number">7.1.</span> <span class="nav-text">1.栈上分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%90%8C%E6%AD%A5%E6%B6%88%E9%99%A4"><span class="nav-number">7.2.</span> <span class="nav-text">2.同步消除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%A0%87%E9%87%8F%E6%9B%BF%E6%8D%A2"><span class="nav-number">7.3.</span> <span class="nav-text">3.标量替换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JAVA%E7%9A%84IO%E6%A8%A1%E5%BC%8F"><span class="nav-number">8.</span> <span class="nav-text">JAVA的IO模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NIO%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%90%8C%E6%AD%A5%E9%9D%9E%E9%98%BB%E5%A1%9E"><span class="nav-number">8.1.</span> <span class="nav-text">NIO如何实现同步非阻塞</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JAVA%E6%B5%81"><span class="nav-number">9.</span> <span class="nav-text">JAVA流</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E6%80%A7"><span class="nav-number">9.1.</span> <span class="nav-text">特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%A1%E9%81%93"><span class="nav-number">9.2.</span> <span class="nav-text">管道</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JAVA%E6%B3%9B%E5%9E%8B%E6%93%A6%E9%99%A4%E5%8E%9F%E7%90%86"><span class="nav-number">10.</span> <span class="nav-text">JAVA泛型擦除原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E6%B3%9B%E5%9E%8B%E6%93%A6%E9%99%A4%E4%B8%8E%E5%A4%9A%E6%80%81%E6%80%A7%E7%9A%84%E5%86%B2%E7%AA%81"><span class="nav-number">10.1.</span> <span class="nav-text">关于泛型擦除与多态性的冲突</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E6%80%81%E7%9A%84%E4%BC%98%E7%82%B9"><span class="nav-number">10.2.</span> <span class="nav-text">多态的优点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E7%94%A8"><span class="nav-number">11.</span> <span class="nav-text">引用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%BA%E5%BC%95%E7%94%A8"><span class="nav-number">11.0.1.</span> <span class="nav-text">强引用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BD%AF%E5%BC%95%E7%94%A8"><span class="nav-number">11.0.2.</span> <span class="nav-text">软引用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%B1%E5%BC%95%E7%94%A8"><span class="nav-number">11.0.3.</span> <span class="nav-text">弱引用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%99%9A%E5%BC%95%E7%94%A8"><span class="nav-number">11.0.4.</span> <span class="nav-text">虚引用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%95%E7%94%A8%E9%98%9F%E5%88%97"><span class="nav-number">11.0.5.</span> <span class="nav-text">引用队列</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference%E7%B1%BB"><span class="nav-number">11.1.</span> <span class="nav-text">Reference类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F"><span class="nav-number">12.</span> <span class="nav-text">内存泄漏</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F"><span class="nav-number">12.0.1.</span> <span class="nav-text">什么是内存泄漏</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JAVA%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D"><span class="nav-number">12.1.</span> <span class="nav-text">JAVA内存分配</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A0%86%E4%B8%8E%E6%A0%88%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">12.1.1.</span> <span class="nav-text">堆与栈的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">12.2.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JAVA%E7%BA%BF%E7%A8%8B"><span class="nav-number">13.</span> <span class="nav-text">JAVA线程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sleep-%E6%96%B9%E6%B3%95%E5%92%8C-wait-%E6%96%B9%E6%B3%95%E5%AF%B9%E6%AF%94"><span class="nav-number">13.1.</span> <span class="nav-text">sleep() 方法和 wait() 方法对比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E4%BB%A5%E7%9B%B4%E6%8E%A5%E8%B0%83%E7%94%A8-Thread-%E7%B1%BB%E7%9A%84-run-%E6%96%B9%E6%B3%95%E5%90%97%EF%BC%9F"><span class="nav-number">13.2.</span> <span class="nav-text">可以直接调用 Thread 类的 run 方法吗？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%86%E8%8A%82%E9%A2%98"><span class="nav-number">14.</span> <span class="nav-text">细节题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0"><span class="nav-number">14.1.</span> <span class="nav-text">0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1"><span class="nav-number">14.2.</span> <span class="nav-text">1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2"><span class="nav-number">14.3.</span> <span class="nav-text">2</span></a></li></ol></li></ol></div>
             
 
           </div>

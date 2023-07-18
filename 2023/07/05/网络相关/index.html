@@ -86,11 +86,13 @@
 <meta property="og:site_name" content="Sounio">
 <meta property="og:description" content="计算机网络编程什么是网络编程？ 计算机和计算机之间通过网络进行数据传输 ##常见架构 CS需要客户端，本地有一个客户端程序，远程有一个服务器端程序 体验好、要开发客户端 更新麻烦 ###BS 只需要一个浏览器，用户通过不同的网址，客户访问不同的服务器 方便 体验一般 三要素IP设备在网络中的地址，唯一标识 分为公网IP和私有IP（局域网） 特殊：127.0.0.1	本地ip	和该设备在局域网的ip">
 <meta property="og:locale">
+<meta property="og:image" content="https://oss.javaguide.cn/github/javaguide/cs-basics/network/tcp-ip-4-model.png">
 <meta property="article:published_time" content="2023-07-05T07:39:34.000Z">
-<meta property="article:modified_time" content="2023-07-05T13:24:17.985Z">
+<meta property="article:modified_time" content="2023-07-14T06:53:01.246Z">
 <meta property="article:author" content="sounio">
 <meta property="article:tag" content="计算机网络">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://oss.javaguide.cn/github/javaguide/cs-basics/network/tcp-ip-4-model.png">
 
 
 
@@ -368,6 +370,19 @@
 <p>![1688563362506](D:\WeChatFile\WeChat Files\wxid_cii3gqlpyfgm22\FileStorage\Temp\1688563362506.png)</p>
 <p>四次挥手</p>
 <p>![1688563296313](D:\WeChatFile\WeChat Files\wxid_cii3gqlpyfgm22\FileStorage\Temp\1688563296313.png)</p>
+<h2 id="网络模型"><a href="#网络模型" class="headerlink" title="网络模型"></a>网络模型</h2><h3 id="TCP-x2F-IP-4层模型"><a href="#TCP-x2F-IP-4层模型" class="headerlink" title="TCP&#x2F;IP 4层模型"></a>TCP&#x2F;IP 4层模型</h3><p>1.应用层</p>
+<p>2.传输层</p>
+<p>3.网络层</p>
+<p>4.网络接口层</p>
+<p><img src="https://oss.javaguide.cn/github/javaguide/cs-basics/network/tcp-ip-4-model.png" alt="TCP/IP 四层模型"></p>
+<p>##套接字解决的问题</p>
+<p>应用层通过传输层进行数据通信时，TCP和UDP会遇到同时为多个应用程序进程提供并发服务的问题。多个TCP连接或多个应用程序进程可能需要通过<strong>同一个TCP协议端口传输数据</strong>。为了<strong>区别不同的应用程序进程和连接</strong>，许多计算机操作系统为应用程序与TCP／IP协议交互提供了称为套接字 (Socket)的接口，区分不同应用程序进程间的网络通信和连接。</p>
+<p>###套接字详细</p>
+<p>生成套接字，主要有3个参数：通信的<strong>目的IP地址</strong>、使用的<strong>传输层协议</strong>(TCP或UDP)和使用的<strong>端口号</strong>。通过将这3个参数结合起来，与一个“插座”Socket绑定，应用层就可以和传输层通过套接字接口，区分来自不同应用程序进程或网络连接的通信，实现数据传输的<strong>并发</strong>服务。</p>
+<p>Socket可以看成在两个程序进行通讯连接中的一个端点，一个程序将一段信息写入Socket中，该Socket将这段信息发送给另外一个Socket中，使这段信息能传送到其他程序中。要通过互联网进行通信，至少需要一对套接字，一个运行于客户机端，称之为ClientSocket，另一个运行于服务器端，称之为serverSocket。根据连接启动的方式以及本地套接字要连接的目标，套接字之间的连接过程可以分为<strong>三个步骤</strong>：服务器监听，客户端请求，连接确认。   </p>
+<p><strong>服务器监听</strong>：是服务器端套接字并不定位具体的客户端套接字，而是处于<strong>等待连接</strong>的状态，实时<strong>监控网络状态</strong>。</p>
+<p><strong>客户端请求</strong>：是指<strong>由客户端的套接字提出连接请求</strong>，要连接的目标是服务器端的套接字。为此，客户端的套接字必须首先<strong>描述它要连接的服务器的套接字</strong>，指出服务器端套接字的<strong>地址和端口号</strong>，然后就向服务器端套接字提出<strong>连接请求</strong>。</p>
+<p><strong>连接确认</strong>：是指当服务器端套接字监听到或者说接收到客户端套接字的连接请求，它就<strong>响应</strong>客户端套接字的请求，建立一个<strong>新的线程</strong>，把服务器端套接字的<strong>描述发给客户端</strong>，一旦客户端<strong>确认</strong>了此描述，连接就建立好了。而服务器端套接字<strong>继续处于监听</strong>状态，继续接收其他客户端套接字的连接请求。</p>
 
       
     </div>
@@ -407,6 +422,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2023/07/11/%E7%A7%8B%E6%8B%9B/" rel="prev" title="秋招">
+                秋招 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -483,7 +502,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -496,7 +515,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
@@ -529,7 +548,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">计算机网络编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CS"><span class="nav-number">1.0.1.</span> <span class="nav-text">CS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E8%A6%81%E7%B4%A0"><span class="nav-number">1.1.</span> <span class="nav-text">三要素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IP"><span class="nav-number">1.1.1.</span> <span class="nav-text">IP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3%E5%8F%B7"><span class="nav-number">1.1.2.</span> <span class="nav-text">端口号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.1.3.</span> <span class="nav-text">协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#UDP"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">UDP</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F"><span class="nav-number">1.1.3.1.1.</span> <span class="nav-text">通信方式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">TCP</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">计算机网络编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CS"><span class="nav-number">1.0.1.</span> <span class="nav-text">CS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E8%A6%81%E7%B4%A0"><span class="nav-number">1.1.</span> <span class="nav-text">三要素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IP"><span class="nav-number">1.1.1.</span> <span class="nav-text">IP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3%E5%8F%B7"><span class="nav-number">1.1.2.</span> <span class="nav-text">端口号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.1.3.</span> <span class="nav-text">协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#UDP"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">UDP</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F"><span class="nav-number">1.1.3.1.1.</span> <span class="nav-text">通信方式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">TCP</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.2.</span> <span class="nav-text">网络模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-x2F-IP-4%E5%B1%82%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.2.1.</span> <span class="nav-text">TCP&#x2F;IP 4层模型</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

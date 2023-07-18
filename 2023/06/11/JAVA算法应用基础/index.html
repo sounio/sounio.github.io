@@ -86,11 +86,14 @@
 <meta property="og:site_name" content="Sounio">
 <meta property="og:description" content="Linkedlist链表结构 LinkedList 实现了 Queue 接口，可作为队列使用。 LinkedList 实现了 List 接口，可进行列表的相关操作。 LinkedList 实现了 Deque 接口，可作为队列使用。 LinkedList 实现了 Cloneable 接口，可实现克隆。 123456789101112131415161718   LinkedList&lt;Strin">
 <meta property="og:locale">
+<meta property="og:image" content="https://oss.javaguide.cn/github/javaguide/java/collection/java7_concurrenthashmap.png">
+<meta property="og:image" content="https://oss.javaguide.cn/github/javaguide/java/collection/java8_concurrenthashmap.png">
 <meta property="article:published_time" content="2023-06-11T14:07:28.000Z">
-<meta property="article:modified_time" content="2023-06-21T06:10:07.393Z">
+<meta property="article:modified_time" content="2023-07-18T06:33:58.457Z">
 <meta property="article:author" content="sounio">
 <meta property="article:tag" content="Java ， leetcode">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://oss.javaguide.cn/github/javaguide/java/collection/java7_concurrenthashmap.png">
 
 
 
@@ -341,10 +344,12 @@
 <p>LinkedList 实现了 Cloneable 接口，可实现克隆。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">   LinkedList&lt;String&gt; sites = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;String&gt;();</span><br><span class="line">   sites.add(<span class="string">&quot;队尾添加元素,返回true&quot;</span>);</span><br><span class="line">   sites.addFirst(<span class="string">&quot;队头添加元素&quot;</span>);</span><br><span class="line">   sites.addLast(<span class="string">&quot;队尾添加元素,无返回&quot;</span>);</span><br><span class="line">   sites.removeFirst(<span class="string">&quot;移除头部元素&quot;</span>);</span><br><span class="line">   sites.removeLast(<span class="string">&quot;移除尾部元素&quot;</span>);</span><br><span class="line">   sites.size()</span><br><span class="line">   sites.get(i)</span><br><span class="line">   sites.getLast()</span><br><span class="line">   <span class="keyword">for</span>(String i : sites)&#123;</span><br><span class="line">       System.out,println(i);</span><br><span class="line">   &#125;</span><br><span class="line"><span class="keyword">public</span> T[] toArray(T[] a)	返回一个由链表元素转换类型而成的数组。</span><br><span class="line">   <span class="keyword">public</span> Object[] toArray()	返回一个由链表元素组成的数组。</span><br><span class="line">   <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">add</span><span class="params">(E e)</span>	链表末尾添加元素，返回是否成功，成功为 <span class="literal">true</span>，失败为 <span class="literal">false</span>。</span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> index, E element)</span>	向指定位置插入元素。</span><br><span class="line">   <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">addAll</span><span class="params">(Collection c)</span>	将一个集合的所有元素添加到链表后面，返回是否成功，成功为 <span class="literal">true</span>，失败为 <span class="literal">false</span>。</span><br><span class="line">   <span class="keyword">public</span> E <span class="title function_">remove</span><span class="params">(<span class="type">int</span> index)</span>	删除指定位置的元素。</span><br></pre></td></tr></table></figure>
 
-
-
-
-
+<ul>
+<li>头部插入&#x2F;删除：只需要修改头结点的指针即可完成插入&#x2F;删除操作，因此时间复杂度为 O(1)。</li>
+<li>尾部插入&#x2F;删除：只需要修改尾结点的指针即可完成插入&#x2F;删除操作，因此时间复杂度为 O(1)。</li>
+<li>指定位置插入&#x2F;删除：需要先移动到指定位置，再修改指定节点的指针完成插入&#x2F;删除，因此需要移动平均 n&#x2F;2 个元素，时间复杂度为 O(n)</li>
+</ul>
+<h3 id="LinkedList-为什么不能实现-RandomAccess-接口？"><a href="#LinkedList-为什么不能实现-RandomAccess-接口？" class="headerlink" title="LinkedList 为什么不能实现 RandomAccess 接口？"></a>LinkedList 为什么不能实现 RandomAccess 接口？</h3><p><code>RandomAccess</code> 是一个标记接口，用来表明实现该接口的类支持随机访问（即可以通过索引快速访问元素）。由于 <code>LinkedList</code> 底层数据结构是链表，内存地址不连续，只能通过指针来定位，不支持随机快速访问，所以不能实现 <code>RandomAccess</code> 接口。</p>
 <h2 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h2><p>ArrayList 是一个数组队列，提供了相关的添加、删除、修改、遍历等功能。</p>
 <table>
 <thead>
@@ -382,6 +387,20 @@
 <td align="left">返回 arraylist 中元素的索引值</td>
 </tr>
 </tbody></table>
+<ul>
+<li><p>头部插入：由于需要将所有元素都依次向后移动一个位置，因此时间复杂度是 O(n)。</p>
+</li>
+<li><p>尾部插入：当 <code>ArrayList</code> 的容量未达到极限时，往列表末尾插入元素的时间复杂度是 O(1)，因为它只需要在数组末尾添加一个元素即可；当容量已达到极限并且需要扩容时，则需要执行一次 O(n) 的操作将原数组复制到新的更大的数组中，然后再执行 O(1) 的操作添加元素。</p>
+</li>
+<li><p>指定位置插入：需要将目标位置之后的所有元素都向后移动一个位置，然后再把新元素放入指定位置。这个过程需要移动平均 n&#x2F;2 个元素，因此时间复杂度为 O(n)。</p>
+</li>
+<li><p>头部删除：由于需要将所有元素依次向前移动一个位置，因此时间复杂度是 O(n)。</p>
+</li>
+<li><p>尾部删除：当删除的元素位于列表末尾时，时间复杂度为 O(1)。</p>
+</li>
+<li><p>指定位置删除：需要将目标元素之后的所有元素向前移动一个位置以填补被删除的空白位置，因此需要移动平均 n&#x2F;2 个元素，时间复杂度为 O(n)。</p>
+</li>
+</ul>
 <h2 id="快排"><a href="#快排" class="headerlink" title="快排"></a>快排</h2><p>基础思想：以某个哨兵为基准数，将小于的元素移动至左边，大于的元素移动至右边。</p>
 <p>然后对于两边分别设置哨兵，递归。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">quicksort</span><span class="params">(<span class="type">int</span>[] q ,<span class="type">int</span> l ,<span class="type">int</span> r)</span>&#123;	<span class="comment">// quicksort(q,0,n-1)</span></span><br><span class="line">    <span class="keyword">if</span>(l &gt;= r)<span class="keyword">return</span>;		<span class="comment">// 终止于递归数组只有一个数</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">x</span> <span class="operator">=</span> q[l+r &gt;&gt; <span class="number">1</span>];	<span class="comment">// 一般取中间的某个值</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> l-<span class="number">1</span>,j = r+<span class="number">1</span>;	<span class="comment">// 注意-1和+1，扩大范围，适应后面的++</span></span><br><span class="line">    <span class="keyword">while</span>(i &lt; j)&#123;			<span class="comment">// 对于两边不满足条件元素的进行遍历</span></span><br><span class="line">        <span class="keyword">while</span>(q[++i] &lt; x);	<span class="comment">// 找到左边大于哨兵的地址		注意++在前面</span></span><br><span class="line">        <span class="keyword">while</span>(q[--j] &gt; x);	<span class="comment">// 找到右边小于哨兵的地址</span></span><br><span class="line">        <span class="keyword">if</span>(i &lt; j)&#123;			<span class="comment">// 如果仍然在寻找中，则交换</span></span><br><span class="line">            <span class="type">int</span> <span class="variable">t</span> <span class="operator">=</span> q[j];</span><br><span class="line">            q[i] = q[j];</span><br><span class="line">            q[j] = t;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 一遍找完</span></span><br><span class="line">    quicksort(q,l,j);</span><br><span class="line">    quicksort(q,j+<span class="number">1</span>,r);		<span class="comment">// 注意+1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -438,6 +457,24 @@
 <h2 id="Map的遍历"><a href="#Map的遍历" class="headerlink" title="Map的遍历"></a>Map的遍历</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// map.entrySet()返回示例[1=Google, 2=Runoob, 3=Taobao]，返回的是一个集合</span></span><br><span class="line"><span class="comment">//增强for获取实体	，无法remove等操作</span></span><br><span class="line">Map&lt;Integer ,Integer&gt; map = HashMap&lt;&gt;();</span><br><span class="line"><span class="keyword">for</span>(Map.Entry&lt;Integer , Integer&gt; entry : map.entrySet())&#123;	</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">if</span>(entry.getValue() == <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> entry.getKey();    </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 迭代器</span></span><br><span class="line">Iterator&lt;Map.Entry&lt;String,String&gt;&gt; it = map.entrySet().iterator();</span><br><span class="line"><span class="keyword">while</span>(it.hasNext())&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 只能获取values，不能获取key</span></span><br><span class="line"><span class="keyword">for</span>(String v : map,values())&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>Map的entrySet()方法返回一个实现Map.Entry接口的对象合集，集合中的每个对象都是底层Map中一个特定的键值对</p>
+<h2 id="ConcurrentHashMap为什么线程安全"><a href="#ConcurrentHashMap为什么线程安全" class="headerlink" title="ConcurrentHashMap为什么线程安全"></a>ConcurrentHashMap为什么线程安全</h2><p><code>ConcurrentHashMap</code> 是由 <code>Segment</code> 数组结构和 <code>HashEntry</code> 数组结构组成。</p>
+<p>1.7版本</p>
+<p><img src="https://oss.javaguide.cn/github/javaguide/java/collection/java7_concurrenthashmap.png" alt="Java7 ConcurrentHashMap 存储结构"></p>
+<p>1.8版本</p>
+<p><img src="https://oss.javaguide.cn/github/javaguide/java/collection/java8_concurrenthashmap.png" alt="Java8 ConcurrentHashMap 存储结构"></p>
+<ol>
+<li><code>分段锁</code>（Segment Locking）：ConcurrentHashMap 内部被划分为多个段（Segment）（<code>不可改变，默认16</code>），每个段相当于一个小的哈希表，有自己的锁。不同的线程可以同时访问和修改不同的段，从而提供了<code>并发操作</code>的能力。这样可以降低锁的粒度，减少线程之间的竞争。</li>
+</ol>
+<p>​	<code>Segment</code> 继承了 <code>ReentrantLock</code>,所以 <code>Segment</code> 是一种可重入锁，扮演锁的角色。</p>
+<ol>
+<li><code>volatile</code> 关键字：ConcurrentHashMap 使用 volatile 修饰的变量来保证内部数据结构的可见性。通过使用 volatile，当一个线程修改了共享变量时，会立即将修改的值刷新到主内存，并使其他线程可见。</li>
+</ol>
+<p>​	volatile实现原理：</p>
+<ol>
+<li><code>CAS</code>（Compare and Swap）操作：ConcurrentHashMap 使用 CAS 操作来保证并发的更新操作的原子性。CAS 是一种<code>乐观锁</code>机制，在更新数据时，会先比较当前值是否与期望值相等，如果相等，则执行更新操作，否则重新尝试。</li>
+</ol>
+<h2 id="数组索引"><a href="#数组索引" class="headerlink" title="数组索引"></a>数组索引</h2><p>注意：不能使用 return Math.max(helper(nums[0,len-1],tmp),helper(nums[1,len],tmp))这种。</p>
+<p>可用Arrays.copyOfRange(nums,0,len);</p>
 
       
     </div>
@@ -557,7 +594,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -570,7 +607,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
@@ -603,7 +640,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linkedlist"><span class="nav-number">1.</span> <span class="nav-text">Linkedlist</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ArrayList"><span class="nav-number">2.</span> <span class="nav-text">ArrayList</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%AB%E6%8E%92"><span class="nav-number">3.</span> <span class="nav-text">快排</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97"><span class="nav-number">4.</span> <span class="nav-text">优先队列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97"><span class="nav-number">5.</span> <span class="nav-text">双端队列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#StringBuilder"><span class="nav-number">6.</span> <span class="nav-text">StringBuilder</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8EcompareTo-%E5%87%BD%E6%95%B0"><span class="nav-number">7.</span> <span class="nav-text">关于compareTo()函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Int%E8%BD%AC%E4%B8%BAString"><span class="nav-number">8.</span> <span class="nav-text">Int转为String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%AA%E5%8F%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%81%E5%88%86%E5%89%B2"><span class="nav-number">9.</span> <span class="nav-text">截取字符串、分割</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DP"><span class="nav-number">10.</span> <span class="nav-text">DP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B0%E7%BB%84"><span class="nav-number">11.</span> <span class="nav-text">字符串转数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Map%E7%9A%84%E9%81%8D%E5%8E%86"><span class="nav-number">12.</span> <span class="nav-text">Map的遍历</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linkedlist"><span class="nav-number">1.</span> <span class="nav-text">Linkedlist</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#LinkedList-%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E5%AE%9E%E7%8E%B0-RandomAccess-%E6%8E%A5%E5%8F%A3%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">LinkedList 为什么不能实现 RandomAccess 接口？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ArrayList"><span class="nav-number">2.</span> <span class="nav-text">ArrayList</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%AB%E6%8E%92"><span class="nav-number">3.</span> <span class="nav-text">快排</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97"><span class="nav-number">4.</span> <span class="nav-text">优先队列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97"><span class="nav-number">5.</span> <span class="nav-text">双端队列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#StringBuilder"><span class="nav-number">6.</span> <span class="nav-text">StringBuilder</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8EcompareTo-%E5%87%BD%E6%95%B0"><span class="nav-number">7.</span> <span class="nav-text">关于compareTo()函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Int%E8%BD%AC%E4%B8%BAString"><span class="nav-number">8.</span> <span class="nav-text">Int转为String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%AA%E5%8F%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%81%E5%88%86%E5%89%B2"><span class="nav-number">9.</span> <span class="nav-text">截取字符串、分割</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DP"><span class="nav-number">10.</span> <span class="nav-text">DP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B0%E7%BB%84"><span class="nav-number">11.</span> <span class="nav-text">字符串转数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Map%E7%9A%84%E9%81%8D%E5%8E%86"><span class="nav-number">12.</span> <span class="nav-text">Map的遍历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ConcurrentHashMap%E4%B8%BA%E4%BB%80%E4%B9%88%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8"><span class="nav-number">13.</span> <span class="nav-text">ConcurrentHashMap为什么线程安全</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E7%B4%A2%E5%BC%95"><span class="nav-number">14.</span> <span class="nav-text">数组索引</span></a></li></ol></div>
             
 
           </div>

@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="系统," />
 
 
 
@@ -79,16 +79,17 @@
 
 
 
-<meta name="description" content="###套接字解决的问题 应用层通过传输层进行数据通信时，TCP和UDP会遇到同时为多个应用程序进程提供并发服务的问题。多个TCP连接或多个应用程序进程可能需要通过同一个TCP协议端口传输数据。为了区别不同的应用程序进程和连接，许多计算机操作系统为应用程序与TCP／IP协议交互提供了称为套接字 (Socket)的接口，区分不同应用程序进程间的网络通信和连接。 ###套接字详细 生成套接字，主要有3个">
+<meta name="description" content="进程进程有几种状态创建（Created）：进程正在被创建，但尚未开始执行。 就绪（Ready）：进程已经创建并分配了所有必要的资源，等待被调度器选中并分配CPU资源开始执行。 运行（Running）：被调度器选中的进程正在执行，并占用CPU资源。 阻塞（Blocked）：进程由于某些原因无法继续执行，例如等待外部事件的发生（如输入&#x2F;输出操作）或等待资源的释放。在此状态下，进程暂时停止执行">
 <meta property="og:type" content="article">
-<meta property="og:title" content="套接字">
-<meta property="og:url" content="https://sounio.github.io/2023/04/26/%E5%A5%97%E6%8E%A5%E5%AD%97/index.html">
+<meta property="og:title" content="操作系统">
+<meta property="og:url" content="https://sounio.github.io/2023/07/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/index.html">
 <meta property="og:site_name" content="Sounio">
-<meta property="og:description" content="###套接字解决的问题 应用层通过传输层进行数据通信时，TCP和UDP会遇到同时为多个应用程序进程提供并发服务的问题。多个TCP连接或多个应用程序进程可能需要通过同一个TCP协议端口传输数据。为了区别不同的应用程序进程和连接，许多计算机操作系统为应用程序与TCP／IP协议交互提供了称为套接字 (Socket)的接口，区分不同应用程序进程间的网络通信和连接。 ###套接字详细 生成套接字，主要有3个">
+<meta property="og:description" content="进程进程有几种状态创建（Created）：进程正在被创建，但尚未开始执行。 就绪（Ready）：进程已经创建并分配了所有必要的资源，等待被调度器选中并分配CPU资源开始执行。 运行（Running）：被调度器选中的进程正在执行，并占用CPU资源。 阻塞（Blocked）：进程由于某些原因无法继续执行，例如等待外部事件的发生（如输入&#x2F;输出操作）或等待资源的释放。在此状态下，进程暂时停止执行">
 <meta property="og:locale">
-<meta property="article:published_time" content="2023-04-26T06:46:06.000Z">
-<meta property="article:modified_time" content="2023-05-05T02:45:56.533Z">
+<meta property="article:published_time" content="2023-07-13T04:51:38.000Z">
+<meta property="article:modified_time" content="2023-07-14T15:13:56.225Z">
 <meta property="article:author" content="sounio">
+<meta property="article:tag" content="系统">
 <meta name="twitter:card" content="summary">
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://sounio.github.io/2023/04/26/套接字/"/>
+  <link rel="canonical" href="https://sounio.github.io/2023/07/13/操作系统/"/>
 
 
 
 
 
-  <title>套接字 | Sounio</title>
+  <title>操作系统 | Sounio</title>
   
 
 
@@ -266,7 +267,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sounio.github.io/2023/04/26/%E5%A5%97%E6%8E%A5%E5%AD%97/">
+    <link itemprop="mainEntityOfPage" href="https://sounio.github.io/2023/07/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -283,7 +284,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">套接字</h1>
+          <h1 class="post-title" itemprop="name headline">操作系统</h1>
         
 
         <div class="post-meta">
@@ -295,8 +296,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-04-26T14:46:06+08:00">
-                2023-04-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-07-13T12:51:38+08:00">
+                2023-07-13
               </time>
             
 
@@ -333,14 +334,14 @@
       
 
       
-        <p>###套接字解决的问题</p>
-<p>应用层通过传输层进行数据通信时，TCP和UDP会遇到同时为多个应用程序进程提供并发服务的问题。多个TCP连接或多个应用程序进程可能需要通过<strong>同一个TCP协议端口传输数据</strong>。为了<strong>区别不同的应用程序进程和连接</strong>，许多计算机操作系统为应用程序与TCP／IP协议交互提供了称为套接字 (Socket)的接口，区分不同应用程序进程间的网络通信和连接。</p>
-<p>###套接字详细</p>
-<p>生成套接字，主要有3个参数：通信的<strong>目的IP地址</strong>、使用的<strong>传输层协议</strong>(TCP或UDP)和使用的<strong>端口号</strong>。通过将这3个参数结合起来，与一个“插座”Socket绑定，应用层就可以和传输层通过套接字接口，区分来自不同应用程序进程或网络连接的通信，实现数据传输的<strong>并发</strong>服务。</p>
-<p>Socket可以看成在两个程序进行通讯连接中的一个端点，一个程序将一段信息写入Socket中，该Socket将这段信息发送给另外一个Socket中，使这段信息能传送到其他程序中。要通过互联网进行通信，至少需要一对套接字，一个运行于客户机端，称之为ClientSocket，另一个运行于服务器端，称之为serverSocket。根据连接启动的方式以及本地套接字要连接的目标，套接字之间的连接过程可以分为<strong>三个步骤</strong>：服务器监听，客户端请求，连接确认。   </p>
-<p><strong>服务器监听</strong>：是服务器端套接字并不定位具体的客户端套接字，而是处于<strong>等待连接</strong>的状态，实时<strong>监控网络状态</strong>。</p>
-<p><strong>客户端请求</strong>：是指<strong>由客户端的套接字提出连接请求</strong>，要连接的目标是服务器端的套接字。为此，客户端的套接字必须首先<strong>描述它要连接的服务器的套接字</strong>，指出服务器端套接字的<strong>地址和端口号</strong>，然后就向服务器端套接字提出<strong>连接请求</strong>。</p>
-<p><strong>连接确认</strong>：是指当服务器端套接字监听到或者说接收到客户端套接字的连接请求，它就<strong>响应</strong>客户端套接字的请求，建立一个<strong>新的线程</strong>，把服务器端套接字的<strong>描述发给客户端</strong>，一旦客户端<strong>确认</strong>了此描述，连接就建立好了。而服务器端套接字<strong>继续处于监听</strong>状态，继续接收其他客户端套接字的连接请求。</p>
+        <h3 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h3><h4 id="进程有几种状态"><a href="#进程有几种状态" class="headerlink" title="进程有几种状态"></a>进程有几种状态</h4><p><strong>创建（Created</strong>）：进程正在被创建，但尚未开始执行。</p>
+<p><strong>就绪（Ready）</strong>：进程已经创建并分配了所有必要的资源，等待被调度器选中并分配CPU资源开始执行。</p>
+<p><strong>运行（Running）</strong>：被调度器选中的进程正在执行，并占用CPU资源。</p>
+<p><strong>阻塞（Blocked）</strong>：进程由于某些原因无法继续执行，例如等待外部事件的发生（如输入&#x2F;输出操作）或等待资源的释放。在此状态下，进程暂时停止执行，直到满足某些条件后才能切换到就绪状态。</p>
+<p><strong>终止（Terminated）</strong>：进程执行完成或被操作系统终止，释放所有分配的资</p>
+<h3 id="何为进程"><a href="#何为进程" class="headerlink" title="何为进程?"></a>何为进程?</h3><p>进程是程序的一次执行过程，是系统运行程序的基本单位，因此进程是动态的。系统运行一个程序即是一个进程从创建，运行到消亡的过程。</p>
+<p>在 Java 中，当我们启动 main 函数时其实就是启动了一个 JVM 的进程，而 main 函数所在的线程就是这个进程中的一个线程，也称主线程。</p>
+<h3 id="何为线程"><a href="#何为线程" class="headerlink" title="何为线程?"></a>何为线程?</h3><p>线程与进程相似，但线程是一个比进程更小的执行单位。一个进程在其执行的过程中可以产生多个线程。与进程不同的是同类的多个线程共享进程的<strong>堆</strong>和<strong>方法区</strong>资源，但每个线程有自己的<strong>程序计数器</strong>、<strong>虚拟机栈</strong>和<strong>本地方法栈</strong>，所以系统在产生一个线程，或是在各个线程之间作切换工作时，负担要比进程小得多，也正因为如此，线程也被称为轻量级进程。</p>
 
       
     </div>
@@ -356,6 +357,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/%E7%B3%BB%E7%BB%9F/" rel="tag"># 系统</a>
+          
+        </div>
+      
 
       
       
@@ -365,8 +372,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2023/04/25/%E5%8F%8D%E5%B0%84/" rel="next" title="反射">
-                <i class="fa fa-chevron-left"></i> 反射
+              <a href="/2023/07/11/%E7%A7%8B%E6%8B%9B/" rel="next" title="秋招">
+                <i class="fa fa-chevron-left"></i> 秋招
               </a>
             
           </div>
@@ -374,10 +381,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2023/04/26/JAVA%E6%B3%9B%E5%9E%8B%E6%93%A6%E9%99%A4/" rel="prev" title="JAVA泛型擦除">
-                JAVA泛型擦除 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -429,8 +432,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -445,7 +457,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -458,7 +470,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
@@ -481,6 +493,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">进程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E6%9C%89%E5%87%A0%E7%A7%8D%E7%8A%B6%E6%80%81"><span class="nav-number">1.1.</span> <span class="nav-text">进程有几种状态</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%95%E4%B8%BA%E8%BF%9B%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">何为进程?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%95%E4%B8%BA%E7%BA%BF%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">何为线程?</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
